@@ -1,5 +1,5 @@
 vsc-extension-quickstart.md
-node_modules/
-node_modules/*
+./node_modules/
+./node_modules/*
 .DS_Store
 syntaxes/save.parsley.tmLanguage.json
