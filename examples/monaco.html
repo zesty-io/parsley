@@ -1,0 +1,47 @@
+<html>
+    <head>
+            <title>Monaco Parsley Example</title>
+        
+    </head>
+    <body>
+            <div id="editor" style="width:800px;height:600px;border:1px solid grey"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.18.0/min/vs/loader.js"></script>
+        
+        <script>
+            require.config({ paths: { 'vs': 'monaco-editor/min/vs' }});
+            require(['vs/editor/editor.main'], function() {
+                let parsley = {"root":[{"include":"code"}],"code":[["(\\{\\{)",{"next":"code__b__0","token":"comment.block"}]],"code__b__0":[["(\\}\\})",{"next":"@pop","token":"comment.block"}],{"include":"singleVariable"},{"include":"statementKeywords"}],"singleVariable":[["\\{",{"next":"singleVariable__b__0","token":"comment.block"}]],"singleVariable__b__0":[["(?=\\})",{"next":"@pop","token":"comment.block"}],{"include":"allStrings"}],"allStrings":[[".","constant.character.escape"]],"statementKeywords":[["(each|end(-| )if)","meta.tag"]]}
+                // Register a new language
+                
+                monaco.languages.setMonarchTokensProvider('parsley', {
+                    tokenizer: parsley
+                });
+
+                monaco.languages.register({ id: 'parsley' });
+
+                    var editor = monaco.editor.create(document.getElementById('editor'), {
+                        theme: 'vs-dark',
+                        value: parsleyTestString(),
+                        language: 'parsley'
+                    });
+                });
+          
+
+            function parsleyTestString(){
+                return `
+                    <html>
+            {{this.hello}}
+            </html>
+
+            {{ $this = {this.haha} }} 
+            <strong>Hello world</strong>
+            "test"
+            <ul>
+            {{ if sadfasdf = 'sadf' }}
+
+            <li>{{this.title}}</li>`
+            }
+        </script>
+        
+    </body>
+</html>
