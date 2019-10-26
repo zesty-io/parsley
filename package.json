@@ -1,0 +1,54 @@
+{
+    "name": "parsley",
+    "displayName": "parsley",
+    "description": "Syntax Grammer Highlighter for Parsley - A Zesty.io Language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.39.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "scripts": {
+        "buildJSON": "npx js-yaml syntaxes/parsley.YAML-tmLanguage > syntaxes/parsley.tmLanguage.json",
+        "buildXML": "node scripts/build-xml.js",
+        "buildMonarch": "node scripts/build-monarch.js"
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "parsley",
+                "aliases": [
+                    "Parsley",
+                    "parsley"
+                ],
+                "extensions": [
+                    ".prsly",
+                    ".zesty",
+                    ".view",
+                    ".parsley"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "parsley",
+                "scopeName": "source.parsley",
+                "path": "./syntaxes/parsley.tmLanguage.json",
+                "embeddedLanguages": {
+                    "meta.embedded.block.html": "html",
+                    "meta.embedded.block.javascript": "javascript"
+                }
+            }
+        ]
+    },
+    "dependencies": {
+        "fs": "0.0.1-security",
+        "path": "^0.12.7",
+        "plist": "^3.0.1"
+    },
+    "devDependencies": {
+        "js-yaml": "^3.13.1"
+    }
+}
