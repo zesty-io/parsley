@@ -1,0 +1,45 @@
+---
+name: Parsley
+scopeName: source.parsley
+fileTypes: ['.parsley']
+variables:
+  identifier: '(?:{{letter}}{{letterOrDigit}}*)|(?:\^"{{identifierLiteralChar}}+")'
+  letter: '[a-zA-Z_]'
+  letterOrDigit: '[a-zA-Z0-9_]'
+  identifierLiteralChar: ([^|"\\\f\n\r\t]|\\\\[btnfr]|\\[|"\\/])
+repository:
+  singleVariable:
+    patterns:
+      - name: variable.complex
+        begin: \{
+        beginCaptures:
+          '0': { name: comment.block }
+        end: '(?=\})'
+        endCaptures:
+          '0': { name: comment.block }
+        patterns:
+        - include: '#allStrings'
+  statementKeywords:
+    patterns:
+      - name: meta.tag
+        match: (each|end(-| )if)
+  code:
+    patterns:
+    - name: variable.complex
+      begin: '(\{\{)'
+      beginCaptures:
+        '0': {name: comment.block}
+      end: '(\}\})'
+      endCaptures:
+        '0': {name: comment.block} 
+      patterns:
+        - include: '#singleVariable'
+        - include: '#statementKeywords'  
+        
+  allStrings:
+    patterns:
+      - name: constant.character.escape
+        match: .
+patterns:
+- include: text.html.basic
+- include: '#code'
