@@ -9,25 +9,39 @@
             <!-- OR ANY OTHER AMD LOADER HERE INSTEAD OF loader.js -->
             <script src="node_modules/monaco-editor/min/vs/loader.js"></script>
             <script>
-                fetch('https://zesty-io.github.io/parsley-grammers/syntaxes/parsley-monarch-tokenizer.json').then(res => res.json()).then(json => {
-                    let parlseyMonarchTokenizer = json
-                    runMonaco(parlseyMonarchTokenizer)
+                let themeColors = []
+
+                fetch('https://zesty-io.github.io/parsley-grammers/syntaxes/parsley-monarch-tokenizer.json').then(res => res.json()).then(tokenizerJSON => {
+                    let parlseyMonarchTokenizer = tokenizerJSON
+
+                    fetch('https://zesty-io.github.io/parsley-grammers/themes/parsley-monaco-dark-theme.json').then(res => res.json()).then(themeColors => {
+                        runMonaco(parlseyMonarchTokenizer, themeColors)
+                    })
                 })
+
               
-                function runMonaco(parlseyMonarchTokenizer) {
+                function runMonaco(parlseyMonarchTokenizer, themeColorRules) {
+                    
                     require.config({ paths: { 'vs': 'node_modules/monaco-editor/min/vs' }});
+                    
                     require(['vs/editor/editor.main'], function() {
                         
                         monaco.languages.setMonarchTokensProvider('parsley', {
                             tokenizer: parlseyMonarchTokenizer
                         });
 
+                        monaco.editor.defineTheme('parsleyDark', {
+                            base: 'vs-dark', // can also be vs-dark or hc-black
+                            inherit: true, // can also be false to completely replace the builtin rules
+                            rules: themeColorRules
+                        });
+
                         monaco.languages.register({ id: 'parsley' });
         
                         var editor = monaco.editor.create(document.getElementById('container'), {
-                            theme: 'vs-dark',
-                                value: parsleyTestString(),
-                                language: 'parsley'
+                            theme: 'parsleyDark',
+                            value: parsleyTestString(),
+                            language: 'parsley'
                         });
                     });
                 }
