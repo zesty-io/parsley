@@ -1,0 +1,11 @@
+<
+{{this.hello}}
+
+
+{{ $this = {this.haha} }} 
+<strong>Hello world</strong>
+"test"
+<ul>
+{{ if sadfasdf = 'sadf' }}
+
+<li>{{this.title}}</li>
