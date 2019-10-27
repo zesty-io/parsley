@@ -1,11 +1,27 @@
 <html>
     <head>
             <title>Monaco Parsley Example</title>
-        
+            <link href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-            <div id="container" style="width:800px;height:600px;border:1px solid grey"></div>
-
+            
+                <div class="columns">
+                    <div class="column is-three-fifths">
+                            <div id="monacoContainer" style="width:100%;height:600px;border:1px solid grey"></div>
+                    </div>
+                    <div class="column is-two-fifths content">
+                        <h1 class="title">Monaco Editor with Parsley Language and Theme</h1>
+                        <p>This example loads two external JSON files</p>
+                        <ul>
+                            <li><code>/syntaxes/parsley-monarch-tokenizer.json</code> the Monarch token for Parsley</li>
+                            <li><code>/themes/parsley-monaco-dark-theme.json</code> the Color Highlighter, Required to highlight Parsleys tokenizer strings. </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+            
+            
             <!-- OR ANY OTHER AMD LOADER HERE INSTEAD OF loader.js -->
             <script src="node_modules/monaco-editor/min/vs/loader.js"></script>
             <script>
@@ -38,7 +54,7 @@
 
                         monaco.languages.register({ id: 'parsley' });
         
-                        var editor = monaco.editor.create(document.getElementById('container'), {
+                        var editor = monaco.editor.create(document.getElementById('monacoContainer'), {
                             theme: 'parsleyDark',
                             value: parsleyTestString(),
                             language: 'parsley'
