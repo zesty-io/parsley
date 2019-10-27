@@ -65,9 +65,10 @@
                 }
     
                 async function parsleyTestString(){
-                    await fetch('https://zesty-io.github.io/parsley-grammers/examples/test.parsley')
+                    await fetch('https://zesty-io.github.io/parsley-grammers/examples/parsley-test-syntax.txt')
                     .then(response => response.text())
                     .then((data) => {
+                        console.log(data)
                        return data
                     })
                 }
