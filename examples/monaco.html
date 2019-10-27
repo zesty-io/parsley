@@ -36,11 +36,11 @@
                 })
 
               
-                function runMonaco(parlseyMonarchTokenizer, themeColorRules) {
+                async function runMonaco(parlseyMonarchTokenizer, themeColorRules) {
                     
                     require.config({ paths: { 'vs': 'node_modules/monaco-editor/min/vs' }});
                     
-                    require(['vs/editor/editor.main'], function() {
+                    require(['vs/editor/editor.main'], async function() {
                         
                         monaco.languages.setMonarchTokensProvider('parsley', {
                             tokenizer: parlseyMonarchTokenizer
@@ -53,28 +53,23 @@
                         });
 
                         monaco.languages.register({ id: 'parsley' });
-        
+                        
+                        let testFile = await parsleyTestString()
+
                         var editor = monaco.editor.create(document.getElementById('monacoContainer'), {
                             theme: 'parsleyDark',
-                            value: parsleyTestString(),
+                            value: testFile,
                             language: 'parsley'
                         });
                     });
                 }
     
-                function parsleyTestString(){
-                    return `
-                        <html>
-                {{this.hello}}
-                </html>
-    
-                {{ $this = {this.haha} }} 
-                <strong>Hello world</strong>
-                "test"
-                <ul>
-                {{ if sadfasdf = 'sadf' }}
-    
-                <li>{{this.title}}</li>`
+                async function parsleyTestString(){
+                    await fetch('https://zesty-io.github.io/parsley-grammers/examples/test.parsley')
+                    .then(response => response.text())
+                    .then((data) => {
+                       return data
+                    })
                 }
             </script>
     </body>
