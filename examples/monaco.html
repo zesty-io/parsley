@@ -11,21 +11,52 @@
                     </div>
                     <div class="column is-two-fifths content">
                         <h1 class="title">Monaco Editor with Parsley Language and Theme</h1>
-                        <p>This example loads two external JSON files</p>
+                        <p>This example loads two external JSON files to run the language and theme.</p>
                         <ul>
-                            <li><code>/syntaxes/parsley-monarch-tokenizer.json</code> the Monarch token for Parsley</li>
+                            <li><code>/syntaxes/parsley-monarch-tokenizer.json</code> the Monarch tokenizer for Parsley</li>
                             <li><code>/themes/parsley-monaco-dark-theme.json</code> the Color Highlighter, Required to highlight Parsleys tokenizer strings. </li>
                         </ul>
+
+                        <p>The language and theme is built inline using the above file to hydrate the dynamic parts</p>
+                        <div class="notification">
+                            <div style="white-space: pre;">
+    async function runMonaco(parlseyMonarchTokenizer, themeColorRules) {
+
+        require.config({ paths: { 'vs': 'node_modules/monaco-editor/min/vs' }});
+        
+        require(['vs/editor/editor.main'], async function() {
+            
+            monaco.languages.setMonarchTokensProvider('parsley', {
+                tokenizer: parlseyMonarchTokenizer
+            });
+
+            monaco.editor.defineTheme('parsleyDark', {
+                base: 'vs-dark', // can also be vs-dark or hc-black
+                inherit: true, // can also be false to completely replace the builtin rules
+                rules: themeColorRules
+            });
+
+            monaco.languages.register({ id: 'parsley' });
+            
+            let testFile = await parsleyTestString()
+
+            console.log(testFile)
+
+            var editor = monaco.editor.create(document.getElementById('monacoContainer'), {
+                theme: 'parsleyDark',
+                value: testFile,
+                language: 'parsley'
+            });
+        });
+    }
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
                 
-            
-            
-            <!-- OR ANY OTHER AMD LOADER HERE INSTEAD OF loader.js -->
             <script src="node_modules/monaco-editor/min/vs/loader.js"></script>
             <script>
-                let themeColors = []
 
                 fetch('https://zesty-io.github.io/parsley-grammers/syntaxes/parsley-monarch-tokenizer.json').then(res => res.json()).then(tokenizerJSON => {
                     let parlseyMonarchTokenizer = tokenizerJSON
