@@ -12,6 +12,12 @@ The master file is `syntaxes/parsley.YAML-tmLanguage`, all other syntaxes are bu
 
 `npm run buildMonarch` outputs to `syntaxes/parsley-monarch-tokenizer.json`
 
+**Remote files to include:**
+Tokenizer `https://zesty-io.github.io/parsley-grammers/syntaxes/parsley-monarch-tokenizer.json`
+Theme Colors: `https://zesty-io.github.io/parsley-grammers/themes/parsley-monaco-dark-theme.json`
+
+See examples usage of this in the `/examples/monaco.html` file in this repo.
+
 ### VSCode
 
 `npm run buildJSON` outputs to `syntaxes/parsley.tmLanguage.json`
