@@ -14,15 +14,15 @@ repository:
         begin: \{
         beginCaptures:
           '0': { name: comment.block }
-        end: '(?=\})'
+        end: \}
         endCaptures:
           '0': { name: comment.block }
         patterns:
         - include: '#allStrings'
   statementKeywords:
     patterns:
-      - name: meta.tag
-        match: (each|end(-| )if)
+      - name: keyword.control.parsley
+        match: '(^)?( )?(if|each|end-each|end-if|(else( |-)if))(( )|($))?'
   code:
     patterns:
     - name: variable.complex
@@ -35,11 +35,27 @@ repository:
       patterns:
         - include: '#singleVariable'
         - include: '#statementKeywords'  
-        
+        - include: '#eachOperators'  
+  blockComments:
+    patterns:
+    - name: keyword.annotation.parsley
+      begin: '\(\*\*'
+      beginCaptures:
+        '0': {name: keyword.annotation}
+      end: '\*\*\)'
+      endCaptures:
+        '0': {name: keyword.annotation} 
+      patterns:
+        - include: '#allStrings'        
   allStrings:
     patterns:
       - name: constant.character.escape
         match: .
+  eachOperators:
+    patterns:
+      - name: variable.other.parsley
+        match: =        
 patterns:
 - include: text.html.basic
 - include: '#code'
+- include: '#blockComments'

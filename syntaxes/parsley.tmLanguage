@@ -30,7 +30,7 @@
               </dict>
             </dict>
             <key>end</key>
-            <string>(?=\})</string>
+            <string>\}</string>
             <key>endCaptures</key>
             <dict>
               <key>0</key>
@@ -55,9 +55,9 @@
         <array>
           <dict>
             <key>name</key>
-            <string>meta.tag</string>
+            <string>keyword.control.parsley</string>
             <key>match</key>
-            <string>(each|end(-| )if)</string>
+            <string>(^)?( )?(if|each|end-each|end-if|(else( |-)if))(( )|($))?</string>
           </dict>
         </array>
       </dict>
@@ -98,6 +98,47 @@
                 <key>include</key>
                 <string>#statementKeywords</string>
               </dict>
+              <dict>
+                <key>include</key>
+                <string>#eachOperators</string>
+              </dict>
+            </array>
+          </dict>
+        </array>
+      </dict>
+      <key>blockComments</key>
+      <dict>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>name</key>
+            <string>keyword.annotation.parsley</string>
+            <key>begin</key>
+            <string>\(\*\*</string>
+            <key>beginCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.annotation</string>
+              </dict>
+            </dict>
+            <key>end</key>
+            <string>\*\*\)</string>
+            <key>endCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.annotation</string>
+              </dict>
+            </dict>
+            <key>patterns</key>
+            <array>
+              <dict>
+                <key>include</key>
+                <string>#allStrings</string>
+              </dict>
             </array>
           </dict>
         </array>
@@ -114,6 +155,18 @@
           </dict>
         </array>
       </dict>
+      <key>eachOperators</key>
+      <dict>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>name</key>
+            <string>variable.other.parsley</string>
+            <key>match</key>
+            <string>=</string>
+          </dict>
+        </array>
+      </dict>
     </dict>
     <key>patterns</key>
     <array>
@@ -124,6 +177,10 @@
       <dict>
         <key>include</key>
         <string>#code</string>
+      </dict>
+      <dict>
+        <key>include</key>
+        <string>#blockComments</string>
       </dict>
     </array>
   </dict>
