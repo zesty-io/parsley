@@ -2,7 +2,7 @@
 
 ![Parsley Logo](assets/parsley-logo.png)
 
-Parsley is a programming language for injecting Zesty.io CMS data into documents. The Parsley language can manipulate documents with string injection, logic, and iteration based on content it can access through a Zesty.io content instance. Parsley is maintained by Zesty.io, a content management system. Zesty.io uses Parsley to render dynamic server side into static files.  
+Parsley is a programming language for injecting Zesty.io CMS content and data into documents. The Parsley language can manipulate documents with string injection, logic, and iteration based on content it can access through a Zesty.io content instance. Parsley is maintained by Zesty.io, a content management system. Zesty.io uses Parsley to render dynamic server side into static files.  
 
 This repo maintains grammers, REPL, and tooling to support the Parsley Syntax and Language. Anyone may contribute to it. Discover Parsley at https://parsley.zesty.io
 
