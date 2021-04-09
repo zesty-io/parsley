@@ -8,6 +8,7 @@ This repo maintains grammers, REPL, and tooling to support the Parsley Syntax an
 
 ## Repo Legend
 
-* `/pvl/` - Parsley Visual Layout Tool - A Drag n Drop Layout tool built in react to output parsley code [link](pvl/)
-* `/grammers/` - Parsley Grammer files for syntax highlighting in Programming IDEs
-* `/repl/` - Tooling to support the learning REPL at https://parsley.zesty.io
+* [/pvl/](pvl/) - Parsley Visual Layout Tool - A Drag n Drop Layout tool built in react to output parsley code [link
+* [/grammers/](grammers/) - Parsley Grammer files for syntax highlighting in Programming IDEs
+* [/repl/](repl/) - Tooling to support the learning REPL at https://parsley.zesty.io
+* [Syntax Documentation](https://zesty.org/services/web-engine/introduction-to-parsley/parsley-index) it maintained on Zesty.org, can be contributed from the [zesty-io/zesty-org](https://github.com/zesty-io/zesty-org/tree/master/services/web-engine/introduction-to-parsley) repo
