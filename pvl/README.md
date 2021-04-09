@@ -85,3 +85,8 @@ A layout object is a top level class that holds information to
 * onHover - changes its display, record the object being held over it
 * onDrag
 * onDrop
+
+# Interface
+
+**Concept**
+![image](https://user-images.githubusercontent.com/729972/114240505-77af5980-993c-11eb-8f0c-024aa94a3f28.png)
