@@ -24,9 +24,13 @@ var ParsleyVisualLayout = function (_React$Component) {
 
             return React.createElement(
                 "div",
-                null,
-                React.createElement(VisualLayout, null),
-                React.createElement(ContentBank, null)
+                { className: "pvl" },
+                React.createElement(
+                    "div",
+                    { className: "shell" },
+                    React.createElement(VisualLayout, null),
+                    React.createElement(ContentBank, null)
+                )
             );
         }
     }]);

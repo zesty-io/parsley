@@ -8,9 +8,11 @@ class ParsleyVisualLayout extends React.Component {
         const styles = this.props.styles || {};
 
         return (
-            <div>
-                <VisualLayout></VisualLayout>
+            <div className="pvl">
+                <div className="shell">
+                      <VisualLayout></VisualLayout>
                 <ContentBank></ContentBank>
+                </div>
             </div>
         );
     }
