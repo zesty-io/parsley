@@ -1,5 +1,5 @@
 
-class ParsleyVisualLayout extends React.Component {
+class VisualLayout extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -9,8 +9,7 @@ class ParsleyVisualLayout extends React.Component {
 
         return (
             <div>
-                <VisualLayout></VisualLayout>
-                <ContentBank></ContentBank>
+                <h2>Visual Layout</h2>
             </div>
         );
     }

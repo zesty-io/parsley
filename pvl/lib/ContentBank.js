@@ -8,16 +8,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ParsleyVisualLayout = function (_React$Component) {
-    _inherits(ParsleyVisualLayout, _React$Component);
+var ContentBank = function (_React$Component) {
+    _inherits(ContentBank, _React$Component);
 
-    function ParsleyVisualLayout(props) {
-        _classCallCheck(this, ParsleyVisualLayout);
+    function ContentBank(props) {
+        _classCallCheck(this, ContentBank);
 
-        return _possibleConstructorReturn(this, (ParsleyVisualLayout.__proto__ || Object.getPrototypeOf(ParsleyVisualLayout)).call(this, props));
+        return _possibleConstructorReturn(this, (ContentBank.__proto__ || Object.getPrototypeOf(ContentBank)).call(this, props));
     }
 
-    _createClass(ParsleyVisualLayout, [{
+    _createClass(ContentBank, [{
         key: "render",
         value: function render() {
             var styles = this.props.styles || {};
@@ -25,11 +25,20 @@ var ParsleyVisualLayout = function (_React$Component) {
             return React.createElement(
                 "div",
                 null,
-                React.createElement(VisualLayout, null),
-                React.createElement(ContentBank, null)
+                React.createElement(
+                    "h2",
+                    null,
+                    "Content Bank"
+                ),
+                React.createElement(
+                    "div",
+                    { className: "content" },
+                    React.createElement(LayoutObject, null),
+                    React.createElement(LayoutObjectText, null)
+                )
             );
         }
     }]);
 
-    return ParsleyVisualLayout;
+    return ContentBank;
 }(React.Component);

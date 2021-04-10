@@ -8,16 +8,24 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ParsleyVisualLayout = function (_React$Component) {
-    _inherits(ParsleyVisualLayout, _React$Component);
+var LayoutObject = function (_React$Component) {
+    _inherits(LayoutObject, _React$Component);
 
-    function ParsleyVisualLayout(props) {
-        _classCallCheck(this, ParsleyVisualLayout);
+    function LayoutObject(props) {
+        _classCallCheck(this, LayoutObject);
 
-        return _possibleConstructorReturn(this, (ParsleyVisualLayout.__proto__ || Object.getPrototypeOf(ParsleyVisualLayout)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (LayoutObject.__proto__ || Object.getPrototypeOf(LayoutObject)).call(this, props));
+
+        _this.handleChange = _this.handleChange.bind(_this);
+        return _this;
     }
 
-    _createClass(ParsleyVisualLayout, [{
+    _createClass(LayoutObject, [{
+        key: "handleChange",
+        value: function handleChange(e) {
+            alert(e.target.value);
+        }
+    }, {
         key: "render",
         value: function render() {
             var styles = this.props.styles || {};
@@ -25,11 +33,15 @@ var ParsleyVisualLayout = function (_React$Component) {
             return React.createElement(
                 "div",
                 null,
-                React.createElement(VisualLayout, null),
-                React.createElement(ContentBank, null)
+                React.createElement(
+                    "label",
+                    null,
+                    "hello"
+                ),
+                React.createElement("input", { type: "text", onChange: this.handleChange, value: "world" })
             );
         }
     }]);
 
-    return ParsleyVisualLayout;
+    return LayoutObject;
 }(React.Component);
