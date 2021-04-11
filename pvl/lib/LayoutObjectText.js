@@ -1,6 +1,12 @@
-"use strict";
+'use strict';
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactDnd = require('react-dnd');
+
+var _ItemTypes = require('./ItemTypes');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -12,6 +18,8 @@ var LayoutObjectText = function (_LayoutObject) {
     _inherits(LayoutObjectText, _LayoutObject);
 
     function LayoutObjectText(props) {
+        var _ret;
+
         _classCallCheck(this, LayoutObjectText);
 
         var _this = _possibleConstructorReturn(this, (LayoutObjectText.__proto__ || Object.getPrototypeOf(LayoutObjectText)).call(this, props));
@@ -19,28 +27,48 @@ var LayoutObjectText = function (_LayoutObject) {
         _this.state = { value: '' };
 
         _this.handleChange = _this.handleChange.bind(_this);
-        return _this;
+
+        var _useDrag = (0, _reactDnd.useDrag)(function () {
+            return {
+                type: _ItemTypes.ItemTypes.LAYOUTOBJECTTEXT,
+                collect: function collect(monitor) {
+                    return {
+                        isDragging: !!monitor.isDragging()
+                    };
+                }
+            };
+        }, []),
+            _useDrag2 = _slicedToArray(_useDrag, 3),
+            isDragging = _useDrag2[0].isDragging,
+            drag = _useDrag2[1],
+            preview = _useDrag2[2];
+
+        return _ret = React.createElement(
+            'div',
+            { ref: drag, className: 'dragging' },
+            'OMG'
+        ), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(LayoutObjectText, [{
-        key: "handleChange",
+        key: 'handleChange',
         value: function handleChange(e) {
             this.setState({ value: event.target.value });
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             var styles = this.props.styles || {};
 
             return React.createElement(
-                "div",
-                null,
+                'div',
+                { ref: drag, className: 'pvlLayoutObject' },
                 React.createElement(
-                    "label",
+                    'label',
                     null,
-                    "me again "
+                    'me again '
                 ),
-                React.createElement("input", { type: "text", onChange: this.handleChange, value: this.state.value })
+                React.createElement('input', { type: 'text', onChange: this.handleChange, value: this.state.value })
             );
         }
     }]);

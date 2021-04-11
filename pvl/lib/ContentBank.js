@@ -24,7 +24,7 @@ var ContentBank = function (_React$Component) {
 
             return React.createElement(
                 "div",
-                null,
+                { className: "pvlContentBank" },
                 React.createElement(
                     "h2",
                     null,
@@ -33,7 +33,7 @@ var ContentBank = function (_React$Component) {
                 React.createElement(
                     "div",
                     { className: "content" },
-                    React.createElement(LayoutObject, null),
+                    React.createElement(LayoutObjectText, null),
                     React.createElement(LayoutObjectText, null)
                 )
             );

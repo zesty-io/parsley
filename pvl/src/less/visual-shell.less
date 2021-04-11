@@ -1,11 +1,48 @@
 @width: 100%;
+@defaultPadding: 10px;
+@defaultBorderRadius: 5px;
+@defaultMargin: @defaultPadding;
+.defaultBorderRadius() {
+    border-radius: 4px;
+}
 
 .pvl {
-
+    width: @width;
+    margin: @defaultMargin;
     .shell {
-        width: @width;
-        background: grey;
-        border-radius: 5px;
-        padding: 10px;
+
+        background: @zesty-light-grey;
+        .defaultBorderRadius();
+        padding: @defaultPadding;
+        display: flex;
+        .pvlVisualLayout {
+            flex: 4;
+            min-width: 100px;
+            background: white;
+            .defaultBorderRadius();
+            padding: @defaultPadding;
+        }
+
+        .pvlContentBank{
+            flex: 2;
+            min-width: 100px;
+            background: white;
+            .defaultBorderRadius();
+            margin-left: @defaultMargin;
+            
+        }
+        .pvlLayoutObject{
+            .defaultBorderRadius();
+            background: @zesty-white;
+            margin: @defaultMargin;
+            padding: @defaultPadding;
+            border: 1px @zesty-light-grey solid;
+        }
+        .dragging {
+            width: 100px;
+            height: 100px;
+            background: @zesty-grey;
+        }
+        
     }
 }

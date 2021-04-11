@@ -3,25 +3,26 @@
         <meta charset="UTF-8" />
         <title>Content Designer</title>
          <!-- To load React add the scripts. --> 
-        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script> 
+        <!-- <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script> 
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> 
-        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
         <link rel="stylesheet" href="lib/main.css"/>
-
+        <style>
+            body { padding: 0px; margin: 0px;}
+        </style>
         
     </head>
     <body>
         <h1>Content Designer</h1>
-        <div id="root"></div>
+        <div id="app"></div>
       
-        <script type="text/babel" src="lib/ParsleyVisualLayout.js"></script>
+        <!-- <script type="text/babel" src="lib/ParsleyVisualLayout.js"></script>
         <script type="text/babel" src="lib/VisualLayout.js"></script>
         <script type="text/babel" src="lib/ContentBank.js"></script>
         <script type="text/babel" src="lib/LayoutObject.js"></script>
         <script type="text/babel" src="lib/LayoutObjectText.js"></script>
-        <script type="text/babel">
-            const domContainer = document.querySelector('#root'); 
-            ReactDOM.render(<ParsleyVisualLayout />, domContainer);
-        </script>
+     -->
+     <script src="dist/bundle.js"></script>
+
     </body>
 </html>

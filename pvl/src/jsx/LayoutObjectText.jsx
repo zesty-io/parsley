@@ -1,23 +1,21 @@
+import React, { Component } from 'react'
+import ItemTypes from './ItemTypes';
 
-class LayoutObjectText extends LayoutObject {
+// import { LayoutObject } from './LayoutObject';
+
+class LayoutObjectText extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
 
-        this.handleChange = this.handleChange.bind(this);
     }
-
-    handleChange(e) {
-        this.setState({value: event.target.value});
-    } 
+    
 
     render() {
-        const styles = this.props.styles || {};
 
         return (
-            <div>
+            <div className="pvlLayoutObject">
                 <label >me again </label>
-                <input type="text" onChange={this.handleChange} value={this.state.value} />
+                
             </div>
         );
     }
@@ -25,4 +23,4 @@ class LayoutObjectText extends LayoutObject {
 
 
 
-
+export default LayoutObjectText;

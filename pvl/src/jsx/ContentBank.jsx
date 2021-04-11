@@ -1,17 +1,19 @@
 
+import React, { Component } from 'react'
+import LayoutObjectText from './LayoutObjectText'
+
 class ContentBank extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const styles = this.props.styles || {};
 
         return (
-            <div>
+            <div className="pvlContentBank">
                 <h2>Content Bank</h2>
                 <div className="content">
-                    <LayoutObject></LayoutObject>
+                    <LayoutObjectText></LayoutObjectText>
                     <LayoutObjectText></LayoutObjectText>
                 </div>
             </div> 
@@ -19,6 +21,7 @@ class ContentBank extends React.Component {
     }
 }
 
+export default ContentBank;
 
 
 

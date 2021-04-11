@@ -1,20 +1,28 @@
-var path = require('path');
-
+const webpack = require('webpack');
+const path = require('path');
+ 
 module.exports = {
-    mode: 'production',
-    entry: './src/ParsleyVisualLayout.jsx',
-    output: {
-        path: path.resolve('lib'),
-        filename: 'ParsleyVisualLayout.js',
-        libraryTarget: 'commonjs2'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                exclude: /(node_modules)/,
-                use: 'babel-loader'
-            }
-        ]
-    }
-}
+    mode: 'development',
+    watch: true,
+  entry: path.resolve(__dirname, './src/jsx/index.js'),
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'bundle.js',
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, './dist'),
+    hot: true,
+  },
+};

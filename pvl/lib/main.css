@@ -1,6 +1,97 @@
-.pvl .shell {
+.display {
+  font-family: "Montserrat", Arial, Sans-Serif;
+  font-size: 32px;
+  font-weight: 200;
+  line-height: 48px;
+  letter-spacing: 0.32px;
+}
+.display.reversed {
+  color: #eff5ff;
+}
+.headline {
+  font-family: "Montserrat", Arial, Sans-Serif;
+  font-size: 28px;
+  font-weight: 200;
+  line-height: 42px;
+  letter-spacing: 0.32px;
+}
+.headline.reversed {
+  color: #eff5ff;
+}
+.title {
+  font-family: "Montserrat", Arial, Sans-Serif;
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 36px;
+  letter-spacing: 0.16px;
+}
+.title.reversed {
+  color: #eff5ff;
+}
+.subheadline {
+  font-family: "Montserrat", Arial, Sans-Serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.08px;
+}
+.bodyText {
+  font-family: "Montserrat", Arial, Sans-Serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+.bodyText.reversed {
+  color: #eff5ff;
+}
+.buttonText {
+  font-family: "Montserrat", Arial, Sans-Serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.12px;
+}
+.caption {
+  font-family: "Montserrat", Arial, Sans-Serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+}
+.pvl {
   width: 100%;
-  background: grey;
-  border-radius: 5px;
+  margin: 10px;
+}
+.pvl .shell {
+  background: #a7afbf;
+  border-radius: 4px;
   padding: 10px;
+  display: flex;
+}
+.pvl .shell .pvlVisualLayout {
+  flex: 4;
+  min-width: 100px;
+  background: white;
+  border-radius: 4px;
+  padding: 10px;
+}
+.pvl .shell .pvlContentBank {
+  flex: 2;
+  min-width: 100px;
+  background: white;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+.pvl .shell .pvlLayoutObject {
+  border-radius: 4px;
+  background: #eff5ff;
+  margin: 10px;
+  padding: 10px;
+  border: 1px #a7afbf solid;
+}
+.pvl .shell .dragging {
+  width: 100px;
+  height: 100px;
+  background: #5b667d;
 }

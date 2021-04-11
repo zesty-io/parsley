@@ -24,7 +24,7 @@ var VisualLayout = function (_React$Component) {
 
             return React.createElement(
                 "div",
-                null,
+                { className: "pvlVisualLayout" },
                 React.createElement(
                     "h2",
                     null,
