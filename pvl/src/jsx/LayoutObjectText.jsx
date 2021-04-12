@@ -44,7 +44,8 @@ const layoutObjectSource = {
     const dropResult = monitor.getDropResult()
 
     // This is a good place to call some Flux action
-    CardActions.moveCardToList(item.id, dropResult.listId)
+    alert('dropped')
+   console.log(item.id, dropResult.listId)
   }
 }
 
