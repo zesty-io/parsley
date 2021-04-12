@@ -73,6 +73,7 @@ class LayoutObjectText extends React.Component {
     render() {
         // Your component receives its own props as usual
         const { id } = this.props
+        console.log(this.props)
   
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
@@ -80,8 +81,8 @@ class LayoutObjectText extends React.Component {
 
         return connectDragSource(
             <div className="pvlLayoutObject">
-                I am a draggable card number {id}
-        {isDragging && ' (and I am being dragged now)'}
+               {this.props.type}: {this.props.name} <br />
+                {isDragging && ' (being dragged )'}
             </div>
         );
     }

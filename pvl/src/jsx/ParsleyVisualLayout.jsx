@@ -46,7 +46,7 @@ class ParsleyVisualLayout extends React.Component {
             <DndProvider backend={HTML5Backend}>
             <div className="shell">
                 <VisualLayout></VisualLayout>
-                <ContentBank fetchURL={this.getContentBankURL()}></ContentBank> 
+                <ContentBank models={this.getContentBank()}></ContentBank> 
             </div>
             </DndProvider>
         </div>
