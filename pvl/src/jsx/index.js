@@ -4,6 +4,6 @@ import ParsleyVisualLayout from './ParsleyVisualLayout.jsx';
  
  
 ReactDOM.render(
-  <ParsleyVisualLayout></ParsleyVisualLayout>,
+  <ParsleyVisualLayout instanceZUID=""></ParsleyVisualLayout>,
   document.getElementById('app')
 );

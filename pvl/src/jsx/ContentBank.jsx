@@ -4,7 +4,13 @@ import LayoutObjectText from './LayoutObjectText'
 
 class ContentBank extends React.Component {
     constructor(props) {
+        
         super(props);
+        console.log(this.props.fetchURL)
+    }
+
+    getModel() {
+
     }
 
     render() {

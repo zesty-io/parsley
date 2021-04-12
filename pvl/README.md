@@ -24,7 +24,15 @@ A NO CODE tool for authoring HTML layouts that outputs HTML and CSS with Zesty.i
 * Will use a lightweight CSS framework: [Reflex](https://github.com/leejordan/reflex)
 * Elements in output all have a `pvl-*` class on them
 
-# Part of the Layout App
+## How to Use
+
+The Zesty.io Instance's `GQL` setting should be set to be on. Start with property `instanceZUID`, if it is blank it will default to zesty.io/-/gql/, if you pass an instanceZUID it attempts to connect to the preview URL for that ZUID. Not preview lock will block this requrest, so the user should have an active session to access their {instanceZUID}-dev.zesty.io/-/gql/. 
+
+```
+<ParsleyVisualLayout instanceZUID=""></ParsleyVisualLayout>
+```
+
+# Documenting of the Layout App
 
 ## LayoutTree
 

@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
     mode: 'development',
     watch: true,
-  entry: path.resolve(__dirname, './src/jsx/index.js'),
+  entry: ['babel-polyfill', path.resolve(__dirname, './src/jsx/index.js')],
   module: {
     rules: [
       {

@@ -85,7 +85,7 @@ class VisualLayout extends React.Component {
         this.state = {
             layoutObjects: [
                 {id: 1, type: 'LayoutObjectText'},
-                {id: 2, type: 'LayoutObjectText'},
+                { id: 2, type: 'LayoutObjectText'},
             ],
             currentPic: null
         };
@@ -132,14 +132,14 @@ class VisualLayout extends React.Component {
         return connectDropTarget(
             <div className="pvlVisualLayout">
                 <h2>Visual Layout</h2>
-                <div class="pvlCanvase">
+                <div className="pvlCanvas">
                     {this.state.layoutObjects.map((lo) => {
                         return (
-                            <LayoutObjectText id={lo.id} isReady="true" />
+                            <LayoutObjectText key={lo.id} id={lo.id} isReady="true" />
                         )
                     })}
                 </div>
-                <div class="message">
+                <div className="message">
                     {isOver && canDrop && <div>omg u there</div>}
                     {!isOver && canDrop && <div>drop on me</div>}
                     {isOver && !canDrop && <div>invalid drop</div>}
