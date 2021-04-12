@@ -1,3 +1,16 @@
+# Development state notes
+
+[X] Setup React Webpack (React 16 to matches manager-ui)
+[X] Install React-DND
+[X] Connect DND to component
+[X] setup DND decorator API https://react-dnd.github.io/react-dnd/docs/api/drop-target
+[X] Test dragging and dropping
+[ ] Connect to remove endpoint in zesty, store in top level state
+[ ] pass content down to content bank, display layoutobjects (pass in types as props)
+[ ] Expand layoutobject to have different behaviors per type and content
+[ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
+[ ] Start Matching design
+
 # Parsley Visual Layout Tool
 
 A NO CODE tool for authoring HTML layouts that outputs HTML and CSS with Zesty.io Parsley references.

@@ -6,7 +6,7 @@ import { ItemTypes } from './ItemTypes';
 
 const layoutObjectSource = {
   canDrag(props) {
-    console.log(props)
+    //console.log(props)
     // You can disallow drag based on props
     return props.isReady
   },
@@ -44,8 +44,8 @@ const layoutObjectSource = {
     const dropResult = monitor.getDropResult()
 
     // This is a good place to call some Flux action
-    alert('dropped')
-   console.log(item.id, dropResult.listId)
+    alert('drag ended')
+   console.log(item.id, dropResult)
   }
 }
 

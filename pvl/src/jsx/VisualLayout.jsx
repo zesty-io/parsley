@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
+import  LayoutObjectText  from './LayoutObjectText';
 
 /**
  * Specifies the drop target contract.
@@ -33,16 +34,24 @@ const layoutObjectTarget = {
   },
 
   drop(props, monitor, component) {
+      alert('dropped')
+      console.log('dropped')
+      console.log('component',component)
+      
+      component.addToLayout();
     if (monitor.didDrop()) {
-        
+       
       // If you want, you can check whether some nested
       // target already handled drop
       return
     }
+
     
     // Obtain the dragged item
     const item = monitor.getItem()
-
+    
+    console.log('item',monitor.getItem())
+    component.addToLayout(component);
     // You can do something with it
     //ChessActions.movePiece(item.fromPosition, props.position)
 
@@ -57,7 +66,6 @@ const layoutObjectTarget = {
  * Specifies which props to inject into your component.
  */
 function collect(connect, monitor) {
-   console.log(connect)
   return {
     
     // Call this function inside render()
@@ -74,12 +82,27 @@ function collect(connect, monitor) {
 class VisualLayout extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            layoutObjects: [
+                {id: 1, type: 'LayoutObjectText'},
+                {id: 2, type: 'LayoutObjectText'},
+            ],
+            currentPic: null
+        };
+
+    }
+    
+
+    getChildren(){
+
+
     }
     componentDidUpdate(prevProps) { 
-        
+        console.log(prevProps)
+        console.log('comp did update')
         if (!prevProps.isOver && this.props.isOver) {
         // You can use this as enter handler
-            
+            //alert('entered')
         }
 
         if (prevProps.isOver && !this.props.isOver) {
@@ -90,6 +113,12 @@ class VisualLayout extends React.Component {
         // You can be more specific and track enter/leave
         // shallowly, not including nested targets
         }
+    }
+
+    addToLayout() {
+        console.log('add to layout', this.props)
+        console.log('connect to drop',this.props.connectDropTarget())
+        alert('added')
     }
 
     render() {
@@ -103,9 +132,18 @@ class VisualLayout extends React.Component {
         return connectDropTarget(
             <div className="pvlVisualLayout">
                 <h2>Visual Layout</h2>
-                {isOver && canDrop && <div>omg u there</div>}
-                {!isOver && canDrop && <div>drop on me</div>}
-                {isOver && !canDrop && <div>invalid drop</div>}
+                <div class="pvlCanvase">
+                    {this.state.layoutObjects.map((lo) => {
+                        return (
+                            <LayoutObjectText id={lo.id} isReady="true" />
+                        )
+                    })}
+                </div>
+                <div class="message">
+                    {isOver && canDrop && <div>omg u there</div>}
+                    {!isOver && canDrop && <div>drop on me</div>}
+                    {isOver && !canDrop && <div>invalid drop</div>}
+                </div>
             </div>
         );
     }
