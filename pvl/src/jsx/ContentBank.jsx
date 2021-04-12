@@ -13,8 +13,8 @@ class ContentBank extends React.Component {
             <div className="pvlContentBank">
                 <h2>Content Bank</h2>
                 <div className="content">
-                    <LayoutObjectText></LayoutObjectText>
-                    <LayoutObjectText></LayoutObjectText>
+                    <LayoutObjectText isReady="true" id="1"></LayoutObjectText>
+                    <LayoutObjectText isReady="true" id="2"></LayoutObjectText>
                 </div>
             </div> 
         );
