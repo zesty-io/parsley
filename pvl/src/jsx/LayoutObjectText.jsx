@@ -66,7 +66,7 @@ function collect(connect, monitor) {
 class LayoutObjectText extends React.Component {
     constructor(props) {
         super(props);
-        
+         
     }
   
 
@@ -74,7 +74,7 @@ class LayoutObjectText extends React.Component {
         // Your component receives its own props as usual
         const { id } = this.props
         console.log(this.props)
-  
+   
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
         const { isDragging, connectDragSource } = this.props

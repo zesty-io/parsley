@@ -5,15 +5,27 @@ import LayoutObjectText from './LayoutObjectText'
 class ContentBank extends React.Component {
     constructor(props) {
         super(props);
+        
         console.log(this.props)
+    }
+
+    sortIndexPlusPlus(){
+        setState('sortIndex', this.state.sortIndex + 1)
     }
 
     getModelFields(i) {
         let fields = this.props.models != undefined ? this.props.models[i].fields : {loading: "loading"}
         let fieldsToReturn = []
+        let sortIndex = 1 ;
         Object.keys(fields).map(function(key, position) {
             console.log(key, position)
-            fieldsToReturn.push({ name : key, type: fields[key] })
+            fieldsToReturn.push({ 
+                name : key, 
+                type: fields[key],
+                sort: sortIndex,
+                value: ""
+            })
+            sortIndex++
         })
         return fieldsToReturn
     }

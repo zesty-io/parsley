@@ -10,6 +10,13 @@
 [ ] Expand layoutobject to have different behaviors per type and content
 [ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
 [ ] Start Matching design
+[ ] Output Targets (snippet, export html, view file, wysiwyg target)
+
+## Considerations
+
+Our Goal... To make Zesty.io like nothing you've ever experienced...
+
+[ ] Allow Parsley in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
 
 # Parsley Visual Layout Tool
 

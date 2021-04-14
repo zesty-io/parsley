@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import  VisualLayout from './VisualLayout'
+import  VisualLayoutContainer from './VisualLayoutContainer'
 import  ContentBank from './ContentBank'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -45,7 +45,7 @@ class ParsleyVisualLayout extends React.Component {
         <div className="pvl">
             <DndProvider backend={HTML5Backend}>
             <div className="shell">
-                <VisualLayout></VisualLayout>
+                <VisualLayoutContainer></VisualLayoutContainer>
                 <ContentBank models={this.getContentBank()}></ContentBank> 
             </div>
             </DndProvider>
