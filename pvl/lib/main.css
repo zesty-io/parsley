@@ -140,7 +140,6 @@ html {
   display: none;
   position: absolute;
   width: 150px;
-  height: 80px;
   font-weight: 400;
   line-height: 130%;
   padding: 10px;
@@ -158,12 +157,14 @@ html {
 .pvl .shell .pvlHelp:hover .pvlHelpText {
   display: block;
 }
+.pvl .pvlObject {
+  display: flex;
+}
 .pvl .pvlObject.pvlLayoutObject,
 .pvl .pvlObject.pvlContentObject {
   border-radius: 3px;
   background: #eff5ff;
   margin: 10px;
-  padding: 10px;
   border: 1px #a7afbf solid;
 }
 .pvl .pvlObject.pvlLayoutObject .dragging,
@@ -171,4 +172,19 @@ html {
   width: 100px;
   height: 100px;
   background: #5b667d;
+}
+.pvl .pvlObject .pvlTypeTag {
+  flex: 1;
+  max-width: 60px;
+  text-align: center;
+  background-color: #a7afbf;
+  color: #5b667d;
+}
+.pvl .pvlObject .pvlTypeTag span {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+.pvl .pvlObject .pvlObjectPreview {
+  flex: 6;
+  padding: 10px;
 }

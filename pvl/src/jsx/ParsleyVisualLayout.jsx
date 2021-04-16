@@ -93,6 +93,7 @@ class ParsleyVisualLayout extends React.Component {
         type: 'columns',
         classes: 'row',
         html: '<div style="">*</div>',
+        preview: '<div style="display:flex"><div style="flex:1"><div style="flex:2"><div style="flex:2"><div><div><div></div>',
         droppable: false,
         children: [
           {
@@ -121,6 +122,7 @@ class ParsleyVisualLayout extends React.Component {
         name: 'Horizontal Rule',
         type: 'design',
         html: '<hr>',
+        preview: '<hr>',
         classes: '',
         droppable: false
       }

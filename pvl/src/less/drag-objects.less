@@ -1,11 +1,12 @@
 .pvlObject{
+    display: flex;
     &.pvlLayoutObject, &.pvlContentObject{
         
         .defaultBorderRadius();
         
         background: @zesty-white;
         margin: @defaultMargin;
-        padding: @defaultPadding;
+        
         border: 1px @zesty-light-grey solid;
 
         .dragging {
@@ -14,4 +15,22 @@
             background: @zesty-grey;
         }
     }
+
+    .pvlTypeTag {
+        flex: 1;
+        max-width: 60px;
+        text-align: center;
+        background-color: @zesty-light-grey;
+        color: @zesty-grey;
+        span {
+            font-size: 1.5em;
+            margin-top: @defaultMargin;
+        }
+
+    }
+    .pvlObjectPreview {
+        flex: 6;
+        padding: @defaultPadding;
+    }
+   
 }

@@ -33,7 +33,7 @@ class LayoutBank extends React.Component {
                 <div className="modelText">
                     {this.getLayoutObjects().map((lo) => {
                         return (
-                            <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} type={lo.type} isReady="true" />
+                            <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} type={lo.type} obj={lo} isReady="true" />
                         ) 
                     })} 
                 </div>

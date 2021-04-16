@@ -1,6 +1,7 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
+import { LayoutObjectTypes } from './LayoutObjectTypes';
 
 const layoutObjectSource = {
   canDrag(props) {
@@ -66,20 +67,36 @@ class LayoutObject extends React.Component {
         super(props);
          
     }
+    getType() {
+      return LayoutObjectTypes[this.props.type] !== undefined ? LayoutObjectTypes[this.props.type] :  LayoutObjectTypes.unknown;
+    }
+
+
 
     render() {
         // Your component receives its own props as usual
         const { id } = this.props
-        console.log(this.props)
-   
+        
+        let type = this.getType()
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
         const { isDragging, connectDragSource } = this.props
-
+        console.log('no ty[e', type)
         return connectDragSource(
             <div className="pvlObject pvlLayoutObject">
-               {this.props.type}: {this.props.name} <br />
-                {isDragging && ' (being dragged )'}
+                <div className="pvlTypeTag" title={type.name}> 
+                  <span className={`fa fa-${type.icon}`}></span>
+                </div>
+                <div className="pvlObjectPreview">
+                  {this.props.obj !== undefined && this.props.obj.preview !== undefined && 
+                    <div dangerouslySetInnerHTML={{
+                      __html: this.props.obj.preview
+                      }}></div>
+                    }
+
+                  {this.props.type}: {this.props.name} <br />
+                  {isDragging && ' (being dragged )'}
+                </div>
             </div>
         );
     }

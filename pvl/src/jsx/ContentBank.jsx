@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
-import ContentObject from './ContentObject'
+//import ContentObject from './ContentObject'
+import LayoutObject from './LayoutObject'
 import PVLToolbar from './PVLToolbar'
 /**
  * ContentBank is a component that takes  parsley GQL base link as
@@ -44,7 +45,7 @@ class ContentBank extends React.Component {
                 <div className="modelText">
                     {fields.map((field) => {
                         return (
-                            <ContentObject key={field.name} id={field.name} name={field.name} type={field.type} isReady="true" />
+                            <LayoutObject key={field.name} id={field.name} name={field.name} type={field.type}  obj={field}  isReady="true" />
                         )
                     })}
                 </div>

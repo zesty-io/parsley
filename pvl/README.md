@@ -5,8 +5,13 @@
 [X] Connect DND to component
 [X] setup DND decorator API https://react-dnd.github.io/react-dnd/docs/api/drop-target
 [X] Test dragging and dropping
-[ ] Connect to remove endpoint in zesty, store in top level state
-[ ] pass content down to content bank, display layoutobjects (pass in types as props)
+[X] Connect to remote endpoint in zesty, store in top level state
+[X] pass content down to content bank, display layoutobjects (pass in types as props)
+[ ] Setup layout object bank
+[ ] Connect collapse button to CSS functionality and prop passing
+[ ] Setup include code object bank component
+[ ] fetch remote file data for snippets, or fake it for now
+[ ] Work on layout object to adapt to different styles based on its incoming object
 [ ] Expand layoutobject to have different behaviors per type and content
 [ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
 [ ] Start Matching design
