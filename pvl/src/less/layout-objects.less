@@ -1,78 +1,111 @@
 .pvlObject{
-    display: flex;
     position: relative;
+    flex-basis: auto; 
+    align-items: stretch;
+    background: @zesty-white;
+    margin: 0px @defaultMargin @defaultMargin 0px;  
+    border: 1px @zesty-light-grey solid;
+    .defaultBorderRadius();
+
     &:hover{
         cursor: move;
     }
 
-    &.pvlLayoutObject, &.pvlContentObject{
-        .defaultBorderRadius();
-        background: @zesty-white;
-        margin: @defaultMargin;  
-        border: 1px @zesty-light-grey solid;
-    }
     &.pvlDragging{
         background: @zesty-yellow;
         .pvlTypeTag {
             display: none;
         }
     }
-
+    .pvlObjectHeader {
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+    }
     .pvlTypeTag {
         flex: 1;
+        display: block;
         max-width: 60px;
         text-align: center;
         background-color: @zesty-field-blue;
         color: @zesty-grey;
         border-right: 1px @zesty-light-grey solid;
+        border-radius: @defaultBorderRadius 0px 0px @defaultBorderRadius;
         span {
             font-size: 1.5em;
             margin-top: @defaultMargin;
         }
 
     }
-    .pvlObjectPreview {
+    .pvlDescription {
         flex: 6;
-        padding: @defaultPadding;
         display: flex;
-        .pvlPreview{
-            margin-right: @defaultMargin;
+        span {
+            display: block;
+            padding: 5px @defaultPadding;
         }
+        
+    }
+    .pvlPreview{
+        display: block;
+        margin-right: @defaultMargin;
     }
     &.pvlLayout {
+        .pvlDescription { 
+           font-weight: 500; 
+           border-bottom: 1px @zesty-light-grey solid;
+        }
         .pvlTypeTag {
-            position: absolute;
-            top: 0px;
-            right: 0px;
+            //align-self: flex-end;
+            order: 5;
             border: 1px @zesty-light-grey solid;
             border-right: 0px;
             border-top: 0px;
-            width: 30px;
-            border-bottom-left-radius: 3px;
+            min-width: 24px;
+            border-radius: 0px @defaultBorderRadius 0px 0px;
+            span {
+                margin-top: 3px;
+                font-size: 1.3em;
+                padding: 4px;
+            }
             
         }
-        .pvlObjectPreview {
+        
+        
+        .pvlPreview{
             display: block;
-            .pvlPreview{
+            padding: @defaultPadding;
+            div {
+                .defaultBorderRadius();
+                border: 4px @zesty-grey solid;
+                height: 20px;
+                width: 100%;
                 div {
-                    .defaultBorderRadius();
-                    border: 4px @zesty-grey solid;
-                    height: 20px;
-                    width: 60px;
-                    div {
-                        border-radius: 0px;
-                        border: none;
-                        border-right: 4px @zesty-grey solid;
-                    }
-                    div:nth-child(2) {
-                        background-color: @zesty-field-blue;
-                    }
-                    div:last-child {
-                        border:none;
-                    }
+                    border-radius: 0px;
+                    border: none;
+                    border-right: 4px @zesty-grey solid;
+                }
+                div:nth-child(even) {
+                    background-color: @zesty-field-blue;
+                }
+                div:last-child {
+                    border:none;
                 }
             }
         }
+    
+    }
+
+    // for row breaks
+
+    &.pvlBreak {
+       
+        flex-basis: 100%;
+        height: 0;
+        width: 100%;
+        display: inline-block
+    
+       
     }
 
 }

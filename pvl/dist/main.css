@@ -112,6 +112,9 @@ html {
 .pvl .shell .pvlObjectBank {
   border-radius: 3px;
   display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  align-items: left;
 }
 .pvl .shell .pvlToolbar {
   background: #a7afbf;
@@ -161,18 +164,16 @@ html {
   display: block;
 }
 .pvl .pvlObject {
-  display: flex;
   position: relative;
+  flex-basis: auto;
+  align-items: stretch;
+  background: #eff5ff;
+  margin: 0px 10px 10px 0px;
+  border: 1px #a7afbf solid;
+  border-radius: 3px;
 }
 .pvl .pvlObject:hover {
   cursor: move;
-}
-.pvl .pvlObject.pvlLayoutObject,
-.pvl .pvlObject.pvlContentObject {
-  border-radius: 3px;
-  background: #eff5ff;
-  margin: 10px;
-  border: 1px #a7afbf solid;
 }
 .pvl .pvlObject.pvlDragging {
   background: #fffde2;
@@ -180,53 +181,78 @@ html {
 .pvl .pvlObject.pvlDragging .pvlTypeTag {
   display: none;
 }
+.pvl .pvlObject .pvlObjectHeader {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
 .pvl .pvlObject .pvlTypeTag {
   flex: 1;
+  display: block;
   max-width: 60px;
   text-align: center;
   background-color: #c7d4ea;
   color: #5b667d;
   border-right: 1px #a7afbf solid;
+  border-radius: 3px 0px 0px 3px;
 }
 .pvl .pvlObject .pvlTypeTag span {
   font-size: 1.5em;
   margin-top: 10px;
 }
-.pvl .pvlObject .pvlObjectPreview {
+.pvl .pvlObject .pvlDescription {
   flex: 6;
-  padding: 10px;
   display: flex;
 }
-.pvl .pvlObject .pvlObjectPreview .pvlPreview {
+.pvl .pvlObject .pvlDescription span {
+  display: block;
+  padding: 5px 10px;
+}
+.pvl .pvlObject .pvlPreview {
+  display: block;
   margin-right: 10px;
 }
+.pvl .pvlObject.pvlLayout .pvlDescription {
+  font-weight: 500;
+  border-bottom: 1px #a7afbf solid;
+}
 .pvl .pvlObject.pvlLayout .pvlTypeTag {
-  position: absolute;
-  top: 0px;
-  right: 0px;
+  order: 5;
   border: 1px #a7afbf solid;
   border-right: 0px;
   border-top: 0px;
-  width: 30px;
-  border-bottom-left-radius: 3px;
+  min-width: 24px;
+  border-radius: 0px 3px 0px 0px;
 }
-.pvl .pvlObject.pvlLayout .pvlObjectPreview {
+.pvl .pvlObject.pvlLayout .pvlTypeTag span {
+  margin-top: 3px;
+  font-size: 1.3em;
+  padding: 4px;
+}
+.pvl .pvlObject.pvlLayout .pvlPreview {
   display: block;
+  padding: 10px;
 }
-.pvl .pvlObject.pvlLayout .pvlObjectPreview .pvlPreview div {
+.pvl .pvlObject.pvlLayout .pvlPreview div {
   border-radius: 3px;
   border: 4px #5b667d solid;
   height: 20px;
-  width: 60px;
+  width: 100%;
 }
-.pvl .pvlObject.pvlLayout .pvlObjectPreview .pvlPreview div div {
+.pvl .pvlObject.pvlLayout .pvlPreview div div {
   border-radius: 0px;
   border: none;
   border-right: 4px #5b667d solid;
 }
-.pvl .pvlObject.pvlLayout .pvlObjectPreview .pvlPreview div div:nth-child(2) {
+.pvl .pvlObject.pvlLayout .pvlPreview div div:nth-child(even) {
   background-color: #c7d4ea;
 }
-.pvl .pvlObject.pvlLayout .pvlObjectPreview .pvlPreview div div:last-child {
+.pvl .pvlObject.pvlLayout .pvlPreview div div:last-child {
   border: none;
+}
+.pvl .pvlObject.pvlBreak {
+  flex-basis: 100%;
+  height: 0;
+  width: 100%;
+  display: inline-block;
 }

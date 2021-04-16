@@ -56,6 +56,13 @@ export const LayoutObjectTypes = {
     description: 'Text with HTML references.',
     draggable: true
   },
+  break: {
+    icon: '',
+    name: 'break',
+    type: 'break',
+    description: 'layout break line',
+    draggable: false
+  },
   unknown: {
     icon: 'question',
     name: 'Unknown',

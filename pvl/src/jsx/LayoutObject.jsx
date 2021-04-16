@@ -86,23 +86,23 @@ class LayoutObject extends React.Component {
         // as defined by your `collect` function above:
         const { isDragging, connectDragSource } = this.props
         let draggingClass = isDragging ? 'pvlDragging' : '';
-        
+  
         return connectDragSource(
             <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+              <div className="pvlObjectHeader">  
                 <div className="pvlTypeTag" title={type.name}> 
                   <span className={`fa fa-${type.icon}`}></span>
                 </div>
-                <div className="pvlObjectPreview">
-                  {this.props.obj !== undefined && this.props.obj.preview !== undefined && 
-                    <div className="pvlPreview" dangerouslySetInnerHTML={{
-                      __html: this.props.obj.preview
-                      }}></div>
-                    }
-                  <div className="pvlDescription">
-                    {this.props.name} 
-                    
-                  </div>
+                <div className="pvlDescription">
+                  <span>{this.props.name}</span>
                 </div>
+              </div>
+              {this.props.obj !== undefined && this.props.obj.preview !== undefined && 
+                <div className="pvlPreview" dangerouslySetInnerHTML={{
+                  __html: this.props.obj.preview
+                  }}></div>
+                }
+                 
             </div>
         );
     }

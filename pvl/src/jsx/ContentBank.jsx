@@ -39,6 +39,9 @@ class ContentBank extends React.Component {
     render() {
         const fields = this.getModelFields(2)
         let helpText = `Search for content field references and drag and drop them into the Visual Layout canvas`
+        if (this.props.content == undefined) {
+            return <div></div>
+        }
         return (
             <div className="pvlContentBank">
                 <PVLToolbar title="Content Bank" helpText={helpText}></PVLToolbar>
