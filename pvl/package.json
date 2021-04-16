@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "npx babel --watch src/jsx --out-dir ./lib",
-    "watch-less": "less-watch-compiler ./src/less ./lib main.less",
+    "watch-less": "less-watch-compiler ./src/less ./dist main.less",
     "start": "webpack-dev-server --open --hot --mode development",
     "build-prod": "webpack --mode production"
   },
