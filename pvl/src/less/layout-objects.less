@@ -1,18 +1,20 @@
 .pvlObject{
     display: flex;
-    &.pvlLayoutObject, &.pvlContentObject{
-        
-        .defaultBorderRadius();
-        
-        background: @zesty-white;
-        margin: @defaultMargin;
-        
-        border: 1px @zesty-light-grey solid;
+    position: relative;
+    &:hover{
+        cursor: move;
+    }
 
-        .dragging {
-            width: 100px;
-            height: 100px;
-            background: @zesty-grey;
+    &.pvlLayoutObject, &.pvlContentObject{
+        .defaultBorderRadius();
+        background: @zesty-white;
+        margin: @defaultMargin;  
+        border: 1px @zesty-light-grey solid;
+    }
+    &.pvlDragging{
+        background: @zesty-yellow;
+        .pvlTypeTag {
+            display: none;
         }
     }
 
@@ -20,8 +22,9 @@
         flex: 1;
         max-width: 60px;
         text-align: center;
-        background-color: @zesty-light-grey;
+        background-color: @zesty-field-blue;
         color: @zesty-grey;
+        border-right: 1px @zesty-light-grey solid;
         span {
             font-size: 1.5em;
             margin-top: @defaultMargin;
@@ -32,14 +35,42 @@
         flex: 6;
         padding: @defaultPadding;
         display: flex;
+        .pvlPreview{
+            margin-right: @defaultMargin;
+        }
     }
     &.pvlLayout {
-        .pvlPreview{
-            div {
-                .defaultBorderRadius();
-                border: 2px @zesty-grey solid;
-                height: 20px;
-
+        .pvlTypeTag {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            border: 1px @zesty-light-grey solid;
+            border-right: 0px;
+            border-top: 0px;
+            width: 30px;
+            border-bottom-left-radius: 3px;
+            
+        }
+        .pvlObjectPreview {
+            display: block;
+            .pvlPreview{
+                div {
+                    .defaultBorderRadius();
+                    border: 4px @zesty-grey solid;
+                    height: 20px;
+                    width: 60px;
+                    div {
+                        border-radius: 0px;
+                        border: none;
+                        border-right: 4px @zesty-grey solid;
+                    }
+                    div:nth-child(2) {
+                        background-color: @zesty-field-blue;
+                    }
+                    div:last-child {
+                        border:none;
+                    }
+                }
             }
         }
     }

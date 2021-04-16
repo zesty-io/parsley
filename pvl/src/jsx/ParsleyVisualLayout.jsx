@@ -65,7 +65,7 @@ class ParsleyVisualLayout extends React.Component {
   getLayoutObjects() {
     return [
       {
-        uid: '1',
+        uid: '11',
         name: '2 Columns',
         type: 'columns',
         classes: 'row',
@@ -88,12 +88,12 @@ class ParsleyVisualLayout extends React.Component {
 
       },
       {
-        uid: '1',
+        uid: '12',
         name: '3 Columns',
         type: 'columns',
         classes: 'row',
         html: '<div style="">*</div>',
-        preview: '<div style="display:flex"><div style="flex:1"><div style="flex:2"><div style="flex:2"><div><div><div></div>',
+        preview: '<div style="display:flex"><div style="flex:1"></div><div style="flex:2"></div><div style="flex:2"></div></div>',
         droppable: false,
         children: [
           {
@@ -118,7 +118,7 @@ class ParsleyVisualLayout extends React.Component {
 
       },
        {
-        uid: '1',
+        uid: '13',
         name: 'Horizontal Rule',
         type: 'design',
         html: '<hr>',

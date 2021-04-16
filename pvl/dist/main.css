@@ -106,12 +106,12 @@ html {
 .pvl .shell .pvlObjectBanks {
   flex: 2;
   min-width: 100px;
-  background: #c7d4ea;
   border-radius: 3px;
   margin-left: 10px;
 }
 .pvl .shell .pvlObjectBank {
   border-radius: 3px;
+  display: flex;
 }
 .pvl .shell .pvlToolbar {
   background: #a7afbf;
@@ -162,6 +162,10 @@ html {
 }
 .pvl .pvlObject {
   display: flex;
+  position: relative;
+}
+.pvl .pvlObject:hover {
+  cursor: move;
 }
 .pvl .pvlObject.pvlLayoutObject,
 .pvl .pvlObject.pvlContentObject {
@@ -170,18 +174,19 @@ html {
   margin: 10px;
   border: 1px #a7afbf solid;
 }
-.pvl .pvlObject.pvlLayoutObject .dragging,
-.pvl .pvlObject.pvlContentObject .dragging {
-  width: 100px;
-  height: 100px;
-  background: #5b667d;
+.pvl .pvlObject.pvlDragging {
+  background: #fffde2;
+}
+.pvl .pvlObject.pvlDragging .pvlTypeTag {
+  display: none;
 }
 .pvl .pvlObject .pvlTypeTag {
   flex: 1;
   max-width: 60px;
   text-align: center;
-  background-color: #a7afbf;
+  background-color: #c7d4ea;
   color: #5b667d;
+  border-right: 1px #a7afbf solid;
 }
 .pvl .pvlObject .pvlTypeTag span {
   font-size: 1.5em;
@@ -192,8 +197,36 @@ html {
   padding: 10px;
   display: flex;
 }
-.pvl .pvlObject.pvlLayout .pvlPreview div {
+.pvl .pvlObject .pvlObjectPreview .pvlPreview {
+  margin-right: 10px;
+}
+.pvl .pvlObject.pvlLayout .pvlTypeTag {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border: 1px #a7afbf solid;
+  border-right: 0px;
+  border-top: 0px;
+  width: 30px;
+  border-bottom-left-radius: 3px;
+}
+.pvl .pvlObject.pvlLayout .pvlObjectPreview {
+  display: block;
+}
+.pvl .pvlObject.pvlLayout .pvlObjectPreview .pvlPreview div {
   border-radius: 3px;
-  border: 2px #5b667d solid;
+  border: 4px #5b667d solid;
   height: 20px;
+  width: 60px;
+}
+.pvl .pvlObject.pvlLayout .pvlObjectPreview .pvlPreview div div {
+  border-radius: 0px;
+  border: none;
+  border-right: 4px #5b667d solid;
+}
+.pvl .pvlObject.pvlLayout .pvlObjectPreview .pvlPreview div div:nth-child(2) {
+  background-color: #c7d4ea;
+}
+.pvl .pvlObject.pvlLayout .pvlObjectPreview .pvlPreview div div:last-child {
+  border: none;
 }

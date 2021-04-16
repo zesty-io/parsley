@@ -85,9 +85,10 @@ class LayoutObject extends React.Component {
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
         const { isDragging, connectDragSource } = this.props
-        console.log('no ty[e', type)
+        let draggingClass = isDragging ? 'pvlDragging' : '';
+        
         return connectDragSource(
-            <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(type.type)}`}>
+            <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
                 <div className="pvlTypeTag" title={type.name}> 
                   <span className={`fa fa-${type.icon}`}></span>
                 </div>
@@ -98,8 +99,8 @@ class LayoutObject extends React.Component {
                       }}></div>
                     }
                   <div className="pvlDescription">
-                    {this.props.type}: {this.props.name} <br />
-                    {isDragging && ' (being dragged )'}
+                    {this.props.name} 
+                    
                   </div>
                 </div>
             </div>
