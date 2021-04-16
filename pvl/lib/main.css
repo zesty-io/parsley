@@ -1,3 +1,18 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_cJD7g4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Me5Q.ttf) format('truetype');
+}
 .display {
   font-family: "Montserrat", Arial, Sans-Serif;
   font-size: 32px;
@@ -59,38 +74,100 @@
   line-height: 16px;
   letter-spacing: 0px;
 }
-.pvl {
-  width: 100%;
-  margin: 10px;
+body,
+html {
+  background-color: #000;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
 }
 .pvl .shell {
   background: #a7afbf;
-  border-radius: 4px;
+  border-radius: 3px;
   padding: 10px;
   display: flex;
 }
-.pvl .shell .pvlVisualLayout {
+.pvl .shell h1,
+.pvl .shell h2,
+.pvl .shell h3,
+.pvl .shell h4,
+.pvl .shell h5,
+.pvl .shell h6,
+.pvl .shell label {
+  font-family: 'Montserrat', sans-serif;
+}
+.pvl .shell .pvlVisualLayoutContainer {
   flex: 4;
   min-width: 100px;
   background: white;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 3px;
 }
-.pvl .shell .pvlContentBank {
+.pvl .shell .pvlObjectBanks {
   flex: 2;
   min-width: 100px;
-  background: white;
-  border-radius: 4px;
+  background: #c7d4ea;
+  border-radius: 3px;
   margin-left: 10px;
 }
-.pvl .shell .pvlLayoutObject {
-  border-radius: 4px;
+.pvl .shell .pvlToolbar {
+  background: #a7afbf;
+  border-bottom: 1px #a7afbf solid;
+  display: flex;
+}
+.pvl .shell .pvlToolbar h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  padding: 5px;
+  flex: 3;
+}
+.pvl .shell .pvlToolbar > div {
+  flex: 1;
+  text-align: right;
+}
+.pvl .shell .pvlToolbar > div span {
+  font-size: 1.8em;
+  margin: 4px 4px 0px 0px;
+  color: #5b667d;
+}
+.pvl .shell .pvlHelp {
+  color: #eff5ff;
+  position: relative;
+  margin-right: 10px;
+}
+.pvl .shell .pvlHelp .pvlHelpText {
+  display: none;
+  position: absolute;
+  width: 150px;
+  height: 80px;
+  font-weight: 400;
+  line-height: 130%;
+  padding: 10px;
+  font-family: Roboto;
+  font-size: 0.8em;
+  background: #fffde2;
+  color: #000;
+  border: #5b667d 1px solid;
+  border-radius: 3px;
+  z-index: 2;
+}
+.pvl .shell .pvlHelp:hover {
+  color: #5b667d;
+}
+.pvl .shell .pvlHelp:hover .pvlHelpText {
+  display: block;
+}
+.pvl .pvlObject.pvlLayoutObject,
+.pvl .pvlObject.pvlContentObject {
+  border-radius: 3px;
   background: #eff5ff;
   margin: 10px;
   padding: 10px;
   border: 1px #a7afbf solid;
 }
-.pvl .shell .dragging {
+.pvl .pvlObject.pvlLayoutObject .dragging,
+.pvl .pvlObject.pvlContentObject .dragging {
   width: 100px;
   height: 100px;
   background: #5b667d;

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
-import VisualToolbar from './VisualToolbar'
+import PVLToolbar from './PVLToolbar'
 import VisualLayout from './VisualLayout'
 
 class VisualLayoutContainer extends React.Component {
@@ -11,10 +11,10 @@ class VisualLayoutContainer extends React.Component {
         super(props);
     }
     render() {
-       
+        let helpText = `Drag and Drop elements form the Content Bank and Layout Tools below.`
         return (
-            <div className="pvlVisualLayout">
-               <VisualToolbar></VisualToolbar>
+            <div className="pvlVisualLayoutContainer">
+               <PVLToolbar title="Visual Layout" helpText={helpText}></PVLToolbar>
                <VisualLayout></VisualLayout>
             </div>
         );

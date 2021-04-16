@@ -1,3 +1,28 @@
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto:wght@400&display=swap';
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
 @import 'https://raw.githubusercontent.com/zesty-io/design-system/master/core/src/colors.less';
 @import 'https://raw.githubusercontent.com/zesty-io/design-system/master/core/src/typography.less';
-@import 'visual-shell.less';
+
+// variables and mixins
+@width: 100%;
+@defaultPadding: 10px;
+@defaultBorderRadius: 5px;
+@defaultMargin: @defaultPadding;
+.defaultBorderRadius() {
+    border-radius: 3px;
+}
+.zerod() {
+    margin: 0;
+    padding: 0;
+}
+// For the demo 
+body,html {
+    background-color: #000;
+    font-family: 'Roboto', sans-serif;
+    font-size: .8em;
+    .zerod();
+}
+.pvl {
+    @import 'visual-shell.less';
+    @import 'drag-objects.less';
+}

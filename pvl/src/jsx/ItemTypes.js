@@ -1,5 +1,5 @@
 export const ItemTypes = {
   LAYOUTOBJECT: 'LayoutObject',
-  LAYOUTOBJECTTEXT: 'LayoutObjectText',
+  CONTENTOBJECT: 'ContentObject',
 }
  

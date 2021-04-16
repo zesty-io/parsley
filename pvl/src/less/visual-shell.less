@@ -1,48 +1,80 @@
-@width: 100%;
-@defaultPadding: 10px;
-@defaultBorderRadius: 5px;
-@defaultMargin: @defaultPadding;
-.defaultBorderRadius() {
-    border-radius: 4px;
-}
+.shell {
 
-.pvl {
-    width: @width;
-    margin: @defaultMargin;
-    .shell {
+    background: @zesty-light-grey;
+    .defaultBorderRadius();
+    padding: @defaultPadding;
+    display: flex;
 
-        background: @zesty-light-grey;
+    h1, h2, h3, h4, h5, h6, label {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .pvlVisualLayoutContainer {
+        flex: 4;
+        min-width: 100px;
+        background: white;
         .defaultBorderRadius();
-        padding: @defaultPadding;
-        display: flex;
-        .pvlVisualLayout {
-            flex: 4;
-            min-width: 100px;
-            background: white;
-            .defaultBorderRadius();
-            padding: @defaultPadding;
-        }
-
-        .pvlContentBank{
-            flex: 2;
-            min-width: 100px;
-            background: white;
-            .defaultBorderRadius();
-            margin-left: @defaultMargin;
-            
-        }
-        .pvlLayoutObject{
-            .defaultBorderRadius();
-            background: @zesty-white;
-            margin: @defaultMargin;
-            padding: @defaultPadding;
-            border: 1px @zesty-light-grey solid;
-        }
-        .dragging {
-            width: 100px;
-            height: 100px;
-            background: @zesty-grey;
-        }
+    }
+    .pvlObjectBanks{
+        flex: 2;
+        min-width: 100px;
+        background: @zesty-field-blue;
+        .defaultBorderRadius();
+        margin-left: @defaultMargin;
+    }
+    .pvlContentBank{
+        
         
     }
+   
+    .pvlToolbar {
+        background: @zesty-light-grey;
+        border-bottom: 1px @zesty-light-grey solid;
+        display: flex;
+        h1 {
+            .zerod();
+            font-size: 16px;
+            padding: 5px;
+            flex: 3;
+            
+        }
+        > div {
+           flex: 1; 
+           text-align: right;
+           span  {
+               font-size: 1.8em;
+               margin: 4px 4px 0px 0px;
+               color: @zesty-grey;
+
+           }
+        }
+    }
+    .pvlHelp {
+        color: @zesty-white;
+        position: relative;
+        margin-right: @defaultMargin;
+        .pvlHelpText{
+            display: none;
+            position: absolute;
+            width: 150px;
+            height: 80px;
+            font-weight: 400;
+            line-height: 130%;
+            padding: @defaultPadding;
+            font-family: Roboto;
+            font-size: .8em;                 
+            background: @zesty-yellow;
+            color: @black;
+            border: @zesty-grey 1px solid;
+            .defaultBorderRadius();
+            z-index: 2;
+        }
+        &:hover{
+            color: @zesty-grey;
+            .pvlHelpText {
+                display: block;
+            }
+        }
+    }
+    
 }

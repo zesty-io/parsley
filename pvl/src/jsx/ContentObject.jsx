@@ -1,10 +1,8 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
-
 import { ItemTypes } from './ItemTypes';
-//import { LayoutObject } from './LayoutObject';
 
-const layoutObjectSource = {
+const contentObjectSource = {
   canDrag(props) {
     //console.log(props)
     // You can disallow drag based on props
@@ -63,7 +61,7 @@ function collect(connect, monitor) {
 }
 
 
-class LayoutObjectText extends React.Component {
+class CotentObject extends React.Component {
     constructor(props) {
         super(props);
          
@@ -80,7 +78,7 @@ class LayoutObjectText extends React.Component {
         const { isDragging, connectDragSource } = this.props
 
         return connectDragSource(
-            <div className="pvlLayoutObject">
+            <div className="pvlObject pvlContentObject">
                {this.props.type}: {this.props.name} <br />
                 {isDragging && ' (being dragged )'}
             </div>
@@ -88,7 +86,7 @@ class LayoutObjectText extends React.Component {
     }
 }
 
-export default DragSource(ItemTypes.LAYOUTOBJECT, layoutObjectSource, collect)(LayoutObjectText)
+export default DragSource(ItemTypes.LAYOUTOBJECT, contentObjectSource, collect)(CotentObject)
 
 
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
-import  LayoutObjectText  from './LayoutObjectText';
+import  LayoutObject  from './LayoutObject';
 
 /**
  * Specifies the drop target contract.
@@ -130,12 +130,11 @@ class VisualLayout extends React.Component {
         const { isOver, canDrop, connectDropTarget } = this.props
 
         return connectDropTarget(
-            <div className="pvlVisualLayout">
-                <h2>Visual Layout</h2>
+            <div>
                 <div className="pvlCanvas">
                     {this.state.layoutObjects.map((lo) => {
                         return (
-                            <LayoutObjectText key={lo.id} id={lo.id} isReady="true" />
+                            <LayoutObject key={lo.id} id={lo.id} isReady="true" />
                         )
                     })}
                 </div>

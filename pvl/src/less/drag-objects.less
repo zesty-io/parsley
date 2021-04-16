@@ -1,0 +1,17 @@
+.pvlObject{
+    &.pvlLayoutObject, &.pvlContentObject{
+        
+        .defaultBorderRadius();
+        
+        background: @zesty-white;
+        margin: @defaultMargin;
+        padding: @defaultPadding;
+        border: 1px @zesty-light-grey solid;
+
+        .dragging {
+            width: 100px;
+            height: 100px;
+            background: @zesty-grey;
+        }
+    }
+}

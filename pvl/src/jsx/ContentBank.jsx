@@ -1,12 +1,15 @@
 
 import React, { Component } from 'react'
-import LayoutObjectText from './LayoutObjectText'
-
+import ContentObject from './ContentObject'
+import PVLToolbar from './PVLToolbar'
+/**
+ * ContentBank is a component that takes  parsley GQL base link as
+ * if objects is undefined or 0 in length, this component renders an empty div
+ */
+ 
 class ContentBank extends React.Component {
     constructor(props) {
         super(props);
-        
-        console.log(this.props)
     }
 
     sortIndexPlusPlus(){
@@ -14,7 +17,7 @@ class ContentBank extends React.Component {
     }
 
     getModelFields(i) {
-        let fields = this.props.models != undefined ? this.props.models[i].fields : {loading: "loading"}
+        let fields = this.props.content != undefined ? this.props.content[i].fields : {loading: "loading"}
         let fieldsToReturn = []
         let sortIndex = 1 ;
         Object.keys(fields).map(function(key, position) {
@@ -34,18 +37,14 @@ class ContentBank extends React.Component {
 
     render() {
         const fields = this.getModelFields(2)
-        console.log(fields)
+        let helpText = `Search for content field references and drag and drop them into the Visual Layout canvas`
         return (
             <div className="pvlContentBank">
-                <h2>Content Bank</h2>
-                <div className="content">
-                    <LayoutObjectText isReady="true" id="1"></LayoutObjectText>
-                    <LayoutObjectText isReady="true" id="2"></LayoutObjectText>
-                </div>
+                <PVLToolbar title="Content Bank" helpText={helpText}></PVLToolbar>
                 <div className="modelText">
                     {fields.map((field) => {
                         return (
-                            <LayoutObjectText key={field.name} id={field.name} name={field.name} type={field.type} isReady="true" />
+                            <ContentObject key={field.name} id={field.name} name={field.name} type={field.type} isReady="true" />
                         )
                     })}
                 </div>
