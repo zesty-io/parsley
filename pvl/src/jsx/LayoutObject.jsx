@@ -70,6 +70,10 @@ class LayoutObject extends React.Component {
     getType() {
       return LayoutObjectTypes[this.props.type] !== undefined ? LayoutObjectTypes[this.props.type] :  LayoutObjectTypes.unknown;
     }
+    capitalizeFirst(s){
+      if (typeof s !== 'string') return ''
+      return s.charAt(0).toUpperCase() + s.slice(1)
+    }
 
 
 
@@ -83,7 +87,7 @@ class LayoutObject extends React.Component {
         const { isDragging, connectDragSource } = this.props
         console.log('no ty[e', type)
         return connectDragSource(
-            <div className="pvlObject pvlLayoutObject pvl">
+            <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(type.type)}`}>
                 <div className="pvlTypeTag" title={type.name}> 
                   <span className={`fa fa-${type.icon}`}></span>
                 </div>
@@ -93,9 +97,10 @@ class LayoutObject extends React.Component {
                       __html: this.props.obj.preview
                       }}></div>
                     }
-
-                  {this.props.type}: {this.props.name} <br />
-                  {isDragging && ' (being dragged )'}
+                  <div className="pvlDescription">
+                    {this.props.type}: {this.props.name} <br />
+                    {isDragging && ' (being dragged )'}
+                  </div>
                 </div>
             </div>
         );

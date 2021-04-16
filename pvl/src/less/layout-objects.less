@@ -31,6 +31,17 @@
     .pvlObjectPreview {
         flex: 6;
         padding: @defaultPadding;
+        display: flex;
     }
-   
+    &.pvlLayout {
+        .pvlPreview{
+            div {
+                .defaultBorderRadius();
+                border: 2px @zesty-grey solid;
+                height: 20px;
+
+            }
+        }
+    }
+
 }

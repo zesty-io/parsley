@@ -110,6 +110,9 @@ html {
   border-radius: 3px;
   margin-left: 10px;
 }
+.pvl .shell .pvlObjectBank {
+  border-radius: 3px;
+}
 .pvl .shell .pvlToolbar {
   background: #a7afbf;
   border-bottom: 1px #a7afbf solid;
@@ -187,4 +190,10 @@ html {
 .pvl .pvlObject .pvlObjectPreview {
   flex: 6;
   padding: 10px;
+  display: flex;
+}
+.pvl .pvlObject.pvlLayout .pvlPreview div {
+  border-radius: 3px;
+  border: 2px #5b667d solid;
+  height: 20px;
 }

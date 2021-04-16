@@ -28,9 +28,9 @@ class LayoutBank extends React.Component {
     render() {
         let helpText = `Column, hairlines and other things to build a page`
         return this.getTotalLO() > 0 ? (
-            <div className="pvlLayoutBank">
+            <div className="pvlBank">
                 <PVLToolbar title="Layout Tools" helpText={helpText} collapse={this.collapse}></PVLToolbar>
-                <div className="modelText">
+                <div className="pvlObjectBank">
                     {this.getLayoutObjects().map((lo) => {
                         return (
                             <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} type={lo.type} obj={lo} isReady="true" />
