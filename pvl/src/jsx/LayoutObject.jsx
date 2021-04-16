@@ -83,13 +83,13 @@ class LayoutObject extends React.Component {
         const { isDragging, connectDragSource } = this.props
         console.log('no ty[e', type)
         return connectDragSource(
-            <div className="pvlObject pvlLayoutObject">
+            <div className="pvlObject pvlLayoutObject pvl">
                 <div className="pvlTypeTag" title={type.name}> 
                   <span className={`fa fa-${type.icon}`}></span>
                 </div>
                 <div className="pvlObjectPreview">
                   {this.props.obj !== undefined && this.props.obj.preview !== undefined && 
-                    <div dangerouslySetInnerHTML={{
+                    <div className="pvlPreview" dangerouslySetInnerHTML={{
                       __html: this.props.obj.preview
                       }}></div>
                     }
