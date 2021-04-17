@@ -7,10 +7,16 @@
 [X] Test dragging and dropping
 [X] Connect to remote endpoint in zesty, store in top level state
 [X] pass content down to content bank, display layoutobjects (pass in types as props)
-[ ] Setup layout object bank
+[X] Setup layout object bank
+[X] Create Layout objects json file
+[X] Design Layout objects interface
+[X] Iterate through GQL object for content bank, collapsable content models
+[X] Design the content model collapsing
+[ ] Search through content filter
 [ ] Connect collapse button to CSS functionality and prop passing
 [ ] Setup include code object bank component
 [ ] fetch remote file data for snippets, or fake it for now
+[ ] Test building tree on main component from drag n drop objects
 [ ] Work on layout object to adapt to different styles based on its incoming object
 [ ] Expand layoutobject to have different behaviors per type and content
 [ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)

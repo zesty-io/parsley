@@ -71,12 +71,12 @@ class ParsleyVisualLayout extends React.Component {
   }
 
   render() {
-      return (
+      return ( 
         <div className="pvl">
             <DndProvider backend={HTML5Backend}>
               <div className="shell">
                   <VisualLayoutContainer></VisualLayoutContainer>
-                  <div class="pvlObjectBanks">
+                  <div className="pvlObjectBanks">
                     <LayoutBank objects={this.getLayoutObjects()}></LayoutBank>
                     <ContentBank content={this.getContentBank()}></ContentBank> 
                   </div>

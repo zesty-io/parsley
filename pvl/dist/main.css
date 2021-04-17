@@ -141,6 +141,7 @@ html {
   color: #eff5ff;
   position: relative;
   margin-right: 10px;
+  cursor: help;
 }
 .pvl .shell .pvlHelp .pvlHelpText {
   display: none;
@@ -156,6 +157,7 @@ html {
   border: #5b667d 1px solid;
   border-radius: 3px;
   z-index: 2;
+  box-shadow: 0px 0px 10px #5b667d;
 }
 .pvl .shell .pvlHelp:hover {
   color: #5b667d;
@@ -180,7 +182,7 @@ html {
 .pvl .pvlObject.pvlDragging {
   background: #fffde2;
   box-shadow: 0px 0px 10px #1b202c;
-  opacity: 0.8;
+  opacity: 0.5;
 }
 .pvl .pvlObject .pvlObjectHeader {
   display: flex;

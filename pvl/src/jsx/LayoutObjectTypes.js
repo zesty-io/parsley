@@ -7,6 +7,14 @@ export const LayoutObjectTypes = {
     description: 'Refernces to image ZUIDs in Zesty.io',
     draggable: true
   },
+  
+  textarea: {
+    icon : 'align-justify',
+    name: 'Text Area',
+    type: 'content',
+    description: 'Mixed Plain and Rich Text',
+    draggable: true
+  },
   text: {
     icon : 'text-height',
     name: 'Text',
