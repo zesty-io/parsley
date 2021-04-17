@@ -167,24 +167,26 @@ html {
   position: relative;
   flex-basis: auto;
   align-items: stretch;
-  background: #eff5ff;
+  background: white;
   margin: 0px 10px 10px 0px;
   border: 1px #a7afbf solid;
   border-radius: 3px;
+  overflow: hidden;
 }
 .pvl .pvlObject:hover {
   cursor: move;
+  box-shadow: 0px 0px 10px #5b667d;
 }
 .pvl .pvlObject.pvlDragging {
   background: #fffde2;
-}
-.pvl .pvlObject.pvlDragging .pvlTypeTag {
-  display: none;
+  box-shadow: 0px 0px 10px #1b202c;
+  opacity: 0.8;
 }
 .pvl .pvlObject .pvlObjectHeader {
   display: flex;
   width: 100%;
   align-items: stretch;
+  color: #5b667d;
 }
 .pvl .pvlObject .pvlTypeTag {
   flex: 1;
@@ -192,17 +194,17 @@ html {
   max-width: 60px;
   text-align: center;
   background-color: #c7d4ea;
-  color: #5b667d;
   border-right: 1px #a7afbf solid;
-  border-radius: 3px 0px 0px 3px;
 }
 .pvl .pvlObject .pvlTypeTag span {
   font-size: 1.5em;
-  margin-top: 10px;
+  padding: 10px;
 }
 .pvl .pvlObject .pvlDescription {
   flex: 6;
   display: flex;
+  background: #eff5ff;
+  border-radius: 3px 3px 0 0;
 }
 .pvl .pvlObject .pvlDescription span {
   display: block;
@@ -249,6 +251,10 @@ html {
 }
 .pvl .pvlObject.pvlLayout .pvlPreview div div:last-child {
   border: none;
+}
+.pvl .pvlObject.pvlLayout .pvlPreview hr {
+  border: 2px #5b667d solid;
+  border-radius: 3px;
 }
 .pvl .pvlObject.pvlBreak {
   flex-basis: 100%;

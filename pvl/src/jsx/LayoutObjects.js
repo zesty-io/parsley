@@ -30,7 +30,7 @@ export const LayoutObjects = [
         type: 'columns',
         classes: 'row',
         html: '<div>*</div>',
-        preview: '<div style="display:flex"><div style="flex:2"></div><div style="flex:3"></div></div>',
+        preview: '<div style="display:flex"><div style="flex:2"></div><div style="flex:4"></div></div>',
         droppable: false,
         columns: [
           {
@@ -40,7 +40,7 @@ export const LayoutObjects = [
             droppable: true
           },
           {
-            width: '3',
+            width: '4',
             html: '<div>*</div>',
             classes: 'column',
             droppable: true
@@ -48,6 +48,7 @@ export const LayoutObjects = [
         ]
 
       },
+      
       {
         uid: '12',
         name: '3 Columns',
@@ -80,10 +81,10 @@ export const LayoutObjects = [
       },
        {
         uid: '99',
-        name: 'Break Line',
+        name: 'White Space',
         type: 'design',
         html: '<br>',
-        preview: '&lt;br&gt;',
+        preview: '<div style="border-style: dashed;"></span>',
         classes: '',
         droppable: false
       },
@@ -95,5 +96,29 @@ export const LayoutObjects = [
         preview: '<hr>',
         classes: '',
         droppable: false
+      },
+       {
+        uid: '19',
+        name: '2 Columns',
+        type: 'columns',
+        classes: 'row',
+        html: '<div>*</div>',
+        preview: '<div style="display:flex"><div style="flex:4"></div><div style="flex:2"></div></div>',
+        droppable: false,
+        columns: [
+          {
+            width: '2',
+            html: '<div>*</div>',
+            classes: 'column',
+            droppable: true
+          },
+          {
+            width: '3',
+            html: '<div>*</div>',
+            classes: 'column',
+            droppable: true
+          },
+        ]
+
       }
     ]

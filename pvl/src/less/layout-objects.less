@@ -2,25 +2,28 @@
     position: relative;
     flex-basis: auto; 
     align-items: stretch;
-    background: @zesty-white;
+    background: white;
     margin: 0px @defaultMargin @defaultMargin 0px;  
     border: 1px @zesty-light-grey solid;
     .defaultBorderRadius();
+    overflow: hidden;
 
     &:hover{
         cursor: move;
+        box-shadow: 0px 0px @defaultPadding @zesty-grey;
     }
 
     &.pvlDragging{
         background: @zesty-yellow;
-        .pvlTypeTag {
-            display: none;
-        }
+        box-shadow: 0px 0px @defaultPadding @zesty-dark-blue;
+        opacity: .8;
+       
     }
     .pvlObjectHeader {
         display: flex;
         width: 100%;
         align-items: stretch;
+        color: @zesty-grey;
     }
     .pvlTypeTag {
         flex: 1;
@@ -28,18 +31,20 @@
         max-width: 60px;
         text-align: center;
         background-color: @zesty-field-blue;
-        color: @zesty-grey;
+        
         border-right: 1px @zesty-light-grey solid;
-        border-radius: @defaultBorderRadius 0px 0px @defaultBorderRadius;
+        
         span {
             font-size: 1.5em;
-            margin-top: @defaultMargin;
+            padding: @defaultPadding;
         }
 
     }
     .pvlDescription {
         flex: 6;
         display: flex;
+        background: @zesty-white;
+        border-radius: @defaultBorderRadius @defaultBorderRadius 0 0 ;
         span {
             display: block;
             padding: 5px @defaultPadding;
@@ -91,6 +96,10 @@
                 div:last-child {
                     border:none;
                 }
+            }
+            hr {
+                border: 2px @zesty-grey solid;
+                .defaultBorderRadius();
             }
         }
     
