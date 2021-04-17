@@ -4,7 +4,7 @@ export const LayoutObjectTypes = {
     icon : 'image',
     name: 'Image(s)',
     type: 'content',
-    description: 'Refernces to image ZUIDs in Zesty.io',
+    description: 'Reference to image ZUIDs in Zesty.io',
     draggable: true
   },
   

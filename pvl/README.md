@@ -12,8 +12,13 @@
 [X] Design Layout objects interface
 [X] Iterate through GQL object for content bank, collapsable content models
 [X] Design the content model collapsing
-[ ] Move content mutatation into top level PVL before going into content bank
-[ ] Search through content filter
+[X] Move content mutatation into top level PVL before going into content bank
+[X] Search through content filter
+[X] Collapse content model button and functionality 
+[X] clear collapse on search, bring it back
+[ ] CSS design content model area
+[ ] Clear content filter
+[ ] Star current Content Model
 [ ] Connect collapse button to CSS functionality and prop passing
 [ ] Setup include code object bank component
 [ ] fetch remote file data for snippets, or fake it for now

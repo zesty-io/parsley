@@ -165,6 +165,12 @@ html {
 .pvl .shell .pvlHelp:hover .pvlHelpText {
   display: block;
 }
+.pvl .pvlModelHeader {
+  display: flex;
+}
+.pvl .pvlModelFields.pvlCollapsed {
+  display: none;
+}
 .pvl .pvlObject {
   position: relative;
   flex-basis: auto;

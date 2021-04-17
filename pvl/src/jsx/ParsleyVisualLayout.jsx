@@ -49,11 +49,11 @@ class ParsleyVisualLayout extends React.Component {
             delete(model.gqlGetAllMethodName)
             delete(model.gqlGetMethodName)
             delete(model.gqlModelName)
-            console.log(model)
-              let fields = this.mutateFieldsForPVL(model)
-              delete(model.fields)
-              model.fields = fields
-            
+            // setup fields for reading
+            let fields = this.mutateFieldsForPVL(model)
+            delete(model.fields)
+            model.fields = fields
+          
             structuredDataArray.push(model)
         })
 

@@ -14,20 +14,27 @@ class ContentBank extends React.Component {
         super(props);
         this.state = {
             currentModel: 'clippings',
-            searchFilter: ''
+            searchFilter: '',
+            collapsed: {}
         };
     }
 
     handleSearchFilterChange(event){
-        
         this.setState({
             searchFilter: event.target.value
         });
-        console.log(this.state.searchFilter, event)
     }
 
-    sortIndexPlusPlus(){
-        setState('sortIndex', this.state.sortIndex + 1)
+    collapseModel(modelName){
+        let temp = this.state.collapsed
+        if(temp[modelName] == undefined){
+            temp[modelName] = true
+        } else {
+            delete(temp[modelName])
+        }
+         this.setState({
+            collapsed: temp
+        });
     }
 
     getContentModels(){
@@ -44,17 +51,38 @@ class ContentBank extends React.Component {
             <div className="pvlContentBank">
                 <PVLToolbar title="Content Bank" helpText={helpText}></PVLToolbar>
                 <input value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
-                <div className="modelText">
-                    {content.map((model) => {
+                <div className="pvlContentModel">
+                    {/* sort models by name alphabetically */}
+                    {content.sort(function(a, b){
+                        if(a.name < b.name) { return -1; }
+                        if(a.name > b.name) { return 1; }
+                        return 0;
+                        // output models here
+                    }).map((model) => {
+                        // handle collapse logic
+                        let searchOn = this.state.searchFilter == '' ? false : true;
+                        let collapsed = this.state.collapsed[model.name] == undefined && !searchOn ? '' : 'pvlCollapsed';
+                        
                         return (
-                            <div key={model.zuid}>
-                            <h5>{model.name}</h5>
-                            {/* filter for search */}
-                            {model.fields.filter(function (field) {
-                                return field.name.includes(this.state.searchFilter);
-                            }.bind(this)).map((field) => {
-                                return (<LayoutObject key={field.name} id={field.name} name={field.name} type={field.type}  obj={field}  isReady="true" />)
-                            })}
+                            <div key={model.zuid}> 
+                                <div className="pvlModelHeader">
+                                    <h3>{model.name} {collapsed != '' && <span>(collapsed)</span>}</h3>
+                                    {/* collapse is off during search, this render output if not on */}
+                                    {!searchOn && 
+                                        <button onClick={() => {this.collapseModel(model.name)} }>
+                                            {collapsed == '' && <span className="fa fa-caret-down"></span>}
+                                            {collapsed != '' && <span className="fa fa-caret-left"></span>}
+                                        </button>
+                                    }
+                                </div>
+                                <div className={`pvlModelFields ${collapsed}`}>
+                                    {/* filter for search */}
+                                    {model.fields.filter(function (field) {
+                                        return field.name.includes(this.state.searchFilter);
+                                    }.bind(this)).map((field) => {
+                                        return (<LayoutObject key={field.name} id={field.name} name={field.name} type={field.type}  obj={field}  isReady="true" />)
+                                    })}
+                                </div>
                             </div>
                             
                         )
