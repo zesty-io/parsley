@@ -32,8 +32,64 @@ class ParsleyVisualLayout extends React.Component {
     this.setState({ data: json });
   }
 
+ // converts given content object (which is Zesty.io /-/gql/ output) to 
+    // a react iterable array/object build, also modifies data to work 
+    // with the layout tool
+    getIterableObject(models) {
+        // bail if we dont have the array yet
+        if(models == undefined) return []
+        // restructure the data
+        let structuredDataArray = []
+        models.map( (model,index) => {
+            
+            model.key =model.zuid
+            model.dataRef =model.gqlUrl
+            // remove GQL references not used
+            delete(model.gqlUrl)
+            delete(model.gqlGetAllMethodName)
+            delete(model.gqlGetMethodName)
+            delete(model.gqlModelName)
+            console.log(model)
+              let fields = this.mutateFieldsForPVL(model)
+              delete(model.fields)
+              model.fields = fields
+            
+            structuredDataArray.push(model)
+        })
+
+        return structuredDataArray
+    }
+
+    mutateFieldsForPVL(model) {
+        
+        const fields = model.fields != undefined ? model.fields : {loading: "Empty Fields"}
+        let fieldsToReturn = []
+        let sortIndex = 1 ;
+
+        Object.keys(fields).map(function(key, position) {
+             
+          let data_type = fields[key]
+          let html = data_type != 'image' ? `{{this.${key}}}` : `{{this.${key}.getImage()}}`
+          
+          fieldsToReturn.push({ 
+              key: `${model.zuid}-${key}`,
+              name : key, 
+              type: data_type,
+              model: {
+                  name: model.name,
+                  zuid: model.zuid
+              },
+              sort: sortIndex,
+              value: "",
+              html: html
+          })
+          sortIndex++
+        })    
+        return fieldsToReturn
+    }
+
   getContentBank() {
-    return this.state.data.models
+    return this.getIterableObject(this.state.data.models)
   }
 
   getCodeReferences() {
