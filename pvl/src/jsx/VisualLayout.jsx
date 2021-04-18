@@ -98,8 +98,7 @@ class VisualLayout extends React.Component {
 
     }
     componentDidUpdate(prevProps) { 
-        console.log(prevProps)
-        console.log('comp did update')
+       
         if (!prevProps.isOver && this.props.isOver) {
         // You can use this as enter handler
             //alert('entered')
@@ -130,7 +129,7 @@ class VisualLayout extends React.Component {
         const { isOver, canDrop, connectDropTarget } = this.props
 
         return connectDropTarget(
-            <div>
+            <div className="pvlVisualLayout">
                 <div className="pvlCanvas">
                     {this.state.layoutObjects.map((lo) => {
                         return (

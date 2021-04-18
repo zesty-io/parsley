@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto:wght@400&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400&display=swap';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
 @import 'https://raw.githubusercontent.com/zesty-io/design-system/master/core/src/colors.less';
 @import 'https://raw.githubusercontent.com/zesty-io/design-system/master/core/src/typography.less';
@@ -18,12 +18,30 @@
     margin: 0;
     padding: 0;
 }
+
+// resused 
+.typetag() {
+    flex: 1;
+    display: block;
+    max-width: 60px;
+    text-align: center;
+    background-color: @zesty-field-blue;
+    
+    border-right: 1px @zesty-light-grey solid;
+    
+    span {
+        font-size: 1.5em;
+        padding: @defaultPadding;
+    }
+}
+
 // For the demo 
 body,html {
     background-color: #000;
     font-family: 'Roboto', sans-serif;
     font-size: .8em;
     .zerod();
+    color: @zesty-dark-blue;
 }
 .pvl {
     @import 'visual-shell.less';

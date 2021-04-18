@@ -37,6 +37,14 @@ class ContentBank extends React.Component {
         });
     }
 
+    modelHasFieldsInFilter(model) {
+        let hit = false
+        model.fields.filter(function (field) {
+            if (field.name.includes(this.state.searchFilter)) hit = true; 
+        }.bind(this))
+        return hit;
+    }
+
     getContentModels(){
         return this.props.content
     }
@@ -47,11 +55,12 @@ class ContentBank extends React.Component {
         if (this.props.content == undefined || content.length == 0) {
             return <div></div>
         }
+
         return (
             <div className="pvlContentBank">
                 <PVLToolbar title="Content Bank" helpText={helpText}></PVLToolbar>
                 <input value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
-                <div className="pvlContentModel">
+                <div className="pvlContentModels">
                     {/* sort models by name alphabetically */}
                     {content.sort(function(a, b){
                         if(a.name < b.name) { return -1; }
@@ -61,31 +70,45 @@ class ContentBank extends React.Component {
                     }).map((model) => {
                         // handle collapse logic
                         let searchOn = this.state.searchFilter == '' ? false : true;
-                        let collapsed = this.state.collapsed[model.name] == undefined && !searchOn ? '' : 'pvlCollapsed';
-                        
-                        return (
-                            <div key={model.zuid}> 
-                                <div className="pvlModelHeader">
-                                    <h3>{model.name} {collapsed != '' && <span>(collapsed)</span>}</h3>
-                                    {/* collapse is off during search, this render output if not on */}
-                                    {!searchOn && 
-                                        <button onClick={() => {this.collapseModel(model.name)} }>
-                                            {collapsed == '' && <span className="fa fa-caret-down"></span>}
-                                            {collapsed != '' && <span className="fa fa-caret-left"></span>}
-                                        </button>
-                                    }
+                        let collapsed = this.state.collapsed[model.name] == undefined || searchOn ? '' : 'pvlCollapsed';
+                        // test for any fields in search filter, if so render model else render an empty div
+                        if( this.modelHasFieldsInFilter(model) ){
+                            return (                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                <div className="pvlContentModel" key={model.zuid}> 
+                                    <div className="pvlModelHeader">
+                                        {!searchOn && 
+                                            <button onClick={() => {this.collapseModel(model.name)} }>
+                                                {collapsed == '' && <span className="fa fa-caret-down"></span>}
+                                                {collapsed != '' && <span className="fa fa-caret-right"></span>}
+                                            </button>
+                                        }
+                                        <h3>
+                                            <strong>{model.label}</strong> 
+                                            {collapsed == '' && <span>[{model.zuid}]</span>}
+                                            {collapsed != '' && <span>(collapsed)</span>}
+                                        
+                                            <a href={`/schema/${model.zuid}`}>
+                                                <em className="fa fa-pen"></em> {model.name}
+                                            </a>
+                                        </h3>
+                                        {/* collapse is off during search, this render output if not on */}
+                                        <div className="pvlModelTag"><span className="fa fa-list"></span></div>
+                                    </div>
+                                    <div className={`pvlModelFields ${collapsed}`}>
+                                        {/* filter for search */}
+                                        {model.fields.filter(function (field) {
+                                            return field.name.includes(this.state.searchFilter);
+                                        }.bind(this)).map((field) => {
+                                            return (<LayoutObject key={field.name} id={field.name} name={field.name} type={field.type}  obj={field}  isReady="true" />)
+                                        })}
+                                    </div>
                                 </div>
-                                <div className={`pvlModelFields ${collapsed}`}>
-                                    {/* filter for search */}
-                                    {model.fields.filter(function (field) {
-                                        return field.name.includes(this.state.searchFilter);
-                                    }.bind(this)).map((field) => {
-                                        return (<LayoutObject key={field.name} id={field.name} name={field.name} type={field.type}  obj={field}  isReady="true" />)
-                                    })}
-                                </div>
-                            </div>
-                            
-                        )
+                                
+                            )
+                        } else {
+                            // empty model return when search for fieldnames fail
+                            return (<div key={model.zuid}></div>)
+                        }
                     })}
                 </div>
 

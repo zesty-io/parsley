@@ -13,10 +13,11 @@
 [X] Iterate through GQL object for content bank, collapsable content models
 [X] Design the content model collapsing
 [X] Move content mutatation into top level PVL before going into content bank
-[X] Search through content filter
+[X] Search through content filter, hiding etc
 [X] Collapse content model button and functionality 
 [X] clear collapse on search, bring it back
-[ ] CSS design content model area
+[X] CSS design content model area
+[ ] CSS design content model object
 [ ] Clear content filter
 [ ] Star current Content Model
 [ ] Connect collapse button to CSS functionality and prop passing

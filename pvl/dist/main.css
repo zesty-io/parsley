@@ -2,9 +2,16 @@
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_cJD7g4.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm45xW4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF7g4.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -81,6 +88,7 @@ html {
   font-size: 0.8em;
   margin: 0;
   padding: 0;
+  color: #1b202c;
 }
 .pvl .shell {
   background: #a7afbf;
@@ -96,11 +104,13 @@ html {
 .pvl .shell h6,
 .pvl .shell label {
   font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 }
 .pvl .shell .pvlVisualLayoutContainer {
   flex: 4;
   min-width: 100px;
   background: white;
+  background: black;
   border-radius: 3px;
 }
 .pvl .shell .pvlObjectBanks {
@@ -165,10 +175,82 @@ html {
 .pvl .shell .pvlHelp:hover .pvlHelpText {
   display: block;
 }
-.pvl .pvlModelHeader {
-  display: flex;
+.pvl .pvlContentModel {
+  margin-bottom: 10px;
+  border-radius: 3px;
+  overflow: hidden;
 }
-.pvl .pvlModelFields.pvlCollapsed {
+.pvl .pvlContentModel .pvlModelHeader {
+  display: flex;
+  background: #eff5ff;
+  border-bottom: 1px solid #a7afbf;
+}
+.pvl .pvlContentModel .pvlModelHeader button {
+  bordeR: none;
+  background-color: transparent;
+  padding: 0 0 0 10px;
+}
+.pvl .pvlContentModel .pvlModelHeader h3 {
+  flex-grow: 5;
+  display: flex;
+  flex-shrink: 2;
+  overflow: hidden;
+  align-items: center;
+}
+.pvl .pvlContentModel .pvlModelHeader h3 strong {
+  font-weight: 600;
+  font-size: 1.3em;
+  flex-shrink: 1;
+  margin: 0 10px;
+}
+.pvl .pvlContentModel .pvlModelHeader h3 span {
+  flex: 1;
+  color: #a7afbf;
+  font-size: 0.9em;
+  flex-grow: 4;
+  flex-shrink: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pvl .pvlContentModel .pvlModelHeader h3 a {
+  font-size: 1em;
+  flex: 2;
+  text-align: right;
+  margin-right: 10px;
+  text-decoration: none;
+  color: #497edf;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.pvl .pvlContentModel .pvlModelHeader h3 a:hover {
+  text-decoration: underline;
+}
+.pvl .pvlContentModel .pvlModelHeader .pvlModeltag {
+  display: block;
+  max-width: 60px;
+  text-align: center;
+  background-color: #c7d4ea;
+  border-right: 1px #a7afbf solid;
+  border: none;
+  border-left: 1px solid #a7afbf;
+  flex: 1;
+  max-width: 40px;
+  flex-basis: 100%;
+}
+.pvl .pvlContentModel .pvlModelHeader .pvlModeltag span {
+  font-size: 1.5em;
+  padding: 10px;
+}
+.pvl .pvlContentModel .pvlModelHeader .pvlModeltag span {
+  color: #5b667d;
+  margin-top: 4px;
+}
+.pvl .pvlContentModel .pvlModelFields {
+  background: white;
+  padding: 10px;
+}
+.pvl .pvlContentModel .pvlModelFields.pvlCollapsed {
   display: none;
 }
 .pvl .pvlObject {
