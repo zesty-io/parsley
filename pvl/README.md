@@ -17,7 +17,7 @@
 [X] Collapse content model button and functionality 
 [X] clear collapse on search, bring it back
 [X] CSS design content model area
-[ ] CSS design content model object
+[X] CSS design content model object
 [X] Clear content filter
 [ ] Star current Content Model
 [ ] Connect collapse button to CSS functionality and prop passing
@@ -25,9 +25,9 @@
 [ ] fetch remote file data for snippets, or fake it for now
 [ ] Test building tree on main component from drag n drop objects
 [ ] Work on layout object to adapt to different styles based on its incoming object
-[ ] Expand layoutobject to have different behaviors per type and content
+[X] Expand layoutobject to have different behaviors per type and content
 [ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
-[ ] Start Matching design
+[X] Start Matching design
 [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
 ## Considerations

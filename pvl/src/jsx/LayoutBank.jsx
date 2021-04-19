@@ -33,7 +33,7 @@ class LayoutBank extends React.Component {
                 <div className="pvlObjectBank">
                     {this.getLayoutObjects().map((lo) => {
                         return (
-                            <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} type={lo.type} obj={lo} isReady="true" />
+                            <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} primarytype="design" type={lo.type} obj={lo} isReady="true" />
                         ) 
                     })} 
                 </div>

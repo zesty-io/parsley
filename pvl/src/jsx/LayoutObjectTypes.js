@@ -7,7 +7,13 @@ export const LayoutObjectTypes = {
     description: 'Reference to image ZUIDs in Zesty.io',
     draggable: true
   },
-  
+  images: {
+    icon : 'images',
+    name: 'Image(s)',
+    type: 'content',
+    description: 'Reference to image ZUIDs in Zesty.io',
+    draggable: true
+  },
   textarea: {
     icon : 'align-justify',
     name: 'Text Area',
@@ -20,6 +26,27 @@ export const LayoutObjectTypes = {
     name: 'Text',
     type: 'content',
     description: 'Plain Text',
+    draggable: true
+  },
+  wysiwyg_basic: {
+    icon: 'outdent',
+    name: 'Rich Text',
+    type: 'content',
+    description: 'Text with HTML references.',
+    draggable: true
+  },
+  wysiwyg_advanced: {
+    icon: 'outdent',
+    name: 'Rich Text',
+    type: 'content',
+    description: 'Text with HTML references.',
+    draggable: true
+  },
+  article_writer: {
+    icon: 'outdent',
+    name: 'Rich Text',
+    type: 'content',
+    description: 'Text with HTML references.',
     draggable: true
   },
   rich: {

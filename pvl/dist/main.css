@@ -328,6 +328,9 @@ select:focus {
 .pvl .pvlContentModel .pvlModelFields {
   background: white;
   padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
 }
 .pvl .pvlContentModel .pvlModelFields.pvlCollapsed {
   display: none;
@@ -371,7 +374,7 @@ select:focus {
 }
 .pvl .pvlObject .pvlDescription {
   flex: 6;
-  display: flex;
+  display: block;
   background: #eff5ff;
   border-radius: 3px 3px 0 0;
 }
@@ -382,6 +385,23 @@ select:focus {
 .pvl .pvlObject .pvlPreview {
   display: block;
   margin-right: 10px;
+}
+.pvl .pvlObject.pvlContent {
+  flex: 1;
+  min-width: 140px;
+}
+.pvl .pvlObject.pvlContent .pvlDescription {
+  padding: 0px;
+}
+.pvl .pvlObject.pvlContent .pvlDescription span {
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 5px 10px 0px 10px;
+}
+.pvl .pvlObject.pvlContent .pvlDescription em {
+  color: #a7afbf;
+  font-size: 0.8em;
+  padding-left: 10px;
 }
 .pvl .pvlObject.pvlLayout .pvlDescription {
   font-weight: 500;

@@ -32,7 +32,7 @@
     }
     .pvlDescription {
         flex: 6;
-        display: flex;
+        display: block;
         background: @zesty-white;
         border-radius: @defaultBorderRadius @defaultBorderRadius 0 0 ;
         span {
@@ -45,6 +45,26 @@
         display: block;
         margin-right: @defaultMargin;
     }
+    &.pvlContent {
+        flex: 1;
+        min-width: 140px;
+        
+        .pvlDescription {
+            padding: 0px;
+            span {
+                font-size: 1.2em;
+                font-weight: 600;
+                padding: 5px @defaultPadding 0px @defaultPadding;
+            }
+            em {
+                color: @zesty-light-grey;
+                font-size: .8em;
+                padding-left: @defaultPadding;
+            }
+            
+        }
+    }
+
     &.pvlLayout {
         .pvlDescription { 
            font-weight: 500; 

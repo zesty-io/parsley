@@ -65,39 +65,55 @@ function collect(connect, monitor) {
 class LayoutObject extends React.Component {
     constructor(props) {
         super(props);
-         
     }
+
     getType() {
       return LayoutObjectTypes[this.props.type] !== undefined ? LayoutObjectTypes[this.props.type] :  LayoutObjectTypes.unknown;
     }
+
+    getPrimaryType() {
+      return LayoutObjectTypes[this.props.primarytype] !== undefined ? LayoutObjectTypes[this.props.primarytype] :  'content';
+    }
+
     capitalizeFirst(s){
       if (typeof s !== 'string') return ''
       return s.charAt(0).toUpperCase() + s.slice(1)
     }
 
-
+    // check the passed in object HAS a specific key
+    has(key){
+      return (this.props.obj !== undefined && this.props.obj[key] !== undefined)
+    }
+    
+    // check if the object IS of a primary type
+    is(primaryType){
+      return (this.getPrimaryType() == primaryType)
+    }
 
     render() {
         // Your component receives its own props as usual
         const { id } = this.props
         
-        let type = this.getType()
+        let type = this.getType() 
+        let ptype = this.getPrimaryType()
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
         const { isDragging, connectDragSource } = this.props
         let draggingClass = isDragging ? 'pvlDragging' : '';
   
         return connectDragSource(
-            <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+            <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
               <div className="pvlObjectHeader">  
                 <div className="pvlTypeTag" title={type.name}> 
                   <span className={`fa fa-${type.icon}`}></span>
                 </div>
                 <div className="pvlDescription">
                   <span>{this.props.name}</span>
+                  {this.has('html') && this.is('content') && <em>{this.props.obj.html}</em>}
+                  
                 </div>
               </div>
-              {this.props.obj !== undefined && this.props.obj.preview !== undefined && 
+              {this.has('preview') && 
                 <div className="pvlPreview" dangerouslySetInnerHTML={{
                   __html: this.props.obj.preview
                   }}></div>
