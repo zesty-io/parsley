@@ -24,6 +24,11 @@ class ContentBank extends React.Component {
             searchFilter: event.target.value
         });
     }
+    clearSearch(){
+        this.setState({
+            searchFilter: ''
+        });
+    }
 
     collapseModel(modelName){
         let temp = this.state.collapsed
@@ -55,12 +60,17 @@ class ContentBank extends React.Component {
         if (this.props.content == undefined || content.length == 0) {
             return <div></div>
         }
-
+        let searchOn = this.state.searchFilter == '' ? false : true;
+        let missedModels = 0 // used for seeing if there is empty search
         return (
             <div className="pvlContentBank">
                 <div className="pvlContentBankHeader">
-                    <PVLToolbar title="Content Bank" helpText={helpText}></PVLToolbar>
-                    <input placeholder="Search Model or Field Name" value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
+                    <PVLToolbar title="Content References" helpText={helpText}></PVLToolbar>
+                    <div className="pvlInputWrapper">
+                        <span class="fa fa-search"></span>
+                        <input placeholder="Search Model or Field Name" value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
+                        {searchOn && <button onClick={() => {this.clearSearch()} } class="fa fa-times"></button>}
+                    </div>
                 </div>
                 <div className="pvlContentModels">
                     {/* sort models by name alphabetically */}
@@ -71,7 +81,6 @@ class ContentBank extends React.Component {
                         // output models here
                     }).map((model) => {
                         // handle collapse logic
-                        let searchOn = this.state.searchFilter == '' ? false : true;
                         let collapsed = this.state.collapsed[model.name] == undefined || searchOn ? '' : 'pvlCollapsed';
                         // test for any fields in search filter, if so render model else render an empty div
                         if( this.modelHasFieldsInFilter(model) ){
@@ -108,8 +117,19 @@ class ContentBank extends React.Component {
                                 
                             )
                         } else {
-                            // empty model return when search for fieldnames fail
-                            return (<div key={model.zuid}></div>)
+                            missedModels++;
+                            if(content.length == missedModels) {
+                                return (
+                                <div className="pvlEmptySearch" key={model.zuid}>
+                                    <p><span class="fa fa-warning"></span> No Search Results for <strong>"{this.state.searchFilter}"</strong></p>
+                                    <button onClick={() => {this.clearSearch()} } >Clear Search</button>
+                                </div>
+                                )
+                            } else {
+                                // empty model return when search for fieldnames fail
+                                return (<div key={model.zuid}></div>)
+                            }
+
                         }
                     })}
                 </div>

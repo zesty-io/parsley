@@ -4,17 +4,67 @@
     .pvlContentBankToolbar {
         flex: 1;
     }
-    input {
+    .pvlInputWrapper{
         flex: 1;
+        position: relative;
+        span {
+            z-index: 1;
+            top: 8px;
+            left: 8px;
+            position: absolute;
+            transform: scaleX(-1);
+            color: @zesty-light-grey;
+            font-size: 1.3em;
+
+        }
+        button { 
+            background-color: transparent;
+            border:none;
+            color: @zesty-orange;
+            z-index: 1;
+            top: 8px;
+            right: 6px;
+            position: absolute;
+            cursor: pointer;
+        }
+        input {
+            width: 100%;
+            .defaultBorderRadius();
+            padding: 8px 10px 8px 25px;
+            margin-bottom: @defaultMargin;
+            border-radius: @defaultMargin;
+            border: 1px @zesty-light-grey solid;
+            background: @zesty-white;
+            font-size: 1em;
+            
+            &:hover, &:active {
+                background: white;
+                border: 1px @zesty-grey solid;
+            }
+           
+            
+        }
+    }
+}
+
+.pvlEmptySearch{
+    .defaultBorderRadius();
+    border: 1px solid @zesty-light-grey;
+    text-align: center;
+    background: @zesty-gray;
+    padding: @defaultPadding;
+    color: @zesty-white;
+    p {
+        font-size: 1.4em;
+    }
+    button {
+        border: 1px solid @zesty-light-gray;
+        padding: @defaultPadding;
         .defaultBorderRadius();
-        padding: 0px @defaultPadding;
-        margin-bottom: @defaultMargin;
-        border-radius: @defaultMargin;
-        border: 1px @zesty-light-grey solid;
-        background: @zesty-white;
-        &:hover, &:active {
-            background: white;
-            border: 1px @zesty-grey solid;
+        color: @zesty-gray;
+        &:hover{
+            cursor: pointer;
+            background: @zesty-white;
         }
     }
 }

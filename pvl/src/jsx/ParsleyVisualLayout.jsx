@@ -74,7 +74,7 @@ class ParsleyVisualLayout extends React.Component {
           fieldsToReturn.push({ 
               key: `${model.zuid}-${key}`,
               name : key, 
-              searchIndex: `${model.name}:${key}`.toLowerCase(),
+              searchIndex: `${model.name} ${key}`.toLowerCase(),
               type: data_type,
               model: {
                   name: model.name,

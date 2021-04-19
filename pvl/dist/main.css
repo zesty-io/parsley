@@ -195,19 +195,64 @@ select:focus {
 .pvl .pvlContentBankHeader .pvlContentBankToolbar {
   flex: 1;
 }
-.pvl .pvlContentBankHeader input {
+.pvl .pvlContentBankHeader .pvlInputWrapper {
   flex: 1;
+  position: relative;
+}
+.pvl .pvlContentBankHeader .pvlInputWrapper span {
+  z-index: 1;
+  top: 8px;
+  left: 8px;
+  position: absolute;
+  transform: scaleX(-1);
+  color: #a7afbf;
+  font-size: 1.3em;
+}
+.pvl .pvlContentBankHeader .pvlInputWrapper button {
+  background-color: transparent;
+  border: none;
+  color: #f17829;
+  z-index: 1;
+  top: 8px;
+  right: 6px;
+  position: absolute;
+  cursor: pointer;
+}
+.pvl .pvlContentBankHeader .pvlInputWrapper input {
+  width: 100%;
   border-radius: 3px;
-  padding: 0px 10px;
+  padding: 8px 10px 8px 25px;
   margin-bottom: 10px;
   border-radius: 10px;
   border: 1px #a7afbf solid;
   background: #eff5ff;
+  font-size: 1em;
 }
-.pvl .pvlContentBankHeader input:hover,
-.pvl .pvlContentBankHeader input:active {
+.pvl .pvlContentBankHeader .pvlInputWrapper input:hover,
+.pvl .pvlContentBankHeader .pvlInputWrapper input:active {
   background: white;
   border: 1px #5b667d solid;
+}
+.pvl .pvlEmptySearch {
+  border-radius: 3px;
+  border: 1px solid #a7afbf;
+  text-align: center;
+  background: #5b667d;
+  padding: 10px;
+  color: #eff5ff;
+}
+.pvl .pvlEmptySearch p {
+  font-size: 1.4em;
+}
+.pvl .pvlEmptySearch button {
+  border: 1px solid #a7afbf;
+  padding: 10px;
+  border-radius: 3px;
+  color: #5b667d;
+}
+.pvl .pvlEmptySearch button:hover {
+  cursor: pointer;
+  background: #eff5ff;
 }
 .pvl .pvlContentModel {
   margin-bottom: 10px;
