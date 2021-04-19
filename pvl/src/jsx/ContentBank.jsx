@@ -40,7 +40,7 @@ class ContentBank extends React.Component {
     modelHasFieldsInFilter(model) {
         let hit = false
         model.fields.filter(function (field) {
-            if (field.name.includes(this.state.searchFilter)) hit = true; 
+            if (field.searchIndex.includes(this.state.searchFilter.toLowerCase())) hit = true; 
         }.bind(this))
         return hit;
     }
@@ -60,7 +60,7 @@ class ContentBank extends React.Component {
             <div className="pvlContentBank">
                 <div className="pvlContentBankHeader">
                     <PVLToolbar title="Content Bank" helpText={helpText}></PVLToolbar>
-                    <input placeholder="Field Name Search" value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
+                    <input placeholder="Search Model or Field Name" value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
                 </div>
                 <div className="pvlContentModels">
                     {/* sort models by name alphabetically */}
@@ -99,7 +99,7 @@ class ContentBank extends React.Component {
                                     <div className={`pvlModelFields ${collapsed}`}>
                                         {/* filter for search */}
                                         {model.fields.filter(function (field) {
-                                            return field.name.includes(this.state.searchFilter);
+                                            return field.searchIndex.includes(this.state.searchFilter.toLowerCase());
                                         }.bind(this)).map((field) => {
                                             return (<LayoutObject key={field.name} id={field.name} name={field.name} type={field.type}  obj={field}  isReady="true" />)
                                         })}

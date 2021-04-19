@@ -121,7 +121,8 @@ select:focus {
 }
 .pvl .shell .pvlObjectBanks {
   flex: 2;
-  min-width: 100px;
+  min-width: 380px;
+  max-width: 460px;
   border-radius: 3px;
   margin-left: 10px;
 }
@@ -156,6 +157,9 @@ select:focus {
   font-size: 1.8em;
   margin: 4px 4px 0px 0px;
   color: #5b667d;
+}
+.pvl .shell .pvlBank {
+  margin-bottom: 10px;
 }
 .pvl .shell .pvlHelp {
   color: #eff5ff;
