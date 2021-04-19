@@ -90,6 +90,12 @@ html {
   padding: 0;
   color: #1b202c;
 }
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
 .pvl .shell {
   background: #a7afbf;
   border-radius: 3px;
@@ -130,13 +136,17 @@ html {
   background: #a7afbf;
   border-bottom: 1px #a7afbf solid;
   display: flex;
+  margin-bottom: 10px;
 }
 .pvl .shell .pvlToolbar h1 {
   margin: 0;
   padding: 0;
   font-size: 16px;
-  padding: 5px;
+  padding: 5px 0;
   flex: 3;
+}
+.pvl .shell .pvlToolbar h1 strong {
+  margin-right: 10px;
 }
 .pvl .shell .pvlToolbar > div {
   flex: 1;
@@ -174,6 +184,26 @@ html {
 }
 .pvl .shell .pvlHelp:hover .pvlHelpText {
   display: block;
+}
+.pvl .pvlContentBankHeader {
+  display: flex;
+}
+.pvl .pvlContentBankHeader .pvlContentBankToolbar {
+  flex: 1;
+}
+.pvl .pvlContentBankHeader input {
+  flex: 1;
+  border-radius: 3px;
+  padding: 0px 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px #a7afbf solid;
+  background: #eff5ff;
+}
+.pvl .pvlContentBankHeader input:hover,
+.pvl .pvlContentBankHeader input:active {
+  background: white;
+  border: 1px #5b667d solid;
 }
 .pvl .pvlContentModel {
   margin-bottom: 10px;

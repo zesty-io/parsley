@@ -1,9 +1,30 @@
 
+.pvlContentBankHeader{
+    display: flex;
+    .pvlContentBankToolbar {
+        flex: 1;
+    }
+    input {
+        flex: 1;
+        .defaultBorderRadius();
+        padding: 0px @defaultPadding;
+        margin-bottom: @defaultMargin;
+        border-radius: @defaultMargin;
+        border: 1px @zesty-light-grey solid;
+        background: @zesty-white;
+        &:hover, &:active {
+            background: white;
+            border: 1px @zesty-grey solid;
+        }
+    }
+}
+
 .pvlContentModel {
     //padding: @defaultPadding;
     margin-bottom: @defaultMargin;
     .defaultBorderRadius();
     overflow: hidden;
+
 
     .pvlModelHeader {
         display: flex;

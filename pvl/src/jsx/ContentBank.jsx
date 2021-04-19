@@ -58,8 +58,10 @@ class ContentBank extends React.Component {
 
         return (
             <div className="pvlContentBank">
-                <PVLToolbar title="Content Bank" helpText={helpText}></PVLToolbar>
-                <input value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
+                <div className="pvlContentBankHeader">
+                    <PVLToolbar title="Content Bank" helpText={helpText}></PVLToolbar>
+                    <input placeholder="Field Name Search" value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
+                </div>
                 <div className="pvlContentModels">
                     {/* sort models by name alphabetically */}
                     {content.sort(function(a, b){

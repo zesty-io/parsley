@@ -38,11 +38,15 @@
         background: @zesty-light-grey;
         border-bottom: 1px @zesty-light-grey solid;
         display: flex;
+        margin-bottom: @defaultMargin;
         h1 {
             .zerod();
             font-size: 16px;
-            padding: 5px;
+            padding: 5px 0;
             flex: 3;
+            strong {
+                margin-right: @defaultMargin;
+            }
             
         }
         > div {

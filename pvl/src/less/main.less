@@ -43,6 +43,10 @@ body,html {
     .zerod();
     color: @zesty-dark-blue;
 }
+// remove outline in chrome
+input:focus, button:focus, textarea:focus, select:focus{
+    outline: none;
+}
 .pvl {
     @import 'visual-shell.less';
     @import 'content-bank.less';

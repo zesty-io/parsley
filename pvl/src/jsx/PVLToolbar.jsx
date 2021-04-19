@@ -18,10 +18,11 @@ class PVLToolbar extends React.Component {
         return (
             <div className={this.getCustomCSSClass()}>
                 <h1>
-                    <span className="fa fa-question-circle pvlHelp">
+                   
+                    <strong>{this.props.title}</strong>
+                     <span className="fa fa-question-circle pvlHelp">
                         <div className="pvlHelpText">{this.props.helpText}</div>
                     </span>
-                    {this.props.title} 
                 </h1>
                 {this.hasCollapse() &&
                     <button onClick={this.props.collapse}> <span className="fa fa-caret-down"></span></button>
