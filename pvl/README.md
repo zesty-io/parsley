@@ -18,7 +18,7 @@
 [X] clear collapse on search, bring it back
 [X] CSS design content model area
 [ ] CSS design content model object
-[ ] Clear content filter
+[X] Clear content filter
 [ ] Star current Content Model
 [ ] Connect collapse button to CSS functionality and prop passing
 [ ] Setup include code object bank component
@@ -35,6 +35,16 @@
 Our Goal... To make Zesty.io like nothing you've ever experienced...
 
 [ ] Allow Parsley in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
+
+# How it works
+
+* **In Schema:** Each content model has a visual layout tab
+ * Output write to a snippet named [MODEL_ZUID]-pvl.parsley
+ * {{this.autolayout()}} will look for that reference
+* **In Content:** Each Content Item will have an PVL (content designer) tab which defaults to the content model design (if it exists)
+  * The output of PVL writes to a new content item field `_pvl`
+  * The items PVL will override the model PVL 
+* In Code: The [MODEL_ZUID]-pvl.parsley files will be accessible to edit
 
 # Parsley Visual Layout Tool
 
