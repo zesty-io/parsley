@@ -68,6 +68,29 @@ The Zesty.io Instance's `GQL` setting should be set to be on. Start with propert
 <ParsleyVisualLayout instanceZUID=""></ParsleyVisualLayout>
 ```
 
+## How to Run Locally
+
+Install Global Tools
+```
+npm install -g react
+npm install -g webpack-cli
+npm install -g less
+npm install -g less-watch-compiler
+```
+
+From base `pvl` directory, run two terminals
+
+Terminal 1
+```
+webpack
+```
+Terminal 2
+```
+npm run watch-less
+```
+
+Install VS Code live server, open `example.html` with live server extension
+
 # Documenting of the Layout App
 
 ## LayoutTree
@@ -109,6 +132,16 @@ A layout object is a top level class that holds information to
 * Access its children on the tree
 * Reference Content
 * Optional Behavior
+
+## LayoutObject Dragging
+
+[An ID is needed for React DND](https://react-dnd.github.io/react-dnd/docs/overview), and that is all that you are working with. Since we do not use REDUX or FLUX for this component, we need to know as much from the ID as possible. Since Layout Object are not related to their actual layout we will be creating a new layout object upon drop. To do this we will need a key that tells us what to do.
+
+Design Format ID: `[primarytype]:[type]` e.g. `design:2columns`
+Content Format ID: `[primarytype]:[type]:[model]:[field_name]` e.g. `content:text:about:title`
+
+The key is split by `:` dilimiter and used to create a new layout object in the VisualLayout component
+
 
 **Types of Layout Objects and specific behaviors**
 

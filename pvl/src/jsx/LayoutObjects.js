@@ -1,6 +1,6 @@
 
-export const LayoutObjects = [
-      {
+export const LayoutObjects = {
+      '2columns' : {
         uid: '11',
         name: '2 Columns',
         type: 'columns',
@@ -24,7 +24,7 @@ export const LayoutObjects = [
         ]
 
       },
-      {
+      '2columnswideright' : {
         uid: '14',
         name: '2 Columns',
         type: 'columns',
@@ -49,7 +49,7 @@ export const LayoutObjects = [
 
       },
       
-      {
+      '3columns':{
         uid: '12',
         name: '3 Columns',
         type: 'columns',
@@ -79,7 +79,7 @@ export const LayoutObjects = [
         ]
 
       },
-       {
+      'whitespace': {
         uid: '99',
         name: 'White Space',
         type: 'design',
@@ -88,7 +88,7 @@ export const LayoutObjects = [
         classes: '',
         droppable: false
       },
-      { 
+      'horizontalrule':{ 
         uid: '13',
         name: 'Horizontal Rule',
         type: 'design',
@@ -97,7 +97,7 @@ export const LayoutObjects = [
         classes: '',
         droppable: false
       },
-       {
+      '2columnswideleft': {
         uid: '19',
         name: '2 Columns',
         type: 'columns',
@@ -121,4 +121,4 @@ export const LayoutObjects = [
         ]
 
       }
-    ]
+}

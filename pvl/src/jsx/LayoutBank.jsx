@@ -15,17 +15,22 @@ class LayoutBank extends React.Component {
         this.state = {
             collapsed: false
         }
-    }
+    } 
 
     getLayoutObjects() {
         return this.props.objects;
     }
 
     getTotalLO(){
-        return this.getLayoutObjects() !== undefined ? this.getLayoutObjects().length : 0;
+        var size = 0, key;
+        for (key in this.getLayoutObjects()) {
+            if (this.getLayoutObjects().hasOwnProperty(key)) size++;
+        }
+
+        return size;
     }
-    collapse() {
-        let toggle = this.state.collapsed == false ? true : false;
+    collapse() { 
+        let toggle = this.state.collapsed == false ? true : false; 
         this.setState({
             collapsed: toggle
         });
@@ -39,9 +44,10 @@ class LayoutBank extends React.Component {
                 <PVLToolbar title="Layout Tools" helpText={helpText} collapse={() => {this.collapse()} } collapsed={this.state.collapsed}></PVLToolbar>
                 {!this.state.collapsed && 
                     <div className="pvlObjectBank">
-                        {this.getLayoutObjects().map((lo) => {
+                        {Object.keys(this.getLayoutObjects()).map((key,index) => {
+                            let lo = this.getLayoutObjects()[key]
                             return (
-                                <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} primarytype="design" type={lo.type} obj={lo} isReady="true" />
+                                <LayoutObject key={lo.uid} id={`design:${lo.type}:${key}`} name={lo.name} primarytype="design" type={lo.type} obj={lo} isReady="true" />
                             ) 
                         })} 
                     </div>
