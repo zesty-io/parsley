@@ -34,8 +34,8 @@ const layoutObjectTarget = {
   },
 
   drop(props, monitor, component) {
-      alert('dropped')
-      console.log('dropped')
+      console.log('drop function in layoutObjecttarget')
+      console.log('props',props)
       console.log('component',component)
       
       component.addToLayout();
@@ -50,7 +50,7 @@ const layoutObjectTarget = {
     // Obtain the dragged item
     const item = monitor.getItem()
     
-    console.log('item',monitor.getItem())
+    console.log('item',item)
     component.addToLayout(component);
     // You can do something with it
     //ChessActions.movePiece(item.fromPosition, props.position)
@@ -92,11 +92,6 @@ class VisualLayout extends React.Component {
 
     }
     
-
-    getChildren(){
-
-
-    }
     componentDidUpdate(prevProps) { 
        
         if (!prevProps.isOver && this.props.isOver) {
@@ -117,7 +112,7 @@ class VisualLayout extends React.Component {
     addToLayout() {
         console.log('add to layout', this.props)
         console.log('connect to drop',this.props.connectDropTarget())
-        alert('added')
+        
     }
 
     render() {
@@ -127,9 +122,14 @@ class VisualLayout extends React.Component {
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
         const { isOver, canDrop, connectDropTarget } = this.props
-
+        let dropclass = ''
+        if(!isOver && canDrop) {
+            dropclass = 'pvlTargetHere'
+        } else if(isOver && canDrop) {
+            dropclass = 'pvlDropReady'
+        }
         return connectDropTarget(
-            <div className="pvlVisualLayout">
+            <div className={`pvlVisualLayout ${dropclass}`}>
                 <div className="pvlCanvas">
                     {this.state.layoutObjects.map((lo) => {
                         return (

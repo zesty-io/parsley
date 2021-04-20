@@ -2,6 +2,7 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
 import { LayoutObjectTypes } from './LayoutObjectTypes';
+let dynamicType = ''
 
 const layoutObjectSource = {
   canDrag(props) {
@@ -20,7 +21,7 @@ const layoutObjectSource = {
 
   beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
-    console.log(props)
+    //console.log(props)
     const item = { id: props.id }
     
     return item
@@ -43,7 +44,7 @@ const layoutObjectSource = {
     const dropResult = monitor.getDropResult()
 
     // This is a good place to call some Flux action
-    alert('drag ended')
+    console.log('enDrag from layout object')
    console.log(item.id, dropResult)
   }
 }

@@ -1,40 +1,41 @@
 # Development state notes
 
-[X] Setup React Webpack (React 16 to matches manager-ui)
-[X] Install React-DND
-[X] Connect DND to component
-[X] setup DND decorator API https://react-dnd.github.io/react-dnd/docs/api/drop-target
-[X] Test dragging and dropping
-[X] Connect to remote endpoint in zesty, store in top level state
-[X] pass content down to content bank, display layoutobjects (pass in types as props)
-[X] Setup layout object bank
-[X] Create Layout objects json file
-[X] Design Layout objects interface
-[X] Iterate through GQL object for content bank, collapsable content models
-[X] Design the content model collapsing
-[X] Move content mutatation into top level PVL before going into content bank
-[X] Search through content filter, hiding etc
-[X] Collapse content model button and functionality 
-[X] clear collapse on search, bring it back
-[X] CSS design content model area
-[X] CSS design content model object
-[X] Clear content filter
-[ ] Star current Content Model
-[X] Connect collapse button to CSS functionality and prop passing
-[ ] Setup include code object bank component
-[ ] fetch remote file data for snippets, or fake it for now
-[ ] Test building tree on main component from drag n drop objects
-[ ] Work on layout object to adapt to different styles based on its incoming object
-[X] Expand layoutobject to have different behaviors per type and content
-[ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
-[X] Start Matching design
-[ ] Output Targets (snippet, export html, view file, wysiwyg target)
+- [X] Setup React Webpack (React 16 to matches manager-ui)
+- [X] Install React-DND
+- [X] Connect DND to component
+- [X] setup DND decorator API https://react-dnd.github.io/react-dnd/docs/api/drop-target
+- [X] Test dragging and dropping
+- [X] Connect to remote endpoint in zesty, store in top level state
+- [X] pass content down to content bank, display layoutobjects (pass in types as props)
+- [X] Setup layout object bank
+- [X] Create Layout objects json file
+- [X] Design Layout objects interface
+- [X] Iterate through GQL object for content bank, collapsable content models
+- [X] Design the content model collapsing
+- [X] Move content mutatation into top level PVL before going into content bank
+- [X] Search through content filter, hiding etc
+- [X] Collapse content model button and functionality 
+- [X] clear collapse on search, bring it back
+- [X] CSS design content model area
+- [X] CSS design content model object
+- [X] Clear content filter
+- [X] Start Matching design
+- [ ] Star current Content Model
+- [X] Connect collapse button to CSS functionality and prop passing
+- [ ] Test building tree on main component from drag n drop objects
+- [ ] Work on layout object to adapt to different styles based on its incoming object
+- [X] Expand layoutobject to have different behaviors per type and content
+- [ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
+
+- [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
 ## Considerations
 
 Our Goal... To make Zesty.io like nothing you've ever experienced...
 
-[ ] Allow Parsley in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
+- [ ] Setup include code object bank component
+- [ ] fetch remote file data for snippets, or fake it for now
+- [ ] Allow Parsley in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
 
 # How it works
 
