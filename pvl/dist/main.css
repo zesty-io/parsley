@@ -189,6 +189,10 @@ select:focus {
 .pvl .shell .pvlHelp:hover .pvlHelpText {
   display: block;
 }
+.pvl .pvlLayoutBank button {
+  background-color: transparent;
+  border: none;
+}
 .pvl .pvlContentBankHeader {
   display: flex;
 }

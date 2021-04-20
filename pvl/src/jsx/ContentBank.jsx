@@ -63,11 +63,11 @@ class ContentBank extends React.Component {
         let searchOn = this.state.searchFilter == '' ? false : true;
         let missedModels = 0 // used for seeing if there is empty search
         return (
-            <div className="pvlContentBank">
+            <div className="pvlBank pvlContentBank">
                 <div className="pvlContentBankHeader">
                     <PVLToolbar title="Content References" helpText={helpText}></PVLToolbar>
                     <div className="pvlInputWrapper">
-                        <span class="fa fa-search"></span>
+                        <span className="fa fa-search"></span>
                         <input placeholder="Search Model or Field Name" value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
                         {searchOn && <button onClick={() => {this.clearSearch()} } class="fa fa-times"></button>}
                     </div>

@@ -20,7 +20,7 @@
 [X] CSS design content model object
 [X] Clear content filter
 [ ] Star current Content Model
-[ ] Connect collapse button to CSS functionality and prop passing
+[X] Connect collapse button to CSS functionality and prop passing
 [ ] Setup include code object bank component
 [ ] fetch remote file data for snippets, or fake it for now
 [ ] Test building tree on main component from drag n drop objects

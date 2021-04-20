@@ -25,7 +25,10 @@ class PVLToolbar extends React.Component {
                     </span>
                 </h1>
                 {this.hasCollapse() &&
-                    <button onClick={this.props.collapse}> <span className="fa fa-caret-down"></span></button>
+                    <button onClick={this.props.collapse}> 
+                        {this.props.collapsed && <span className="fa fa-caret-left"></span>}
+                        {!this.props.collapsed && <span className="fa fa-caret-down"></span>}
+                    </button>
                 }
             </div> 
         );

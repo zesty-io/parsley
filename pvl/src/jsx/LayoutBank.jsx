@@ -12,6 +12,9 @@ import PVLToolbar from './PVLToolbar'
 class LayoutBank extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            collapsed: false
+        }
     }
 
     getLayoutObjects() {
@@ -22,21 +25,27 @@ class LayoutBank extends React.Component {
         return this.getLayoutObjects() !== undefined ? this.getLayoutObjects().length : 0;
     }
     collapse() {
-        alert('collapse')
+        let toggle = this.state.collapsed == false ? true : false;
+        this.setState({
+            collapsed: toggle
+        });
+        
     }
 
     render() {
         let helpText = `Column, hairlines and other things to build a page`
         return this.getTotalLO() > 0 ? (
-            <div className="pvlBank">
-                <PVLToolbar title="Layout Tools" helpText={helpText} collapse={this.collapse}></PVLToolbar>
-                <div className="pvlObjectBank">
-                    {this.getLayoutObjects().map((lo) => {
-                        return (
-                            <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} primarytype="design" type={lo.type} obj={lo} isReady="true" />
-                        ) 
-                    })} 
-                </div>
+            <div className="pvlBank pvlLayoutBank">
+                <PVLToolbar title="Layout Tools" helpText={helpText} collapse={() => {this.collapse()} } collapsed={this.state.collapsed}></PVLToolbar>
+                {!this.state.collapsed && 
+                    <div className="pvlObjectBank">
+                        {this.getLayoutObjects().map((lo) => {
+                            return (
+                                <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} primarytype="design" type={lo.type} obj={lo} isReady="true" />
+                            ) 
+                        })} 
+                    </div>
+                }
 
             </div> 
         ) : (<div></div>);
