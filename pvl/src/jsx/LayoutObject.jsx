@@ -71,9 +71,12 @@ class LayoutObject extends React.Component {
     getType() {
       return ContentTypes[this.props.type] !== undefined ? ContentTypes[this.props.type] :  ContentTypes.unknown;
     }
+    getMode() {
+      return this.props.mode != undefined ? this.props.mode : 'bank';
+    }
 
     getPrimaryType() {
-      return ContentTypes[this.props.primarytype] !== undefined ? ContentTypes[this.props.primarytype] :  'content';
+      return this.props.primarytype !== undefined ? this.props.primarytype :  'content';
     }
 
     capitalizeFirst(s){
@@ -97,31 +100,46 @@ class LayoutObject extends React.Component {
         
         let type = this.getType() 
         let ptype = this.getPrimaryType()
+        let mode = this.getMode()
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
         const { isDragging, connectDragSource } = this.props
         let draggingClass = isDragging ? 'pvlDragging' : '';
-  
-        return connectDragSource(
-            <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
-              <div className="pvlObjectHeader">  
-                <div className="pvlTypeTag" title={type.name}> 
-                  <span className={`fa fa-${type.icon}`}></span>
+
+        // show different outputs based on the mode
+        if (mode == 'bank' || ptype == "content") {
+          return connectDragSource(
+              <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+                <div className="pvlObjectHeader">  
+                  <div className="pvlTypeTag" title={type.name}> 
+                    <span className={`fa fa-${type.icon}`}></span>
+                  </div>
+                  <div className="pvlDescription">
+                    <span>{this.props.name}</span>
+                    {this.has('html') && this.is('content') && <em>{this.props.obj.html}</em>}
+                    
+                  </div>
                 </div>
-                <div className="pvlDescription">
-                  <span>{this.props.name}</span>
-                  {this.has('html') && this.is('content') && <em>{this.props.obj.html}</em>}
+                {this.has('preview') && 
+                  <div className="pvlPreview" dangerouslySetInnerHTML={{
+                    __html: this.props.obj.preview
+                    }}></div>
+                  }
                   
-                </div>
               </div>
-              {this.has('preview') && 
+          );
+        } else {
+          return connectDragSource(
+            <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+            
                 <div className="pvlPreview" dangerouslySetInnerHTML={{
-                  __html: this.props.obj.preview
+                  __html: this.props.obj.html
                   }}></div>
-                }
-                 
+                
+                
             </div>
-        );
+          )
+        }
     }
 }
 

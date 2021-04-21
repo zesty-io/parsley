@@ -22,8 +22,10 @@
 - [X] Start Matching design
 - [ ] Star current Content Model
 - [X] Connect collapse button to CSS functionality and prop passing
-- [ ] Test building tree on main component from drag n drop objects
+- [X] Test building tree on main component from drag n drop objects
 - [ ] Work on layout object to adapt to different styles based on its incoming object
+- [ ] Create Column Layout Object that is droppable
+- [ ] Make different layout designs for visual layout container
 - [X] Expand layoutobject to have different behaviors per type and content
 - [ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
 
