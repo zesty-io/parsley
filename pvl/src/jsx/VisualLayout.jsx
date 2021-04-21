@@ -113,12 +113,19 @@ class VisualLayout extends React.Component {
         console.log(itemString)
         let deciphered = this.decipherItem(itemString)
         console.log(deciphered)
-        let obj
+        let obj = {
+            primarytype: deciphered[0]
+        }
         if(deciphered[0] == 'design'){
             obj = DesignObjects[deciphered[2]];
         } else {
-            obj = ContentTypes[deciphered[2]];
+            obj = ContentTypes[deciphered[1]];
+            obj.type = deciphered[1];
+            obj.primarytype = deciphered[0];
         }
+
+        obj.name = itemString
+
         this.addLayoutObject(obj);
     }
 
@@ -155,7 +162,7 @@ class VisualLayout extends React.Component {
                 <div className="pvlCanvas">
                     {this.state.layoutObjects.map((lo) => {
                         return (
-                            <LayoutObject key={lo.id} id={lo.id} type={lo.type} obj={lo} isReady="true" />
+                            <LayoutObject key={lo.id} id={lo.id} name={lo.name} type={lo.type} obj={lo} isReady="true" />
                         )
                     })}
                 </div>
