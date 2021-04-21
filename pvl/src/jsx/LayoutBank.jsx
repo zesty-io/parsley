@@ -41,7 +41,7 @@ class LayoutBank extends React.Component {
         let helpText = `Column, hairlines and other things to build a page`
         return this.getTotalLO() > 0 ? (
             <div className="pvlBank pvlLayoutBank">
-                <PVLToolbar title="Layout Tools" helpText={helpText} collapse={() => {this.collapse()} } collapsed={this.state.collapsed}></PVLToolbar>
+                <PVLToolbar title="Layout Design Tools" helpText={helpText} collapse={() => {this.collapse()} } collapsed={this.state.collapsed}></PVLToolbar>
                 {!this.state.collapsed && 
                     <div className="pvlObjectBank">
                         {Object.keys(this.getLayoutObjects()).map((key,index) => {

@@ -4,7 +4,7 @@ import VisualLayoutContainer from './VisualLayoutContainer'
 import ContentBank from './ContentBank'
 import LayoutBank from './LayoutBank'
 import PVLToolbar from './PVLToolbar'
-import { LayoutObjects } from './LayoutObjects'
+import { DesignObjects } from './DesignObjects'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
@@ -120,7 +120,7 @@ class ParsleyVisualLayout extends React.Component {
   } 
 
   getLayoutObjects() {
-    return LayoutObjects
+    return DesignObjects
   }
 
   getTree(){

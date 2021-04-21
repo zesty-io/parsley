@@ -1,15 +1,15 @@
 // uses fontawesome 5 icons from https://fontawesome.com/cheatsheet
-export const LayoutObjectTypes = {
+export const ContentTypes = {
   image: {
     icon : 'image',
-    name: 'Image(s)',
+    name: 'Image(s)', 
     type: 'content',
     description: 'Reference to image ZUIDs in Zesty.io',
     draggable: true
   },
   images: {
     icon : 'images',
-    name: 'Image(s)',
+    name: 'Image(s)', 
     type: 'content',
     description: 'Reference to image ZUIDs in Zesty.io',
     draggable: true

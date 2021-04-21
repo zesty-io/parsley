@@ -1,7 +1,7 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
-import { LayoutObjectTypes } from './LayoutObjectTypes';
+import { ContentTypes } from './ContentTypes';
 let dynamicType = ''
 
 const layoutObjectSource = {
@@ -69,11 +69,11 @@ class LayoutObject extends React.Component {
     }
 
     getType() {
-      return LayoutObjectTypes[this.props.type] !== undefined ? LayoutObjectTypes[this.props.type] :  LayoutObjectTypes.unknown;
+      return ContentTypes[this.props.type] !== undefined ? ContentTypes[this.props.type] :  ContentTypes.unknown;
     }
 
     getPrimaryType() {
-      return LayoutObjectTypes[this.props.primarytype] !== undefined ? LayoutObjectTypes[this.props.primarytype] :  'content';
+      return ContentTypes[this.props.primarytype] !== undefined ? ContentTypes[this.props.primarytype] :  'content';
     }
 
     capitalizeFirst(s){

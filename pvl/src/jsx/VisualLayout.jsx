@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
+import { DesignObjects } from './DesignObjects';
+import { ContentTypes } from './ContentTypes';
 import  LayoutObject  from './LayoutObject';
 
 /**
@@ -38,12 +40,12 @@ const layoutObjectTarget = {
       console.log('props',props)
       console.log('component',component)
       
-      component.addToLayout();
+     
     if (monitor.didDrop()) {
        
       // If you want, you can check whether some nested
       // target already handled drop
-      return
+      // return
     }
 
     
@@ -51,7 +53,7 @@ const layoutObjectTarget = {
     const item = monitor.getItem()
     
     console.log('item',item)
-    component.addToLayout(component);
+    component.addToLayout(item.id);
     // You can do something with it
     //ChessActions.movePiece(item.fromPosition, props.position)
 
@@ -83,10 +85,7 @@ class VisualLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            layoutObjects: [
-                {id: 1, type: 'LayoutObjectText'},
-                { id: 2, type: 'LayoutObjectText'},
-            ],
+            layoutObjects: [],
             currentPic: null
         };
 
@@ -109,10 +108,33 @@ class VisualLayout extends React.Component {
         }
     }
 
-    addToLayout() {
+    addToLayout(itemString) {
         console.log('add to layout', this.props)
-        console.log('connect to drop',this.props.connectDropTarget())
+        console.log(itemString)
+        let deciphered = this.decipherItem(itemString)
+        console.log(deciphered)
+        let obj
+        if(deciphered[0] == 'design'){
+            obj = DesignObjects[deciphered[2]];
+        } else {
+            obj = ContentTypes[deciphered[2]];
+        }
+        this.addLayoutObject(obj);
+    }
+
+    addLayoutObject(obj, pos=1){
+        let los = this.state.layoutObjects
+        los.push(obj);
+
+
+        this.setState = {
+            layoutObjects: los
+        }
+    }
+
+    decipherItem(itemString){
         
+        return itemString.split(':')
     }
 
     render() {
@@ -133,7 +155,7 @@ class VisualLayout extends React.Component {
                 <div className="pvlCanvas">
                     {this.state.layoutObjects.map((lo) => {
                         return (
-                            <LayoutObject key={lo.id} id={lo.id} isReady="true" />
+                            <LayoutObject key={lo.id} id={lo.id} type={lo.type} obj={lo} isReady="true" />
                         )
                     })}
                 </div>

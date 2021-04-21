@@ -1,5 +1,5 @@
 
-export const LayoutObjects = {
+export const DesignObjects = { 
       '2columns' : {
         uid: '11',
         name: '2 Columns',
