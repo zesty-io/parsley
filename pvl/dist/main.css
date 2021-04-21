@@ -189,13 +189,24 @@ select:focus {
 .pvl .shell .pvlHelp:hover .pvlHelpText {
   display: block;
 }
-.pvl .pvlVisualLayout {
-  background: #1b202c;
+.pvl .pvlVisualLayoutContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
-.pvl .pvlVisualLayout.pvlTargetHere {
+.pvl .pvlVisualLayoutContainer .pvlToolbar {
+  margin-bottom: 0;
+}
+.pvl .pvlVisualLayoutContainer .pvlVisualLayout {
+  background: #1b202c;
+  flex: 10;
+  flex-grow: 100;
+  flex-basis: 100%;
+}
+.pvl .pvlVisualLayoutContainer .pvlVisualLayout.pvlTargetHere {
   background: #fffde2;
 }
-.pvl .pvlVisualLayout.pvlDropReady {
+.pvl .pvlVisualLayoutContainer .pvlVisualLayout.pvlDropReady {
   background: #75bf25;
 }
 .pvl .pvlLayoutBank button {

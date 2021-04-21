@@ -1,11 +1,21 @@
-.pvlVisualLayout { 
-    background: @zesty-dark-blue;
-
-    &.pvlTargetHere{
-        background: @zesty-yellow;
+.pvlVisualLayoutContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    .pvlToolbar {
+        margin-bottom: 0;
     }
+    .pvlVisualLayout { 
+        background: @zesty-dark-blue;
+        flex: 10;
+        flex-grow: 100;
+        flex-basis: 100%;
+        &.pvlTargetHere{
+            background: @zesty-yellow;
+        }
 
-    &.pvlDropReady {
-        background: @zesty-green;
+        &.pvlDropReady {
+            background: @zesty-green;
+        }
     }
 }
