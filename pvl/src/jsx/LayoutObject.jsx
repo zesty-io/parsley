@@ -46,8 +46,14 @@ const layoutObjectSource = {
     const dropResult = monitor.getDropResult()
 
     // This is a good place to call some Flux action
-   // console.log('enDrag from layout object')
-   //console.log(item.id, dropResult)
+   console.log('endDrag from layout object')
+   console.log(item.id, dropResult)
+   console.log('component',component)
+   
+   // look to remove if we are in layout mode and have the removeMe function
+   if(typeof(component.props.removeMe) === 'function'){
+    component.props.removeMe()
+   }
   }
 }
 
@@ -119,6 +125,7 @@ class LayoutObject extends React.Component {
                     <span className={`fa fa-${type.icon}`}></span>
                   </div>
                   <div className="pvlDescription">
+                    {this.props.mode == 'layout' && <span>{this.props.obj.model}</span>}
                     <span>{this.props.name}</span>
                     {this.has('html') && this.is('content') && <em>{this.props.obj.html}</em>}
                     
@@ -142,13 +149,13 @@ class LayoutObject extends React.Component {
          
             return connectDragSource(
               <div className={`pvlObject pvlVisualLayout pvlDropTarget pvlLayoutRow pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
-                {this.props.obj.columns.map(column => {
+                {this.props.obj.columns.map( (column,index) => {
                   
                   let styles = {
                     flex: column.width
                   }
                   return (
-                      <DropColumn droppable={column.droppable} style={styles}></DropColumn>
+                      <DropColumn key={`column:${column.width}:${this.props.obj.name}:${index}`} droppable={column.droppable} style={styles}></DropColumn>
                   )
                 })}
                 

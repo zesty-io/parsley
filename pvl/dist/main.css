@@ -116,7 +116,6 @@ select:focus {
   flex: 4;
   min-width: 100px;
   background: white;
-  background: #1b202c;
   border-radius: 3px;
 }
 .pvl .shell .pvlObjectBanks {
@@ -199,7 +198,6 @@ select:focus {
   margin-bottom: 0;
 }
 .pvl .pvlVisualLayoutContainer .pvlDropColumn {
-  background: #1b202c;
   flex: 10;
   flex-grow: 100;
   flex-basis: 100%;

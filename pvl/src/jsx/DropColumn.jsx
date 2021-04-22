@@ -36,9 +36,9 @@ const layoutObjectTarget = {
   },
 
   drop(props, monitor, component) {
-      console.log('drop function in layoutObjecttarget')
-      console.log('props',props)
-      console.log('component',component)
+    //   console.log('drop function in layoutObjecttarget')
+    //   console.log('props',props)
+    //   console.log('component',component)
       
      
     if (monitor.didDrop()) {
@@ -46,11 +46,9 @@ const layoutObjectTarget = {
       return
     }
 
-    
     // Obtain the dragged item
     const item = monitor.getItem()
     
-    console.log('item',item)
     component.addToLayout(item.id);
     // You can do something with it
     //ChessActions.movePiece(item.fromPosition, props.position)
@@ -58,7 +56,11 @@ const layoutObjectTarget = {
     // You can also do nothing and return a drop result,
     // which will be available as monitor.getDropResult()
     // in the drag source's endDrag() method
-    return { moved: true }
+    return { 
+        moved: true,
+        objName: item.id, 
+        column: component
+        }
   }
 }
 
@@ -112,13 +114,14 @@ class DropColumn extends React.Component {
         console.log(deciphered)
         let obj = {}
 
+        // design objects have 3 items split from key primarytype:type:name in the array
         if(deciphered[0] == 'design'){
             obj = DesignObjects[deciphered[2]];
-            obj.obj = DesignObjects[deciphered[2]];
             obj.name = deciphered[2];
         } else {
+            // content objects have 4 items split from key primarytype:type:model:field_name in the array
             obj = ContentTypes[deciphered[1]];
-            obj.obj = ContentTypes[deciphered[1]];
+            obj.model = deciphered[2]; 
             obj.name = deciphered[3];
         }
         obj.type = deciphered[1];
@@ -136,9 +139,22 @@ class DropColumn extends React.Component {
         los.push(obj);
 
 
-        this.setState = {
+        this.setState({
             layoutObjects: los
-        }
+        })
+    }
+
+    removeLayoutObject(fullName){
+        let newObjArr = []
+        
+        this.state.layoutObjects.map(lo => {
+            if(lo.fullName != fullName){
+                newObjArr.push(lo)
+            }
+        })
+        this.setState({
+            layoutObjects: newObjArr
+        })
     }
 
     decipherItem(itemString){
@@ -163,9 +179,8 @@ class DropColumn extends React.Component {
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
 
                     {this.state.layoutObjects.map((lo) => {
-                        console.log(lo) 
                         return (
-                            <LayoutObject mode="layout" key={lo.id} id={lo.id} name={lo.name} primarytype={lo.primarytype} type={lo.type} obj={lo} isReady="true" />
+                            <LayoutObject removeMe={() => this.removeLayoutObject(lo.fullName)} mode="layout" key={`layout:${lo.fullName}`} id={`${lo.fullName}`} name={lo.name} primarytype={lo.primarytype} type={lo.type} obj={lo} isReady="true" />
                         )
                     })}
                 
