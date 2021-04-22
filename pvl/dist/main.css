@@ -193,6 +193,7 @@ select:focus {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  /* design for different object types */
 }
 .pvl .pvlVisualLayoutContainer .pvlToolbar {
   margin-bottom: 0;
@@ -202,6 +203,7 @@ select:focus {
   flex: 10;
   flex-grow: 100;
   flex-basis: 100%;
+  padding: 10px;
 }
 .pvl .pvlVisualLayoutContainer .pvlDropColumn.pvlTargetHere {
   background: #fffde2;
@@ -209,24 +211,65 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlDropColumn.pvlDropReady {
   background: #75bf25;
 }
-.pvl .pvlObject.pvlLayoutRow {
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject {
+  /* images */
+  /* rich text */
+}
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject .pvlTypeTag {
+  order: 1;
+  font-size: 18px;
+  border-left: none;
+  border-right: 1px #a7afbf solid;
+  border-radius: 0;
+  min-width: 60px;
+}
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject .pvlDescription {
+  order: 2;
+}
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlImages .pvlObjectHeader {
+  display: block;
+}
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlImages .pvlTypeTag {
+  display: block;
+  width: 100%;
+  text-align: center;
+  flex: none;
+  max-width: 100%;
+  padding: 50px 0px;
+}
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlImages .pvlTypeTag span {
+  font-size: 32px;
+  position: relative;
+}
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlWysiwyg_advanced .pvlTypeTag,
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlWysiwyg_basic .pvlTypeTag,
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlArticle_writer .pvlTypeTag,
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlRich_text .pvlTypeTag {
+  order: 1;
+}
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlWysiwyg_advanced .pvlDescription,
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlWysiwyg_basic .pvlDescription,
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlArticle_writer .pvlDescription,
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlRich_text .pvlDescription {
+  min-height: 100px;
+}
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutRow {
   display: flex;
   margin: 10px;
   border: 3px #a7afbf solid;
 }
-.pvl .pvlObject.pvlLayoutRow .pvlLayoutColumn {
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutRow .pvlLayoutColumn {
   background: transparent;
   min-height: 200px;
-  padding: 10px;
   border-left: 3px #a7afbf solid;
   border-radius: 3px;
 }
-.pvl .pvlObject.pvlLayoutRow .pvlLayoutColumn:nth-child(1) {
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutRow .pvlLayoutColumn:nth-child(1) {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   border-left: none;
 }
-.pvl .pvlObject.pvlLayoutRow .pvlLayoutColumn:last-child {
+.pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutRow .pvlLayoutColumn:last-child {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }

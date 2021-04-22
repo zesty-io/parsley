@@ -10,6 +10,7 @@
         flex: 10;
         flex-grow: 100;
         flex-basis: 100%;
+        padding: @defaultPadding;
         &.pvlTargetHere{
             background: @zesty-yellow;
         }
@@ -17,31 +18,76 @@
             background: @zesty-green;
         }
     }
-}
 
-
-
-.pvlObject.pvlLayoutRow {
-    display: flex;
-    margin: @defaultMargin;
-    border: 3px @zesty-light-grey solid;
-
-    .pvlLayoutColumn{
-        background: transparent;
-        min-height: 200px;
-        padding: @defaultPadding;
-        border-left: 3px @zesty-light-grey solid;
-
-        .defaultBorderRadius();
-        &:nth-child(1){
-            border-top-right-radius: 0px;
-            border-bottom-right-radius: 0px;
+    /* design for different object types */
+    .pvlObject.pvlLayoutObject{
+        .pvlTypeTag {
+            order: 1;
+            font-size: 18px;
             border-left: none;
+            border-right: 1px @zesty-light-grey solid;
+            border-radius: 0;
+            min-width: 60px;
         }
-        &:last-child {
-            border-top-left-radius: 0px;
-            border-bottom-left-radius: 0px;
+        .pvlDescription {
+            order: 2;
         }
+        /* images */
+        &.pvlImages{
+            .pvlObjectHeader{
+                display: block;
+            }
+            .pvlTypeTag {
+                display: block;
+                width: 100%;
+                text-align: center;
+                flex:none;
+                max-width: 100%;
+                padding: 50px 0px;
+                span {
+                    font-size: 32px;
+                    position: relative;    
+                }
+            }
+        }
+        /* rich text */
+        &.pvlWysiwyg_advanced, &.pvlWysiwyg_basic, &.pvlArticle_writer, &.pvlRich_text {
+            .pvlTypeTag {
+               
+                order: 1;
+            }
+            .pvlDescription {
+                min-height: 100px;
+            }
+           
+        }  
+
+    }
+
+
+    .pvlObject.pvlLayoutRow {
+        display: flex;
+        margin: @defaultMargin;
+        border: 3px @zesty-light-grey solid;
+
+        .pvlLayoutColumn{
+            background: transparent;
+            min-height: 200px;
+            
+            border-left: 3px @zesty-light-grey solid;
+
+            .defaultBorderRadius();
+            &:nth-child(1){
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                border-left: none;
+            }
+            &:last-child {
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+            }
+        }
+
     }
 
 }

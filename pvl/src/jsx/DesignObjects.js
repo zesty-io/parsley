@@ -24,6 +24,30 @@ export const DesignObjects = {
         ]
 
       },
+      '2columnsX' : {
+        uid: '4',
+        name: 'X Columns',
+        type: 'columns',
+        classes: 'row',
+        html: '<div>*</div>',
+        preview: '<div style="display:flex"><div style="flex:6"></div><div style="flex:1"></div></div>',
+        droppable: false,
+        columns: [
+          {
+            width: '6',
+            html: '<div>*</div>',
+            classes: 'column',
+            droppable: true
+          },
+          {
+            width: '1',
+            html: '<div>*</div>',
+            classes: 'column',
+            droppable: true
+          },
+        ]
+
+      },
       '2columnswideright' : {
         uid: '14',
         name: '2 Columns',
