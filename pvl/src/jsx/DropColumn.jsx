@@ -107,28 +107,30 @@ class DropColumn extends React.Component {
     }
 
     addToLayout(itemString) {
-        console.log('add to layout', this.props)
-        console.log(itemString)
+        
         let deciphered = this.decipherItem(itemString)
         console.log(deciphered)
-        let obj = {
-            primarytype: deciphered[0]
-        }
+        let obj = {}
+
         if(deciphered[0] == 'design'){
             obj = DesignObjects[deciphered[2]];
+            obj.obj = DesignObjects[deciphered[2]];
             obj.name = deciphered[2];
         } else {
             obj = ContentTypes[deciphered[1]];
+            obj.obj = ContentTypes[deciphered[1]];
             obj.name = deciphered[3];
         }
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
         
         obj.fullName = itemString
-      
+        console.log(obj)
         this.addLayoutObject(obj);
     }
 
+
+    // where we control order
     addLayoutObject(obj, pos=1){
         let los = this.state.layoutObjects
         los.push(obj);
@@ -159,8 +161,9 @@ class DropColumn extends React.Component {
         }
         return connectDropTarget(
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
-                
+
                     {this.state.layoutObjects.map((lo) => {
+                        console.log(lo) 
                         return (
                             <LayoutObject mode="layout" key={lo.id} id={lo.id} name={lo.name} primarytype={lo.primarytype} type={lo.type} obj={lo} isReady="true" />
                         )

@@ -27,8 +27,8 @@
 - [X] Create Column Layout Object that is droppable
 - [X] Make different layout designs for visual layout container
 - [X] Expand layoutobject to have different behaviors per type and content
+- [ ] Add content references to the dropped columns
 - [ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
-
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
 ## Considerations

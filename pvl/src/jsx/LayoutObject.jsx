@@ -46,8 +46,8 @@ const layoutObjectSource = {
     const dropResult = monitor.getDropResult()
 
     // This is a good place to call some Flux action
-    console.log('enDrag from layout object')
-   console.log(item.id, dropResult)
+   // console.log('enDrag from layout object')
+   //console.log(item.id, dropResult)
   }
 }
 
@@ -139,16 +139,16 @@ class LayoutObject extends React.Component {
           // here we are dealing with design objects or columns
           // for columns we have drop targets
           if(this.props.obj.type == 'columns'){
-            console.log('you are here')
+         
             return connectDragSource(
               <div className={`pvlObject pvlVisualLayout pvlDropTarget pvlLayoutRow pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
                 {this.props.obj.columns.map(column => {
-                  console.log(column)
+                  
                   let styles = {
                     flex: column.width
                   }
                   return (
-                      <DropColumn style={styles}></DropColumn>
+                      <DropColumn droppable={column.droppable} style={styles}></DropColumn>
                   )
                 })}
                 
@@ -157,7 +157,7 @@ class LayoutObject extends React.Component {
           // else we are dealing with a design object
           } else {
             return connectDragSource(
-              <div className={`pvlObject pvlVisualLayout pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+              <div className={`pvlObject pvlVisualLayout pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} pvlDesignObject`}>
                   <div className="pvlPreview" dangerouslySetInnerHTML={{
                     __html: this.props.obj.html
                     }}></div> 

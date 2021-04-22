@@ -93,7 +93,7 @@ class ContentBank extends React.Component {
                                                 {collapsed != '' && <span className="fa fa-caret-right"></span>}
                                             </button>
                                         }
-                                        <h3>
+                                        <h3> 
                                             <strong>{model.label}</strong> 
                                             {collapsed == '' && <span>[{model.zuid}]</span>}
                                             {collapsed != '' && <span>(collapsed)</span>}
@@ -110,7 +110,7 @@ class ContentBank extends React.Component {
                                         {model.fields.filter(function (field) {
                                             return field.searchIndex.includes(this.state.searchFilter.toLowerCase());
                                         }.bind(this)).map((field) => {
-                                            return (<LayoutObject key={field.name} id={`content:${field.type}:${field.name}`} name={field.name} primarytype="content" type={field.type}  obj={field}  isReady="true" />)
+                                            return (<LayoutObject key={field.name} id={`content:${field.type}:${model.name}:${field.name}`} name={field.name} primarytype="content" type={field.type}  obj={field}  isReady="true" />)
                                         })}
                                     </div>
                                 </div>

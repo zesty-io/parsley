@@ -62,12 +62,20 @@
            
         }  
 
+        /* deisgn object */
+        &.pvlDesignObject{
+            border-color:transparent;
+            &:hover{
+                border: 1px @zesty-light-grey solid;
+            }
+        }
+
     }
 
 
     .pvlObject.pvlLayoutRow {
         display: flex;
-        margin: @defaultMargin;
+        
         border: 3px @zesty-light-grey solid;
 
         .pvlLayoutColumn{
