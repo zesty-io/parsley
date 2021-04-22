@@ -57,7 +57,7 @@ export const DesignObjects = {
         html: '<div style="">*</div>',
         preview: '<div style="display:flex"><div style="flex:1"></div><div style="flex:2"></div><div style="flex:2"></div></div>',
         droppable: false,
-        children: [
+        columns: [
           {
             width: '1',
             html: '<div style="">*</div>',
@@ -113,7 +113,7 @@ export const DesignObjects = {
             droppable: true
           },
           {
-            width: '3',
+            width: '3', 
             html: '<div>*</div>',
             classes: 'column',
             droppable: true

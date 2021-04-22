@@ -5,7 +5,7 @@
     .pvlToolbar {
         margin-bottom: 0;
     }
-    .pvlVisualLayout { 
+    .pvlDropColumn { 
         background: @zesty-dark-blue;
         flex: 10;
         flex-grow: 100;
@@ -13,9 +13,22 @@
         &.pvlTargetHere{
             background: @zesty-yellow;
         }
-
         &.pvlDropReady {
             background: @zesty-green;
         }
     }
+}
+
+
+
+// for nested drop layout
+
+.pvlDropTarget{
+
+    .pvlDropColumn{
+        background: transparent;
+        min-height: 200px;
+
+    }
+
 }

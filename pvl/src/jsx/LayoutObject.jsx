@@ -2,6 +2,8 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
 import { ContentTypes } from './ContentTypes';
+import DropColumn from './DropColumn'
+
 let dynamicType = ''
 
 const layoutObjectSource = {
@@ -107,6 +109,8 @@ class LayoutObject extends React.Component {
         let draggingClass = isDragging ? 'pvlDragging' : '';
 
         // show different outputs based on the mode
+
+        // this is the mode for th left side bank, or for content
         if (mode == 'bank' || ptype == "content") {
           return connectDragSource(
               <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
@@ -128,17 +132,38 @@ class LayoutObject extends React.Component {
                   
               </div>
           );
+        
+        // below is for the dropcolumn or layout mode
         } else {
-          return connectDragSource(
-            <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
-            
-                <div className="pvlPreview" dangerouslySetInnerHTML={{
-                  __html: this.props.obj.html
-                  }}></div>
+
+          // here we are dealing with design objects or columns
+          // for columns we have drop targets
+          console.log("type",type)
+          console.log("obj",this.props.obj)
+          if(this.props.obj.type == 'columns'){
+            console.log('you are here')
+            return connectDragSource(
+              <div className={`pvlObject pvlDropTarget pvlLayoutColumn pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+                {this.props.obj.columns.map(column => {
+                  return (
+                    <div style={{'flex': column.width}} className={`pvlColumn`}>
+                      <DropColumn></DropColumn>
+                    </div>
+                  )
+                })}
                 
-                
-            </div>
-          )
+              </div>
+            )
+          // else we are dealing with a design object
+          } else {
+            return connectDragSource(
+              <div className={`pvlObject pvlDropTarget pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+                  <div className="pvlPreview" dangerouslySetInnerHTML={{
+                    __html: this.props.obj.html
+                    }}></div> 
+              </div>
+            )
+          }
         }
     }
 }

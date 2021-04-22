@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
 import PVLToolbar from './PVLToolbar'
-import VisualLayout from './VisualLayout'
+import DropColumn from './DropColumn'
 
 class VisualLayoutContainer extends React.Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class VisualLayoutContainer extends React.Component {
         return (
             <div className="pvlVisualLayoutContainer">
                <PVLToolbar title="Parlsey Visual Layout" helpText={helpText}></PVLToolbar>
-               <VisualLayout></VisualLayout>
+               <DropColumn></DropColumn>
             </div>
         );
     }

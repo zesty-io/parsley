@@ -42,10 +42,8 @@ const layoutObjectTarget = {
       
      
     if (monitor.didDrop()) {
-       
-      // If you want, you can check whether some nested
-      // target already handled drop
-      // return
+      // this handles multi level nesting, stops from adding on below layers
+      return
     }
 
     
@@ -81,7 +79,7 @@ function collect(connect, monitor) {
   }
 }
 
-class VisualLayout extends React.Component {
+class DropColumn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -118,14 +116,16 @@ class VisualLayout extends React.Component {
         }
         if(deciphered[0] == 'design'){
             obj = DesignObjects[deciphered[2]];
+            obj.name = deciphered[2];
         } else {
             obj = ContentTypes[deciphered[1]];
+            obj.name = deciphered[3];
         }
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
-
-        obj.name = itemString
-
+        
+        obj.fullName = itemString
+      
         this.addLayoutObject(obj);
     }
 
@@ -158,7 +158,7 @@ class VisualLayout extends React.Component {
             dropclass = 'pvlDropReady'
         }
         return connectDropTarget(
-            <div className={`pvlVisualLayout ${dropclass}`}>
+            <div className={`pvlDropColumn ${dropclass}`}>
                 <div className="pvlCanvas">
                     {this.state.layoutObjects.map((lo) => {
                         return (
@@ -176,7 +176,7 @@ class VisualLayout extends React.Component {
     }
 }
 
-export default DropTarget(ItemTypes.LAYOUTOBJECT, layoutObjectTarget, collect)(VisualLayout);
+export default DropTarget(ItemTypes.LAYOUTOBJECT, layoutObjectTarget, collect)(DropColumn);
 
 
 
