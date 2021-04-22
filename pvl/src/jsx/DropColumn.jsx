@@ -158,19 +158,19 @@ class DropColumn extends React.Component {
             dropclass = 'pvlDropReady'
         }
         return connectDropTarget(
-            <div className={`pvlDropColumn ${dropclass}`}>
-                <div className="pvlCanvas">
+            <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
+                
                     {this.state.layoutObjects.map((lo) => {
                         return (
                             <LayoutObject mode="layout" key={lo.id} id={lo.id} name={lo.name} primarytype={lo.primarytype} type={lo.type} obj={lo} isReady="true" />
                         )
                     })}
-                </div>
-                <div className="message">
+                
+                {/*<div className="message">
                     {isOver && canDrop && <div>omg u there</div>}
                     {!isOver && canDrop && <div>drop on me</div>}
                     {isOver && !canDrop && <div>invalid drop</div>}
-                </div>
+                </div>*/}
             </div>
         );
     }

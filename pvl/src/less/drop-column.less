@@ -21,14 +21,27 @@
 
 
 
-// for nested drop layout
+.pvlObject.pvlLayoutRow {
+    display: flex;
+    margin: @defaultMargin;
+    border: 3px @zesty-light-grey solid;
 
-.pvlDropTarget{
-
-    .pvlDropColumn{
+    .pvlLayoutColumn{
         background: transparent;
         min-height: 200px;
+        padding: @defaultPadding;
+        border-left: 3px @zesty-light-grey solid;
 
+        .defaultBorderRadius();
+        &:nth-child(1){
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-left: none;
+        }
+        &:last-child {
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
     }
 
 }

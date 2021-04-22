@@ -127,7 +127,7 @@ class LayoutObject extends React.Component {
                 {this.has('preview') && 
                   <div className="pvlPreview" dangerouslySetInnerHTML={{
                     __html: this.props.obj.preview
-                    }}></div>
+                    }}></div> 
                   }
                   
               </div>
@@ -138,17 +138,17 @@ class LayoutObject extends React.Component {
 
           // here we are dealing with design objects or columns
           // for columns we have drop targets
-          console.log("type",type)
-          console.log("obj",this.props.obj)
           if(this.props.obj.type == 'columns'){
             console.log('you are here')
             return connectDragSource(
-              <div className={`pvlObject pvlDropTarget pvlLayoutColumn pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+              <div className={`pvlObject pvlVisualLayout pvlDropTarget pvlLayoutRow pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
                 {this.props.obj.columns.map(column => {
+                  console.log(column)
+                  let styles = {
+                    flex: column.width
+                  }
                   return (
-                    <div style={{'flex': column.width}} className={`pvlColumn`}>
-                      <DropColumn></DropColumn>
-                    </div>
+                      <DropColumn style={styles}></DropColumn>
                   )
                 })}
                 
@@ -157,7 +157,7 @@ class LayoutObject extends React.Component {
           // else we are dealing with a design object
           } else {
             return connectDragSource(
-              <div className={`pvlObject pvlDropTarget pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+              <div className={`pvlObject pvlVisualLayout pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
                   <div className="pvlPreview" dangerouslySetInnerHTML={{
                     __html: this.props.obj.html
                     }}></div> 

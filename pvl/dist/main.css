@@ -209,9 +209,26 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlDropColumn.pvlDropReady {
   background: #75bf25;
 }
-.pvl .pvlDropTarget .pvlDropColumn {
+.pvl .pvlObject.pvlLayoutRow {
+  display: flex;
+  margin: 10px;
+  border: 3px #a7afbf solid;
+}
+.pvl .pvlObject.pvlLayoutRow .pvlLayoutColumn {
   background: transparent;
   min-height: 200px;
+  padding: 10px;
+  border-left: 3px #a7afbf solid;
+  border-radius: 3px;
+}
+.pvl .pvlObject.pvlLayoutRow .pvlLayoutColumn:nth-child(1) {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-left: none;
+}
+.pvl .pvlObject.pvlLayoutRow .pvlLayoutColumn:last-child {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 .pvl .pvlLayoutBank button {
   background-color: transparent;
