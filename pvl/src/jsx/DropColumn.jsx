@@ -111,7 +111,7 @@ class DropColumn extends React.Component {
     addToLayout(itemString) {
         
         let deciphered = this.decipherItem(itemString)
-        console.log(deciphered)
+        //console.log(deciphered)
         let obj = {}
 
         // design objects have 3 items split from key primarytype:type:name in the array
@@ -128,7 +128,7 @@ class DropColumn extends React.Component {
         obj.primarytype = deciphered[0];
         
         obj.fullName = itemString
-        console.log(obj)
+        //console.log(obj)
         this.addLayoutObject(obj);
     }
 
@@ -180,7 +180,8 @@ class DropColumn extends React.Component {
 
                     {this.state.layoutObjects.map((lo) => {
                         return (
-                            <LayoutObject removeMe={() => this.removeLayoutObject(lo.fullName)} mode="layout" key={`layout:${lo.fullName}`} id={`${lo.fullName}`} name={lo.name} primarytype={lo.primarytype} type={lo.type} obj={lo} isReady="true" />
+                            //key={`layout:${lo.fullName}`} 
+                            <LayoutObject removeMe={() => this.removeLayoutObject(lo.fullName)} mode="layout" id={`${lo.fullName}`} name={lo.name} primarytype={lo.primarytype} type={lo.type} obj={lo} isReady="true" />
                         )
                     })}
                 
