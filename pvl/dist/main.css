@@ -83,12 +83,13 @@
 }
 body,
 html {
-  background-color: #000;
+  background-color: #5b667d;
   font-family: 'Roboto', sans-serif;
   font-size: 0.8em;
   margin: 0;
   padding: 0;
   color: #1b202c;
+  padding: 10px;
 }
 input:focus,
 button:focus,
