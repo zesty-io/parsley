@@ -24,7 +24,11 @@ const layoutObjectSource = {
   beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
     //console.log(props)
-    const item = { id: props.id }
+    const item = { 
+      id: props.id,
+      mode: props.mode
+      }
+      console.log(item)
     
     return item
   },
@@ -77,7 +81,7 @@ class LayoutObject extends React.Component {
     }
 
     getType() {
-      return ContentTypes[this.props.type] !== undefined ? ContentTypes[this.props.type] :  ContentTypes.unknown;
+      return ContentTypes[this.props.type] !== undefined ? {...ContentTypes[this.props.type]} :  {...ContentTypes.unknown};
     }
     getMode() {
       return this.props.mode != undefined ? this.props.mode : 'bank';
@@ -119,7 +123,7 @@ class LayoutObject extends React.Component {
         // this is the mode for th left side bank, or for content
         if (mode == 'bank' || ptype == "content") {
           return connectDragSource(
-              <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+              <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(mode)} pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(this.props.type)} ${draggingClass}`}>
                 <div className="pvlObjectHeader">  
                   <div className="pvlTypeTag" title={type.name}> 
                     <span className={`fa fa-${type.icon}`}></span>
@@ -148,7 +152,7 @@ class LayoutObject extends React.Component {
           if(this.props.obj.type == 'columns'){
          
             return connectDragSource(
-              <div className={`pvlObject pvlVisualLayout pvlDropTarget pvlLayoutRow pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} ${draggingClass}`}>
+              <div className={`pvlObject pvlVisualLayout pvlDropTarget pvlLayoutRow pvl${this.capitalizeFirst(mode)}  pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(this.props.type)} ${draggingClass}`}>
                 {this.props.obj.columns.map( (column,index) => {
                   
                   let styles = {
@@ -164,7 +168,7 @@ class LayoutObject extends React.Component {
           // else we are dealing with a design object
           } else {
             return connectDragSource(
-              <div className={`pvlObject pvlVisualLayout pvlLayoutObject pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(type.type)} pvlDesignObject`}>
+              <div className={`pvlObject pvlVisualLayout pvlLayoutObject pvl${this.capitalizeFirst(mode)}  pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(this.props.type)} pvlDesignObject`}>
                   <div className="pvlPreview" dangerouslySetInnerHTML={{
                     __html: this.props.obj.html
                     }}></div> 

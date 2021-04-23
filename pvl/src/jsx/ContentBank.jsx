@@ -110,7 +110,16 @@ class ContentBank extends React.Component {
                                         {model.fields.filter(function (field) {
                                             return field.searchIndex.includes(this.state.searchFilter.toLowerCase());
                                         }.bind(this)).map((field) => {
-                                            return (<LayoutObject key={field.name} id={`content:${field.type}:${model.name}:${field.name}`} name={field.name} primarytype="content" type={field.type}  obj={field}  isReady="true" />)
+                                            return (<LayoutObject 
+                                                        key={field.name} 
+                                                        mode="bank"
+                                                        id={`content:${field.type}:${model.name}:${field.name}`} 
+                                                        name={field.name} 
+                                                        primarytype="content" 
+                                                        type={field.type}  
+                                                        obj={field}  
+                                                        isReady="true" 
+                                                        />)
                                         })}
                                     </div>
                                 </div>

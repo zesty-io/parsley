@@ -20,17 +20,19 @@
     }
 
     /* design for different object types */
-    .pvlObject.pvlLayoutObject{
-        .pvlTypeTag {
-            order: 1;
-            font-size: 18px;
-            border-left: none;
-            border-right: 1px @zesty-light-grey solid;
-            border-radius: 0;
-            min-width: 60px;
-        }
-        .pvlDescription {
-            order: 2;
+    .pvlObject.pvlLayoutObject.pvlLayout{
+        .pvlObjectHeader{
+            .pvlTypeTag {
+                order: 1;
+                font-size: 18px;
+                border-left: none;
+                border-right: 1px @zesty-light-grey solid;
+                border-radius: 0;
+                min-width: 60px;
+            }
+            .pvlDescription { 
+                order: 2;
+            }
         }
         /* images */
         &.pvlImages{

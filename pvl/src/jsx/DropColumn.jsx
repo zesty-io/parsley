@@ -183,15 +183,14 @@ class DropColumn extends React.Component {
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
 
                     {this.state.layoutObjects.map((lo,index) => {
-                        
+                        let id = lo.fullName.match(/\d+$/) ? lo.fullName : `${lo.fullName}:${index}`;
                         return (
-                            //
-
+                            // index in the ID and KEY is used as position, but all for uniqueness
                             <LayoutObject 
                                 key={`layout:${lo.fullName}:${index}`} 
                                 removeMe={() => this.removeLayoutObject(lo.fullName)} 
                                 mode="layout" 
-                                id={`${lo.fullName}:${index}`} 
+                                id={id} 
                                 name={lo.name} 
                                 primarytype={lo.primarytype} 
                                 type={lo.type} 

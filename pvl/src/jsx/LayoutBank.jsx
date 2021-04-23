@@ -47,7 +47,16 @@ class LayoutBank extends React.Component {
                         {Object.keys(this.getLayoutObjects()).map((key,index) => {
                             let lo = this.getLayoutObjects()[key]
                             return (
-                                <LayoutObject key={lo.uid} id={`design:${lo.type}:${key}`} name={lo.name} primarytype="design" type={lo.type} obj={lo} isReady="true" />
+                                <LayoutObject 
+                                    key={lo.uid} 
+                                    id={`design:${lo.type}:${key}`} 
+                                    name={lo.name} 
+                                    primarytype="design" 
+                                    type={lo.type} 
+                                    obj={lo} 
+                                    mode="bank"
+                                    isReady="true" 
+                                    />
                             ) 
                         })} 
                     </div>
