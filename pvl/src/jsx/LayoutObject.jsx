@@ -4,7 +4,7 @@ import { ItemTypes } from './ItemTypes';
 import { ContentTypes } from './ContentTypes';
 import DropColumn from './DropColumn'
 
-let dynamicType = ''
+var dynamicType = ''
 
 const layoutObjectSource = {
   canDrag(props) {
@@ -46,9 +46,9 @@ const layoutObjectSource = {
     const dropResult = monitor.getDropResult()
 
     // This is a good place to call some Flux action
-   console.log('endDrag from layout object')
-   console.log(item.id, dropResult)
-   console.log('component',component)
+  //  console.log('endDrag from layout object')
+  //  console.log(item.id, dropResult)
+  //  console.log('component',component)
    
    // look to remove if we are in layout mode and have the removeMe function
    if(typeof(component.props.removeMe) === 'function'){
@@ -106,13 +106,13 @@ class LayoutObject extends React.Component {
         // Your component receives its own props as usual
         const { id } = this.props
         
-        let type = this.getType() 
-        let ptype = this.getPrimaryType()
-        let mode = this.getMode()
+        var type = this.getType() 
+        var ptype = this.getPrimaryType()
+        var mode = this.getMode()
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
         const { isDragging, connectDragSource } = this.props
-        let draggingClass = isDragging ? 'pvlDragging' : '';
+        var draggingClass = isDragging ? 'pvlDragging' : '';
 
         // show different outputs based on the mode
 

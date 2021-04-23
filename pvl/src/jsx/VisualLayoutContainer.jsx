@@ -15,7 +15,7 @@ class VisualLayoutContainer extends React.Component {
         return (
             <div className="pvlVisualLayoutContainer">
                <PVLToolbar title="Parlsey Visual Layout" helpText={helpText}></PVLToolbar>
-               <DropColumn></DropColumn>
+               <DropColumn key="column:00"></DropColumn>
             </div>
         );
     }

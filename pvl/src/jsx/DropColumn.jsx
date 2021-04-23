@@ -58,8 +58,7 @@ const layoutObjectTarget = {
     // in the drag source's endDrag() method
     return { 
         moved: true,
-        objName: item.id, 
-        column: component
+        objName: item.id
         }
   }
 }
@@ -85,8 +84,7 @@ class DropColumn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            layoutObjects: [],
-            currentPic: null
+            layoutObjects: []
         };
 
     }
@@ -108,11 +106,11 @@ class DropColumn extends React.Component {
         }
     }
 
-    addToLayout(itemString) {
+    addToLayout = (itemString) => {
         
-        let deciphered = this.decipherItem(itemString)
-        //console.log(deciphered)
-        let obj = {}
+        var deciphered = this.decipherItem(itemString)
+        console.log('adding',deciphered)
+        var obj = {}
 
         // design objects have 3 items split from key primarytype:type:name in the array
         if(deciphered[0] == 'design'){
@@ -126,7 +124,6 @@ class DropColumn extends React.Component {
         }
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
-        
         obj.fullName = itemString
         //console.log(obj)
         this.addLayoutObject(obj);
@@ -134,19 +131,27 @@ class DropColumn extends React.Component {
 
 
     // where we control order
-    addLayoutObject(obj, pos=1){
-        let los = this.state.layoutObjects
-        los.push(obj);
-
-
-        this.setState({
-            layoutObjects: los
-        })
+    addLayoutObject(obj, pos=false){
+        // default add
+        
+        if(pos == false){
+            this.setState({
+                layoutObjects: [...this.state.layoutObjects, obj] 
+            });
+        // for inserting before an element, not tested yet
+        } else {
+            pos = pos - 1
+            this.setState({
+                layoutObjects: this.state.layoutObjects.splice(pos, 0, obj) 
+            });
+        }
+        console.log('adding to array', this.state.layoutObjects)
+       
     }
 
     removeLayoutObject(fullName){
-        let newObjArr = []
-        
+        var newObjArr = []
+        console.log('running remove',fullName, this.state.layoutObjects)
         this.state.layoutObjects.map(lo => {
             if(lo.fullName != fullName){
                 newObjArr.push(lo)
@@ -163,8 +168,6 @@ class DropColumn extends React.Component {
     }
 
     render() {
-        // Your component receives its own props as usual
-        const { position } = this.props
 
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
@@ -175,13 +178,25 @@ class DropColumn extends React.Component {
         } else if(isOver && canDrop) {
             dropclass = 'pvlDropReady'
         }
+        
         return connectDropTarget(
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
 
-                    {this.state.layoutObjects.map((lo) => {
+                    {this.state.layoutObjects.map((lo,index) => {
+                        
                         return (
-                            //key={`layout:${lo.fullName}`} 
-                            <LayoutObject removeMe={() => this.removeLayoutObject(lo.fullName)} mode="layout" id={`${lo.fullName}`} name={lo.name} primarytype={lo.primarytype} type={lo.type} obj={lo} isReady="true" />
+                            //
+
+                            <LayoutObject 
+                                key={`layout:${lo.fullName}:${index}`} 
+                                removeMe={() => this.removeLayoutObject(lo.fullName)} 
+                                mode="layout" 
+                                id={`${lo.fullName}`} 
+                                name={lo.name} 
+                                primarytype={lo.primarytype} 
+                                type={lo.type} 
+                                obj={lo} 
+                                isReady="true" />
                         )
                     })}
                 
