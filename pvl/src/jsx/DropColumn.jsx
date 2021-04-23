@@ -114,11 +114,11 @@ class DropColumn extends React.Component {
 
         // design objects have 3 items split from key primarytype:type:name in the array
         if(deciphered[0] == 'design'){
-            obj = DesignObjects[deciphered[2]];
+            obj = {...DesignObjects[deciphered[2]]};
             obj.name = deciphered[2];
         } else {
             // content objects have 4 items split from key primarytype:type:model:field_name in the array
-            obj = ContentTypes[deciphered[1]];
+            obj = {...ContentTypes[deciphered[1]]};
             obj.model = deciphered[2]; 
             obj.name = deciphered[3];
         }
