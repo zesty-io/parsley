@@ -191,7 +191,7 @@ class DropColumn extends React.Component {
                                 key={`layout:${lo.fullName}:${index}`} 
                                 removeMe={() => this.removeLayoutObject(lo.fullName)} 
                                 mode="layout" 
-                                id={`${lo.fullName}`} 
+                                id={`${lo.fullName}:${index}`} 
                                 name={lo.name} 
                                 primarytype={lo.primarytype} 
                                 type={lo.type} 
