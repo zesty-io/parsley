@@ -134,6 +134,7 @@ class ParsleyVisualLayout extends React.Component {
               <div className="shell">
                   <VisualLayoutContainer></VisualLayoutContainer>
                   <div className="pvlObjectBanks">
+                    
                     <LayoutBank objects={this.getLayoutObjects()}></LayoutBank>
                     <ContentBank content={this.getContentBank()}></ContentBank> 
                   </div>

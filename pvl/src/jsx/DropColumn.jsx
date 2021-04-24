@@ -34,7 +34,7 @@ const layoutObjectTarget = {
     // You will receive hover() even for items for which canDrop() is false
     const canDrop = monitor.canDrop()
   },
-
+ 
   drop(props, monitor, component) {
     //   console.log('drop function in layoutObjecttarget')
     //   console.log('props',props)
@@ -188,7 +188,7 @@ class DropColumn extends React.Component {
                             // index in the ID and KEY is used as position, but all for uniqueness
                             <LayoutObject 
                                 key={`layout:${lo.fullName}:${index}`} 
-                                removeMe={() => this.removeLayoutObject(lo.fullName)} 
+                                removeMe={() => this.removeLayoutObject(id)} 
                                 mode="layout" 
                                 id={id} 
                                 name={lo.name} 

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { DropTarget } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
+import DeleteArea from './DeleteArea'
 import PVLToolbar from './PVLToolbar'
 import DropColumn from './DropColumn'
 
@@ -15,6 +16,7 @@ class VisualLayoutContainer extends React.Component {
         return (
             <div className="pvlVisualLayoutContainer">
                <PVLToolbar title="Parlsey Visual Layout" helpText={helpText}></PVLToolbar>
+               <DeleteArea></DeleteArea>
                <DropColumn key="column:00"></DropColumn>
             </div>
         );

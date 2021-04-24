@@ -8,7 +8,6 @@ var dynamicType = ''
 
 const layoutObjectSource = {
   canDrag(props) {
-    //console.log(props)
     // You can disallow drag based on props
     return props.isReady
   },
@@ -28,7 +27,7 @@ const layoutObjectSource = {
       id: props.id,
       mode: props.mode
       }
-      console.log(item)
+      //console.log(item)
     
     return item
   },
@@ -53,7 +52,7 @@ const layoutObjectSource = {
   //  console.log('endDrag from layout object')
   //  console.log(item.id, dropResult)
   //  console.log('component',component)
-   
+    console.log('drop result', dropResult)
    // look to remove if we are in layout mode and have the removeMe function
    if(typeof(component.props.removeMe) === 'function'){
     component.props.removeMe()

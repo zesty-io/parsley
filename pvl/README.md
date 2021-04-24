@@ -28,8 +28,11 @@
 - [X] Make different layout designs for visual layout container
 - [X] Expand layoutobject to have different behaviors per type and content
 - [X] Add content references to the dropped columns
-- [ ] Move content objects around
-- [ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
+- [X] Move content objects around
+- [X] Make a layoutobject (columns) droppable once in the canvas
+- [ ] A proper way to delete items
+- [ ] Fix to error where dropping on itself deletes itself (race condition)
+- [ ] Create Code tab, Visual tab
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
 ## Considerations
