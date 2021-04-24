@@ -157,8 +157,9 @@ class LayoutObject extends React.Component {
                   let styles = {
                     flex: column.width
                   }
+                  let columnID = `${this.props.obj.fullName}:column:${column.width}:${this.props.obj.name}:${index}`
                   return (
-                      <DropColumn key={`column:${column.width}:${this.props.obj.name}:${index}`} droppable={column.droppable} style={styles}></DropColumn>
+                      <DropColumn key={columnID} id={columnID} droppable={column.droppable} style={styles}></DropColumn>
                   )
                 })}
                 

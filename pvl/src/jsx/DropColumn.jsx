@@ -104,6 +104,8 @@ class DropColumn extends React.Component {
         // You can be more specific and track enter/leave
         // shallowly, not including nested targets
         }
+
+
     }
 
     addToLayout = (itemString) => {
@@ -124,8 +126,10 @@ class DropColumn extends React.Component {
         }
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
-        obj.fullName = itemString
-        //console.log(obj)
+        let endPosition = this.state.layoutObjects.length // set to add to the end
+        // check if it already has a number
+        obj.fullName = itemString.match(/\d+$/) ? itemString :  `${itemString}:${endPosition}`;
+        
         this.addLayoutObject(obj);
     }
 
@@ -133,11 +137,11 @@ class DropColumn extends React.Component {
     // where we control order
     addLayoutObject(obj, pos=false){
         // default add
-        
+        console.log('Before:addLayoutObject',obj.fullName,obj)
         if(pos == false){
             this.setState({
                 layoutObjects: [...this.state.layoutObjects, obj] 
-            });
+            }); 
         // for inserting before an element, not tested yet
         } else {
             pos = pos - 1
@@ -145,13 +149,14 @@ class DropColumn extends React.Component {
                 layoutObjects: this.state.layoutObjects.splice(pos, 0, obj) 
             });
         }
-        console.log('adding to array', this.state.layoutObjects)
+        
+        console.log('After:addLayoutObject', this.state.layoutObjects)
        
     }
 
     removeLayoutObject(fullName){
         var newObjArr = []
-        console.log('running remove',fullName, this.state.layoutObjects)
+        console.log('removeLayoutObject',fullName, this.state.layoutObjects)
         this.state.layoutObjects.map(lo => {
             if(lo.fullName != fullName){
                 newObjArr.push(lo)
@@ -183,14 +188,14 @@ class DropColumn extends React.Component {
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
 
                     {this.state.layoutObjects.map((lo,index) => {
-                        let id = lo.fullName.match(/\d+$/) ? lo.fullName : `${lo.fullName}:${index}`;
+                        
                         return (
                             // index in the ID and KEY is used as position, but all for uniqueness
                             <LayoutObject 
                                 key={`layout:${lo.fullName}:${index}`} 
-                                removeMe={() => this.removeLayoutObject(id)} 
+                                removeMe={() => this.removeLayoutObject(lo.fullName)} 
                                 mode="layout" 
-                                id={id} 
+                                id={lo.fullName} 
                                 name={lo.name} 
                                 primarytype={lo.primarytype} 
                                 type={lo.type} 
@@ -198,12 +203,6 @@ class DropColumn extends React.Component {
                                 isReady="true" />
                         )
                     })}
-                
-                {/*<div className="message">
-                    {isOver && canDrop && <div>omg u there</div>}
-                    {!isOver && canDrop && <div>drop on me</div>}
-                    {isOver && !canDrop && <div>invalid drop</div>}
-                </div>*/}
             </div>
         );
     }
