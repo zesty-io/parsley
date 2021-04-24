@@ -51,6 +51,7 @@ class LayoutBank extends React.Component {
                                     key={lo.uid} 
                                     id={`design:${lo.type}:${key}`} 
                                     name={lo.name} 
+                                    location="bank"
                                     primarytype="design" 
                                     type={lo.type} 
                                     obj={lo} 

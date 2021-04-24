@@ -22,12 +22,21 @@ const layoutObjectSource = {
 
   beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
-    //console.log(props)
-    const item = { 
+    // begin drag
+    // console.log('begin drag')
+    // console.log(props)
+    // console.log(component)
+
+    var item = { 
       id: props.id,
-      mode: props.mode
+      mode: props.mode,
+      fromLocation: props.location,
+      component: component
       }
-      //console.log(item)
+    if(props.obj.model != undefined){
+      item.model = props.obj.model
+    }
+     // console.log(item)
     
     return item
   },
@@ -48,15 +57,16 @@ const layoutObjectSource = {
     // its drop() method.
     const dropResult = monitor.getDropResult()
 
-    // This is a good place to call some Flux action
-  //  console.log('endDrag from layout object')
-  //  console.log(item.id, dropResult)
-  //  console.log('component',component)
-    console.log('drop result', dropResult)
+    // This is a good place to call some Flux action 
+  
+  //  console.log("end drag objects", item, dropResult)
+  // //  console.log('component',component)
+  //   console.log('drop result', dropResult)
+  //   console.log(component.props.location, dropResult.fromLocation)
    // look to remove if we are in layout mode and have the removeMe function
-   if(typeof(component.props.removeMe) === 'function'){
-    component.props.removeMe()
-   }
+  //  if(typeof(component.props.removeMe) === 'function' && ( dropResult.fromLocation == undefined || dropResult.fromLocation.trim() != item.fromLocation.trim())){
+  //   //component.props.removeMe(props.id)
+  //  }
   }
 }
 
@@ -157,7 +167,7 @@ class LayoutObject extends React.Component {
                   let styles = {
                     flex: column.width
                   }
-                  let columnID = `${this.props.obj.fullName}:column:${column.width}:${this.props.obj.name}:${index}`
+                  let columnID = `${this.props.obj.fullName}-${column.width}:${this.props.obj.name}:${index}`
                   return (
                       <DropColumn key={columnID} id={columnID} droppable={column.droppable} style={styles}></DropColumn>
                   )

@@ -16,29 +16,25 @@
         background: white;
         //background: @zesty-dark-blue; // night coding
         .defaultBorderRadius();
+        overflow: hidden;
+        
     }
+
     .pvlObjectBanks{
         flex: 2;
         min-width: 380px;
         max-width: 460px;
-        //background: @zesty-field-blue;
         .defaultBorderRadius();
         margin-left: @defaultMargin;
     }
-    .pvlObjectBank{
-        .defaultBorderRadius();
-        display: flex;
-        max-width: 100%;
-        flex-wrap: wrap;
-        align-items: left;
-        
-    }
-   
+
     .pvlToolbar {
         background: @zesty-light-grey;
         border-bottom: 1px @zesty-light-grey solid;
         display: flex;
         margin-bottom: @defaultMargin;
+        position: relative;
+        z-index: 1;
         h1 {
             .zerod();
             font-size: 16px;

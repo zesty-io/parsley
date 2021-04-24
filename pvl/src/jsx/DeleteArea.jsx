@@ -42,7 +42,7 @@ const deleteTarget = {
 
     // Obtain the dragged item
     const item = monitor.getItem()
-    
+    item.component.props.removeMe()
     // You can also do nothing and return a drop result,
     // which will be available as monitor.getDropResult()
     // in the drag source's endDrag() method

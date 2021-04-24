@@ -15,9 +15,12 @@ class VisualLayoutContainer extends React.Component {
         let helpText = `Drag and Drop elements form the Content Bank and Layout Tools below.`
         return (
             <div className="pvlVisualLayoutContainer">
-               <PVLToolbar title="Parlsey Visual Layout" helpText={helpText}></PVLToolbar>
-               <DeleteArea></DeleteArea>
-               <DropColumn key="column:00"></DropColumn>
+               <PVLToolbar title="Parsley Visual Layout" helpText={helpText}></PVLToolbar>
+               <div className="pvlUtilities">
+                <DeleteArea></DeleteArea>
+               </div>
+                <DropColumn key="column:00" id="column:00"></DropColumn>
+               
             </div>
         );
     }

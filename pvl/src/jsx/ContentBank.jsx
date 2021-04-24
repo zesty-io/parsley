@@ -115,6 +115,7 @@ class ContentBank extends React.Component {
                                                         mode="bank"
                                                         id={`content:${field.type}:${model.name}:${field.name}`} 
                                                         name={field.name} 
+                                                        location="bank"
                                                         primarytype="content" 
                                                         type={field.type}  
                                                         obj={field}  

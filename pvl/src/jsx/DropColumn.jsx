@@ -37,7 +37,7 @@ const layoutObjectTarget = {
  
   drop(props, monitor, component) {
     //   console.log('drop function in layoutObjecttarget')
-    //   console.log('props',props)
+
     //   console.log('component',component)
       
      
@@ -48,17 +48,24 @@ const layoutObjectTarget = {
 
     // Obtain the dragged item
     const item = monitor.getItem()
+
+    console.log("item detection from drop column on drop", item)
+    console.log("current drop component props", props)
+    console.log("id compared", item.fromLocation, props.id)
+    component.addToLayout(item.id, item.fromLocation);
     
-    component.addToLayout(item.id);
-    // You can do something with it
-    //ChessActions.movePiece(item.fromPosition, props.position)
+    if(typeof(item.component.props.removeMe) === 'function' && item.fromLocation != props.id){
+        item.component.props.removeMe()
+    }
 
     // You can also do nothing and return a drop result,
     // which will be available as monitor.getDropResult()
     // in the drag source's endDrag() method
     return { 
         moved: true,
-        objName: item.id
+        objName: item.id,
+        fromLocation: item.fromLocation,
+        item: item
         }
   }
 }
@@ -108,10 +115,15 @@ class DropColumn extends React.Component {
 
     }
 
-    addToLayout = (itemString) => {
+    addToLayout = (itemString, fromLocation, position=false) => {
         
+        // ignore the if location is the same
+        if(this.props.id == fromLocation) {
+            return
+        }
+
         var deciphered = this.decipherItem(itemString)
-        console.log('adding',deciphered)
+        //console.log('adding',deciphered)
         var obj = {}
 
         // design objects have 3 items split from key primarytype:type:name in the array
@@ -130,14 +142,14 @@ class DropColumn extends React.Component {
         // check if it already has a number
         obj.fullName = itemString.match(/\d+$/) ? itemString :  `${itemString}:${endPosition}`;
         
-        this.addLayoutObject(obj);
+        this.addLayoutObject(obj,position);
     }
 
 
     // where we control order
     addLayoutObject(obj, pos=false){
         // default add
-        console.log('Before:addLayoutObject',obj.fullName,obj)
+        //console.log('Before:addLayoutObject',obj.fullName,obj)
         if(pos == false){
             this.setState({
                 layoutObjects: [...this.state.layoutObjects, obj] 
@@ -150,15 +162,16 @@ class DropColumn extends React.Component {
             });
         }
         
-        console.log('After:addLayoutObject', this.state.layoutObjects)
+        //console.log('After:addLayoutObject', this.state.layoutObjects)
        
     }
 
-    removeLayoutObject(fullName){
+    removeLayoutObject(objectID){
+
         var newObjArr = []
-        console.log('removeLayoutObject',fullName, this.state.layoutObjects)
+        console.log('removeLayoutObject',objectID, this.state.layoutObjects)
         this.state.layoutObjects.map(lo => {
-            if(lo.fullName != fullName){
+            if(lo.fullName != objectID){
                 newObjArr.push(lo)
             }
         })
@@ -183,10 +196,10 @@ class DropColumn extends React.Component {
         } else if(isOver && canDrop) {
             dropclass = 'pvlDropReady'
         }
-        
+        let locationID = this.props.id
         return connectDropTarget(
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
-
+                    
                     {this.state.layoutObjects.map((lo,index) => {
                         
                         return (
@@ -194,7 +207,9 @@ class DropColumn extends React.Component {
                             <LayoutObject 
                                 key={`layout:${lo.fullName}:${index}`} 
                                 removeMe={() => this.removeLayoutObject(lo.fullName)} 
+                                
                                 mode="layout" 
+                                location={locationID}
                                 id={lo.fullName} 
                                 name={lo.name} 
                                 primarytype={lo.primarytype} 
