@@ -30,8 +30,8 @@
 - [X] Add content references to the dropped columns
 - [X] Move content objects around
 - [X] Make a layoutobject (columns) droppable once in the canvas
-- [ ] A proper way to delete items
-- [ ] Fix to error where dropping on itself deletes itself (race condition)
+- [X] A proper way to delete items
+- [C] Fix to error where dropping on itself deletes itself (race condition)
 - [ ] Create Code tab, Visual tab
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
