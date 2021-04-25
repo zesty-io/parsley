@@ -10,11 +10,19 @@ import React, { Component } from 'react'
 class CodeOutput extends React.Component {
     constructor(props) {
         super(props);
+        this.textarea = React.createRef()
     } 
 
+    getCodeOutput(){
+        return 'code'
+    }
+
     render() {
-        
-        return <div></div>;
+        return ( 
+            <div className={this.props.selected == "code" ? `pvlCode pvlSelected` : 'pvlCode '}>
+                <textarea ref={this.textarea}  id="pvlCode" readOnly value={this.getCodeOutput()}></textarea>
+            </div>
+        );
     }
 }
 
