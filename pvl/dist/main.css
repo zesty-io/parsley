@@ -2,9 +2,9 @@
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm45xW4.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_cJD7g4.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
@@ -83,13 +83,34 @@
 }
 body,
 html {
-  background-color: #5b667d;
+  background-color: #1b202c;
   font-family: 'Roboto', sans-serif;
   font-size: 0.8em;
   margin: 0;
   padding: 0;
   color: #1b202c;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
+}
+.header {
+  display: flex;
+  width: 100%;
+  padding: 10px 0px;
+}
+.header div {
+  flex: 1;
+  text-align: right;
+}
+.header div img {
+  max-width: 160px;
+  padding: 10px 0px;
+}
+.header h1 {
+  flex: 3;
+  color: white;
+  letter-spacing: 1;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
 }
 input:focus,
 button:focus,
@@ -111,7 +132,7 @@ select:focus {
 .pvl .shell h6,
 .pvl .shell label {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
 }
 .pvl .shell .pvlVisualLayoutContainer {
   flex: 4;

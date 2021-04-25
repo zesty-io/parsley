@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Roboto:wght@400&display=swap';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
 @import 'https://raw.githubusercontent.com/zesty-io/design-system/master/core/src/colors.less';
 @import 'https://raw.githubusercontent.com/zesty-io/design-system/master/core/src/typography.less';
@@ -35,12 +35,33 @@
 
 // For the demo 
 body,html {
-    background-color: @zesty-grey;
+    background-color: @zesty-dark-blue;
     font-family: 'Roboto', sans-serif;
     font-size: .8em;
     .zerod();
     color: @zesty-dark-blue;
-    padding: @defaultPadding; 
+    padding: 0 @defaultPadding @defaultPadding @defaultPadding; 
+}
+.header{
+    display: flex;
+    width: 100%; 
+    padding: 10px 0px;
+}
+.header div {
+    flex: 1;
+    text-align: right;
+}
+.header div img {
+    max-width: 160px;
+    padding: 10px 0px;
+}
+.header h1 {
+    flex: 3;
+    color: white;  letter-spacing: 1;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+
 }
 // remove outline in chrome
 input:focus, button:focus, textarea:focus, select:focus{
