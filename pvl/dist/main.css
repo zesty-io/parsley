@@ -524,7 +524,7 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlCode {
   position: absolute;
   z-index: 0;
-  top: 70px;
+  top: 65px;
   left: 0px;
   right: 0px;
   bottom: 0px;

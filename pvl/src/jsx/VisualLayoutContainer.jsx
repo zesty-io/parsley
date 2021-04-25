@@ -96,11 +96,12 @@ class VisualLayoutContainer extends React.Component {
         }
         
         // if the keypath greater than 1 we need to the the path to the object's children 
+        let keypath = this.getKeyPath(tree, newParentID);
         // which we will store in
         if(keypath.length > 1){
             // get keypath, an array of keys which chained together accesses
             // the new parent id, note the returned array omits newParentID
-            let keypath = this.getKeyPath(tree, newParentID);
+            
             let objectPathString = 'tree';
             for (const element of keypath) {
                 objectPathString += `['${element}'].children`

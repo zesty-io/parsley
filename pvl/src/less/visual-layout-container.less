@@ -4,13 +4,14 @@
     align-items: stretch;
     position: relative;
     
+    
     .pvlToolbar {
         margin-bottom: 0;
     }
     .pvlCode{
         position: absolute;
         z-index: 0;
-        top: 70px;
+        top: 65px;
         left: 0px;
         right: 0px;
         bottom: 0px;
@@ -20,6 +21,7 @@
         overflow: hidden;
         background: @zesty-dark-blue;
         color: @zesty-white;
+        
         &.pvlSelected {
             z-index: 2;
         }
@@ -53,6 +55,7 @@
         background-color: white;
         position: relative;
         padding: @defaultPadding;
+        //border-right: 3px solid @zesty-tab-blue;
         &.pvlTargetHere{
             background: @zesty-yellow;
         }
