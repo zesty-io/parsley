@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: stretch;
     position: relative;
+    
     .pvlToolbar {
         margin-bottom: 0;
     }
@@ -15,6 +16,8 @@
         bottom: 0px;
         width: 100%;
         border: none;
+        border-radius: @defaultBorderRadius @defaultBorderRadius 0 0 ;
+        overflow: hidden;
         background: @zesty-dark-blue;
         color: @zesty-white;
         &.pvlSelected {
@@ -38,11 +41,10 @@
     .pvlUtilities{
         flex: 1;
         min-height: 36px;
-        background-color: @zesty-dark-blue;
+        background-color: transparent;
         position: relative;
     }
     .pvlDropColumn { 
-        //background: @zesty-dark-blue;
         opacity: .95;
         flex: 10;
         flex-grow: 100;

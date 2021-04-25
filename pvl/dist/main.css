@@ -116,7 +116,7 @@ select:focus {
 .pvl .shell .pvlVisualLayoutContainer {
   flex: 4;
   min-width: 100px;
-  background: white;
+  background: transparent;
   border-radius: 3px;
   overflow: hidden;
 }
@@ -196,18 +196,31 @@ select:focus {
 .pvl .pvlUtilities .pvlVisualTabBar {
   z-index: 1;
   background: #697a91;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
 }
 .pvl .pvlUtilities .pvlVisualTabBar button {
   border: none;
   height: 100%;
   background-color: transparent;
+  border-radius: 3px 3px 0 0;
+  padding: 0 10px;
+  font-size: 1.1em;
+  color: #1b202c;
+  font-weight: 600;
+}
+.pvl .pvlUtilities .pvlVisualTabBar button .fa {
+  margin-right: 4px;
+  color: #a7afbf;
 }
 .pvl .pvlUtilities .pvlVisualTabBar button:hover {
   background: #a3aebd;
   cursor: pointer;
+  color: #697a91;
 }
 .pvl .pvlUtilities .pvlVisualTabBar button.pvlSelected {
   background: white;
+  color: #697a91;
 }
 .pvl .pvlUtilities .pvlDeleteArea {
   background-color: transparent;
@@ -517,6 +530,8 @@ select:focus {
   bottom: 0px;
   width: 100%;
   border: none;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
   background: #1b202c;
   color: #eff5ff;
 }
@@ -538,7 +553,7 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlUtilities {
   flex: 1;
   min-height: 36px;
-  background-color: #1b202c;
+  background-color: transparent;
   position: relative;
 }
 .pvl .pvlVisualLayoutContainer .pvlDropColumn {

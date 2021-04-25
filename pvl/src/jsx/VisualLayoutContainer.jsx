@@ -177,8 +177,12 @@ class VisualLayoutContainer extends React.Component {
                 <PVLToolbar title="Parsley Visual Layout" helpText={helpText}></PVLToolbar>
                 <div className="pvlUtilities">
                     <div className="pvlVisualTabBar">
-                        <button className={this.state.selected == "visual" ? `pvlSelected` : ''} onClick={() => {this.changeTab('visual')} }>Visual Layout</button>
-                        <button className={this.state.selected == "code" ? `pvlSelected`: ''}  onClick={() => {this.changeTab('code')} }>Code Output</button>
+                        <button className={this.state.selected == "visual" ? `pvlSelected` : ''} onClick={() => {this.changeTab('visual')} }>
+                            <span className="fa fa-pen"></span><span>Visual Layout</span>
+                        </button>
+                        <button className={this.state.selected == "code" ? `pvlSelected`: ''}  onClick={() => {this.changeTab('code')} }>
+                            <span className="fa fa-code"></span><span>Code Output</span>
+                        </button>
                     </div> 
                     <DeleteArea></DeleteArea>
                 </div>
