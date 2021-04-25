@@ -31,37 +31,111 @@ class VisualLayoutContainer extends React.Component {
 
     removeFromTree = (parentID, childID) => {
         let tree = {...this.state.tree}
-        console.log('removing from tree')
+        console.log('removing',childID, 'from tree',tree)
+        let keypath = this.getKeyPath(tree, parentID);
+        console.log(keypath)
+        let objectPathString = 'tree';
+        for (const element of keypath) {
+           objectPathString += `['${element}'].children`
+        }
+        objectPathString += `['${parentID}'].children['${childID}']`
+
+        console.log('remove path', objectPathString)
+
+        eval(`delete(${objectPathString})`);
+        
         // search tree to remove the reference
         // find parent
         // delete child
     }
     /**     
-        buildTree gets pass around to child elements as a prop, it gets a 
+        buildTree gets passed around to DropColumn and LayoutObject components to call up VisualLayout
+        its called only in DropColumns add/remove object, which also is a call back. Those functions contain
+        the correct elements to populated needed data to build a tree that mimics the ui output
+
         newParentID (string) used to look up its insert position 
         oldParent (string) used to look up where it was so we can delete that reference (bank is new)
         elObj (object) full object of the elment to inject, this should include instrcution for build
+        note position is handled in the object, and dealth with after
 
     */
-    buildTree = (newParentID, oldParent, elObj, position) => {
+    buildTree = (newParentID, oldParent, elObj) => {
         
-        console.log(newParentID,oldParent,elObj,position)
+        //console.log(newParentID,oldParent,elObj)
+        let tree = {...this.state.tree}
 
         // if its not from the bank, search to remove it form somewhere else
-        if(oldParent != 'bank'){
+        if(oldParent != 'bank'){ 
             //search and remove from tree
         }
-        let tree = {...this.state.tree}
+        console.log('searching for',newParentID)
+        let keypath = this.getKeyPath(tree, newParentID);
+        console.log(keypath)
+        let objectPathString = 'tree';
+        for (const element of keypath) {
+           objectPathString += `['${element}'].children`
+        }
+        // need to clean up this path and cast the object successfully
+        objectPathString = objectPathString.slice(0, -9) // remove the ending .children
+        console.log(objectPathString)
         
-        console.log('buildtree', elObj)
+        if(keypath.length > 1){
+            eval(objectPathString).children = this.deepTreeAddRecursion(tree, newParentID, elObj)
+        } else {
+            tree = this.deepTreeAddRecursion(tree, newParentID, elObj)
+        }
+        //eval(objectPathString) = this.deepTreeAddRecursion(tree, newParentID, elObj)
+        
 
-        tree[newParentID].children[elObj.fullName] = elObj
         this.setState({
             tree: tree
         })
 
-        console.log(this.state.tree)
+        console.log("updated tree", this.state.tree)
+        return  true
     }
+
+    /*
+    * getKeyPath recursively searches through the tree object's keys with .children, return an array of the path to get there
+    * This is used to build a deep reference to set the
+    */
+    getKeyPath(tree, keyToSearch, keyMapArr=[]){
+        if(tree[keyToSearch] != undefined && tree[keyToSearch].children != undefined){
+            //keyMapArr.push(keyToSearch) the last key push isnt needed because deepTreeAddRecursion() already returns it
+            return keyMapArr
+        } else {
+            for (const [key, obj] of Object.entries(tree)) {
+                if(tree[key].children != undefined){
+                    keyMapArr.push(key)
+                    return this.getKeyPath(tree[key].children, keyToSearch, keyMapArr)
+                }
+            }
+        }
+    }
+
+    /*
+    * deepTreeAddRecursion 
+    * digs through the key to where to add the item, returns the children of the key it was added
+    * for anything beyond the root, getKeyPath is needed to dynamically find the child which the returned
+    * tree will be assigned to
+    */
+
+    deepTreeAddRecursion(tree, keyToSearch, objectToAdd){
+        if(tree[keyToSearch] != undefined && tree[keyToSearch].children != undefined){
+            tree[keyToSearch].children[objectToAdd.fullName] = objectToAdd
+            //console.log('hit')
+            return tree
+        } else {
+            for (const [key, obj] of Object.entries(tree)) {
+                if(tree[key].children != undefined){
+                    //console.log('inside')
+                    return this.deepTreeAddRecursion(tree[key].children, keyToSearch, objectToAdd)
+                }
+            }
+        }
+
+    }
+
     codeValue() { 
         
         return 'Code here'; 

@@ -122,29 +122,44 @@ class DropColumn extends React.Component {
             return
         }
         
-
+        // split the string up to determine the oject type
         var deciphered = this.decipherItem(itemString)
         //console.log('adding',deciphered)
         var obj = {}
+        let endPosition = this.state.layoutObjects.length // set to add to the end
 
         // design objects have 3 items split from key primarytype:type:name in the array
         if(deciphered[0] == 'design'){
             obj = {...DesignObjects[deciphered[2]]};
             obj.name = deciphered[2];
-            obj.children = {}
+            obj.position = (position != false) ? position : endPosition;
+            // check if it already has a number
+            obj.fullName = itemString.match(/\d+$/) ? itemString :  `${itemString}:${obj.position}`;
+            // setup the children if type of obj is columns
+            if(obj.type == 'columns'){
+                obj.children = {}
+                obj.columns.map( (column,index) => {
+                    let columnID = `${obj.fullName}-${column.width}:${obj.name}:${index}`
+                    column.children = {}
+                    obj.children[columnID] = column
+                })
+            }
+
+            
         } else {
             // content objects have 4 items split from key primarytype:type:model:field_name in the array
             obj = {...ContentTypes[deciphered[1]]};
             obj.model = deciphered[2]; 
             obj.name = deciphered[3];
+            obj.position = (position != false) ? position : endPosition;
+            // check if it already has a number
+            obj.fullName = itemString.match(/\d+$/) ? itemString :  `${itemString}:${obj.position}`;
         }
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
-        let endPosition = this.state.layoutObjects.length // set to add to the end
-        // check if it already has a number
-        obj.fullName = itemString.match(/\d+$/) ? itemString :  `${itemString}:${endPosition}`;
         
-        this.props.buildTree(this.props.id, fromLocation, obj, position)
+        
+        this.props.buildTree(this.props.id, fromLocation, obj)
         this.addLayoutObject(obj,position);
     }
 
@@ -164,7 +179,7 @@ class DropColumn extends React.Component {
         } else {
             pos = pos - 1
             this.setState({
-                layoutObjects: this.state.layoutObjects.splice(pos, 0, obj) 
+                layoutObjects: [...this.state.layoutObjects].splice(pos, 0, obj) 
             });
         }
         
