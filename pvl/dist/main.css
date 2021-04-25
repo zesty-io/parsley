@@ -523,6 +523,18 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlCode.pvlSelected {
   z-index: 2;
 }
+.pvl .pvlVisualLayoutContainer .pvlCode textarea {
+  position: absolute;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  background: #1b202c;
+  color: #75bf25;
+  font-family: 'Courier New', Courier, monospace;
+}
 .pvl .pvlVisualLayoutContainer .pvlUtilities {
   flex: 1;
   min-height: 36px;

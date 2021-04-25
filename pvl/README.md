@@ -33,7 +33,8 @@
 - [X] A proper way to delete items
 - [X] Fix to error where dropping on itself deletes itself (race condition)
 - [X] Create Code tab, Visual tab bar
-- [ ] build tree function which is passed around to build a large tree for code building
+- [X] build tree function which is passed around to build a large tree for code building
+- [ ] Code Output component - Recieves Tree and outputs HTML with parsley
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
 ## Considerations
