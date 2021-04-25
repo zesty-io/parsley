@@ -18,12 +18,7 @@ const deleteTarget = {
   },
 
   hover(props, monitor, component) {
-    // This is fired very often and lets you perform side effects
-    // in response to the hover. You can't handle enter and leave
-    // here—if you need them, put monitor.isOver() into collect() so you
-    // can use componentDidUpdate() to handle enter/leave.
-
-    // You can access the coordinates if you need them
+   
     const clientOffset = monitor.getClientOffset()
     const componentRect = findDOMNode(component).getBoundingClientRect()
 
@@ -42,13 +37,14 @@ const deleteTarget = {
 
     // Obtain the dragged item
     const item = monitor.getItem()
+    // always run delete on it
     item.component.props.removeMe()
     // You can also do nothing and return a drop result,
     // which will be available as monitor.getDropResult()
     // in the drag source's endDrag() method
     return { 
-        moved: true,
-        objName: item.id
+        deleted: true,
+        itemDelete: item
         }
   }
 }
@@ -106,7 +102,7 @@ class DeleteArea extends React.Component {
         
         return connectDropTarget(
             <div className={`pvlDeleteArea ${dropclass}`} >
-                <div className="message">
+                <div className="pvlDeleteHelperText">
                     {isOver && canDrop && <div>Release to Delete</div>}
                     {!isOver && canDrop && <div>Drop here to Delete</div>}
                     {!isOver && !canDrop && <div>Drop here to Delete</div>}

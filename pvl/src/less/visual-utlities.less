@@ -1,0 +1,46 @@
+.pvlUtilities{
+    .pvlDeleteArea, .pvlVisualTabBar{
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        position: absolute;
+    }
+    .pvlVisualTabBar{
+        z-index: 1;
+        background: @zesty-tab-blue;
+        button {
+            border: none;
+            height: 100%; 
+            background-color: transparent;
+            &:hover{
+                background: lighten(@zesty-tab-blue,20%);
+                cursor: pointer;
+            }
+            &.pvlSelected{
+                background: white;
+            }
+        }
+    }
+    .pvlDeleteArea {
+        background-color: transparent;
+        width: 100%;
+       
+        color: white;
+        font-size: 1.4em;
+        text-align: center;
+        
+        z-index: 0;
+        
+        &.pvlTargetHere{
+            z-index: 2;
+            background: @zesty-orange;
+        }
+
+        &.pvlDropReady{
+            z-index: 2;
+            background: @zesty-red;
+
+        }
+    }
+}

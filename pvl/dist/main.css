@@ -185,21 +185,45 @@ select:focus {
 .pvl .shell .pvlHelp:hover .pvlHelpText {
   display: block;
 }
-.pvl .pvlDeleteArea {
-  background: #e53c05;
-  width: 100%;
+.pvl .pvlUtilities .pvlDeleteArea,
+.pvl .pvlUtilities .pvlVisualTabBar {
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  color: white;
-  font-size: 24px;
-  text-align: center;
   position: absolute;
+}
+.pvl .pvlUtilities .pvlVisualTabBar {
+  z-index: 1;
+  background: #697a91;
+}
+.pvl .pvlUtilities .pvlVisualTabBar button {
+  border: none;
+  height: 100%;
+  background-color: transparent;
+}
+.pvl .pvlUtilities .pvlVisualTabBar button:hover {
+  background: #a3aebd;
+  cursor: pointer;
+}
+.pvl .pvlUtilities .pvlVisualTabBar button.pvlSelected {
+  background: white;
+}
+.pvl .pvlUtilities .pvlDeleteArea {
+  background-color: transparent;
+  width: 100%;
+  color: white;
+  font-size: 1.4em;
+  text-align: center;
   z-index: 0;
 }
-.pvl .pvlDeleteArea.pvlDragging {
-  z-index: 1;
+.pvl .pvlUtilities .pvlDeleteArea.pvlTargetHere {
+  z-index: 2;
+  background: #f17829;
+}
+.pvl .pvlUtilities .pvlDeleteArea.pvlDropReady {
+  z-index: 2;
+  background: #e53c05;
 }
 .pvl .pvlLayoutBank button {
   background-color: transparent;
@@ -478,10 +502,26 @@ select:focus {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  position: relative;
   /* design for different object types */
 }
 .pvl .pvlVisualLayoutContainer .pvlToolbar {
   margin-bottom: 0;
+}
+.pvl .pvlVisualLayoutContainer .pvlCode {
+  position: absolute;
+  z-index: 0;
+  top: 70px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  border: none;
+  background: #1b202c;
+  color: #eff5ff;
+}
+.pvl .pvlVisualLayoutContainer .pvlCode.pvlSelected {
+  z-index: 2;
 }
 .pvl .pvlVisualLayoutContainer .pvlUtilities {
   flex: 1;
@@ -490,9 +530,13 @@ select:focus {
   position: relative;
 }
 .pvl .pvlVisualLayoutContainer .pvlDropColumn {
+  opacity: 0.95;
   flex: 10;
   flex-grow: 100;
   flex-basis: 100%;
+  z-index: 1;
+  background-color: white;
+  position: relative;
   padding: 10px;
 }
 .pvl .pvlVisualLayoutContainer .pvlDropColumn.pvlTargetHere {

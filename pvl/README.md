@@ -32,7 +32,7 @@
 - [X] Make a layoutobject (columns) droppable once in the canvas
 - [X] A proper way to delete items
 - [C] Fix to error where dropping on itself deletes itself (race condition)
-- [ ] Create Code tab, Visual tab
+- [ ] Create Code tab, Visual tab bar
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
 ## Considerations
