@@ -23,21 +23,17 @@ const layoutObjectSource = {
   beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
     // begin drag
-    // console.log('begin drag')
-    // console.log(props)
-    // console.log(component)
 
     var item = { 
       id: props.id,
       mode: props.mode,
       fromLocation: props.location,
       component: component
-      }
+    }
     if(props.obj.model != undefined){
       item.model = props.obj.model
     }
-     // console.log(item)
-    
+
     return item
   },
 

@@ -70,23 +70,6 @@ class DeleteArea extends React.Component {
         super(props);
 
     }
-    
-    componentDidUpdate(prevProps) { 
-       
-        if (!prevProps.isOver && this.props.isOver) {
-        // You can use this as enter handler
-            //alert('entered')
-        }
-
-        if (prevProps.isOver && !this.props.isOver) {
-        // You can use this as leave handler
-        }
-
-        if (prevProps.isOverCurrent && !this.props.isOverCurrent) {
-        // You can be more specific and track enter/leave
-        // shallowly, not including nested targets
-        }
-    }
 
     render() {
 

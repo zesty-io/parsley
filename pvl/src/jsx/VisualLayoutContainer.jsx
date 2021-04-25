@@ -28,14 +28,8 @@ class VisualLayoutContainer extends React.Component {
         console.log('buildtree', element)
     }
     codeValue() { 
-        console.log('inner',this.baseColumn)
-        if(this.baseColumn.current !== null){
-            const el = this.baseColumn.current.decoratedRef.current;
-            console.log('el', el);
-            console.log('el_inner', el.innerHTML);
-            console.log(this.baseColumn.current.props.children)
-        }
-        return (this.baseColumn.current !== null) ? this.baseColumn.current.innerHTML : ''; 
+        
+        return 'Code here'; 
     }
 
     render() {

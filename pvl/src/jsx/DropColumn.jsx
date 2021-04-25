@@ -49,9 +49,9 @@ const layoutObjectTarget = {
     // Obtain the dragged item
     const item = monitor.getItem()
 
-    console.log("item detection from drop column on drop", item)
-    console.log("current drop component props", props)
-    console.log("id compared", item.fromLocation, props.id)
+    // console.log("item detection from drop column on drop", item)
+    // console.log("current drop component props", props)
+    // console.log("id compared", item.fromLocation, props.id)
     component.addToLayout(item.id, item.fromLocation);
     
     if(typeof(item.component.props.removeMe) === 'function' && item.fromLocation != props.id){
@@ -172,7 +172,7 @@ class DropColumn extends React.Component {
     removeLayoutObject(objectID){
 
         var newObjArr = []
-        console.log('removeLayoutObject',objectID, this.state.layoutObjects)
+        //console.log('removeLayoutObject',objectID, this.state.layoutObjects)
         this.state.layoutObjects.map(lo => {
             if(lo.fullName != objectID){
                 newObjArr.push(lo)
