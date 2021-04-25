@@ -34,6 +34,9 @@
 - [X] Fix to error where dropping on itself deletes itself (race condition)
 - [X] Create Code tab, Visual tab bar
 - [X] build tree function which is passed around to build a large tree for code building
+- [X] Clean up presentation
+- [ ] Fix tertiary drop error with tree building
+- [ ] Design the drop area
 - [ ] Code Output component - Recieves Tree and outputs HTML with parsley
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 

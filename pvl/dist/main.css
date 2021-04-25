@@ -89,7 +89,7 @@ html {
   margin: 0;
   padding: 0;
   color: #1b202c;
-  padding: 0 10px 10px 10px;
+  padding: 0 20px 10px 20px;
 }
 .header {
   display: flex;
@@ -253,7 +253,7 @@ select:focus {
 }
 .pvl .pvlUtilities .pvlDeleteArea.pvlTargetHere {
   z-index: 2;
-  background: #f17829;
+  background: black;
 }
 .pvl .pvlUtilities .pvlDeleteArea.pvlDropReady {
   z-index: 2;
@@ -588,10 +588,10 @@ select:focus {
   padding: 10px;
 }
 .pvl .pvlVisualLayoutContainer .pvlDropColumn.pvlTargetHere {
-  background: #fffde2;
+  background: #c0ea93;
 }
 .pvl .pvlVisualLayoutContainer .pvlDropColumn.pvlDropReady {
-  background: #75bf25;
+  background: #8fda3d;
 }
 .pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlLayout {
   /* images */
