@@ -204,7 +204,7 @@ select:focus {
   height: 100%;
   background-color: transparent;
   border-radius: 3px 3px 0 0;
-  padding: 0 10px;
+  padding: 0 15px;
   font-size: 1.1em;
   color: #1b202c;
   font-weight: 600;
