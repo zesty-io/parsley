@@ -10,11 +10,16 @@ import DropColumn from './DropColumn'
 class VisualLayoutContainer extends React.Component {
     constructor(props) {
         super(props);
+        let rootColumnName = `layout:root:column:0`
+        let tree = {}
+        tree[rootColumnName] = {
+                            name: rootColumnName,
+                            children: {}
+                            }
         this.state = {
-            selected: 'visual', 
-            tree:{}
-
-            
+            selected: 'visual',
+            rootColumnName:  rootColumnName,
+            tree: tree
         }
         this.baseColumn = React.createRef();
     }
@@ -23,9 +28,39 @@ class VisualLayoutContainer extends React.Component {
             selected: name
         })
     }
-    buildTree(element){
+
+    removeFromTree = (parentID, childID) => {
         let tree = {...this.state.tree}
-        console.log('buildtree', element)
+        console.log('removing from tree')
+        // search tree to remove the reference
+        // find parent
+        // delete child
+    }
+    /**     
+        buildTree gets pass around to child elements as a prop, it gets a 
+        newParentID (string) used to look up its insert position 
+        oldParent (string) used to look up where it was so we can delete that reference (bank is new)
+        elObj (object) full object of the elment to inject, this should include instrcution for build
+
+    */
+    buildTree = (newParentID, oldParent, elObj, position) => {
+        
+        console.log(newParentID,oldParent,elObj,position)
+
+        // if its not from the bank, search to remove it form somewhere else
+        if(oldParent != 'bank'){
+            //search and remove from tree
+        }
+        let tree = {...this.state.tree}
+        
+        console.log('buildtree', elObj)
+
+        tree[newParentID].children[elObj.fullName] = elObj
+        this.setState({
+            tree: tree
+        })
+
+        console.log(this.state.tree)
     }
     codeValue() { 
         
@@ -33,8 +68,10 @@ class VisualLayoutContainer extends React.Component {
     }
 
     render() {
+
         let helpText = `Drag and Drop elements form the Content Bank and Layout Tools below.`
-        let rootColumnName = `layout:root:column:0`
+        
+        
         return (
             <div className="pvlVisualLayoutContainer">
                 <PVLToolbar title="Parsley Visual Layout" helpText={helpText}></PVLToolbar>
@@ -46,7 +83,7 @@ class VisualLayoutContainer extends React.Component {
                     <DeleteArea></DeleteArea>
                 </div>
                 
-                <DropColumn buildTree={() => this.buildTree(rootColumnName,{} )} ref={this.baseColumn} key={rootColumnName} id={rootColumnName} droppable="true"></DropColumn>
+                <DropColumn buildTree={this.buildTree} removeFromTree={this.removeFromTree} ref={this.baseColumn} key={this.state.rootColumnName} id={this.state.rootColumnName} droppable="true"></DropColumn>
                 <textarea className={this.state.selected == "code" ? `pvlCode pvlSelected` : 'pvlCode '} id="pvlCode" defaultValue={this.codeValue()}></textarea>
 
             </div>

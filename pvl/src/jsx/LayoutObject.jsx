@@ -13,8 +13,6 @@ const layoutObjectSource = {
   },
 
   isDragging(props, monitor) {
-    // If your component gets unmounted while dragged
-    // (like a card in Kanban board dragged between lists)
     // you can implement something like this to keep its
     // appearance dragged:
     return monitor.getItem().id === props.id
@@ -165,7 +163,7 @@ class LayoutObject extends React.Component {
                   }
                   let columnID = `${this.props.obj.fullName}-${column.width}:${this.props.obj.name}:${index}`
                   return (
-                      <DropColumn buildTree={() => this.props.buildTree(columnID, column)} key={columnID} id={columnID} droppable={column.droppable} style={styles}></DropColumn>
+                      <DropColumn removeFromTree={this.props.removeFromTree} buildTree={this.props.buildTree} key={columnID} id={columnID} droppable={column.droppable} style={styles}></DropColumn>
                   )
                 })}
                 

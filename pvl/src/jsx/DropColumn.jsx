@@ -121,6 +121,7 @@ class DropColumn extends React.Component {
         if(this.props.id == fromLocation) {
             return
         }
+        
 
         var deciphered = this.decipherItem(itemString)
         //console.log('adding',deciphered)
@@ -130,6 +131,7 @@ class DropColumn extends React.Component {
         if(deciphered[0] == 'design'){
             obj = {...DesignObjects[deciphered[2]]};
             obj.name = deciphered[2];
+            obj.children = {}
         } else {
             // content objects have 4 items split from key primarytype:type:model:field_name in the array
             obj = {...ContentTypes[deciphered[1]]};
@@ -142,6 +144,7 @@ class DropColumn extends React.Component {
         // check if it already has a number
         obj.fullName = itemString.match(/\d+$/) ? itemString :  `${itemString}:${endPosition}`;
         
+        this.props.buildTree(this.props.id, fromLocation, obj, position)
         this.addLayoutObject(obj,position);
     }
 
@@ -170,7 +173,7 @@ class DropColumn extends React.Component {
     }
 
     removeLayoutObject(objectID){
-
+        
         var newObjArr = []
         //console.log('removeLayoutObject',objectID, this.state.layoutObjects)
         this.state.layoutObjects.map(lo => {
@@ -178,6 +181,7 @@ class DropColumn extends React.Component {
                 newObjArr.push(lo)
             }
         })
+        this.props.removeFromTree(this.props.id,objectID)
         this.setState({
             layoutObjects: newObjArr
         })
@@ -214,7 +218,8 @@ class DropColumn extends React.Component {
                             <LayoutObject 
                                 key={`layout:${lo.fullName}:${index}`} 
                                 removeMe={() => this.removeLayoutObject(lo.fullName)} 
-                                buildTree={() => this.props.buildTree(lo.fullName,lo)}
+                                buildTree={this.props.buildTree}
+                                removeFromTree={this.props.removeFromTree}
                                 mode="layout" 
                                 location={locationID}
                                 id={lo.fullName} 
