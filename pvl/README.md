@@ -31,8 +31,9 @@
 - [X] Move content objects around
 - [X] Make a layoutobject (columns) droppable once in the canvas
 - [X] A proper way to delete items
-- [C] Fix to error where dropping on itself deletes itself (race condition)
-- [ ] Create Code tab, Visual tab bar
+- [X] Fix to error where dropping on itself deletes itself (race condition)
+- [X] Create Code tab, Visual tab bar
+- [ ] build tree function which is passed around to build a large tree for code building
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
 ## Considerations

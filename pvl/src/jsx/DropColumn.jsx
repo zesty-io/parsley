@@ -148,6 +148,9 @@ class DropColumn extends React.Component {
 
     // where we control order
     addLayoutObject(obj, pos=false){
+
+        // add to master tree, if columns, need to split each here
+
         // default add
         //console.log('Before:addLayoutObject',obj.fullName,obj)
         if(pos == false){
@@ -179,6 +182,9 @@ class DropColumn extends React.Component {
             layoutObjects: newObjArr
         })
     }
+    isBaseDropColumn(){
+        return this.props.id == 'layout:root:column:0'
+    }
 
     decipherItem(itemString){
         
@@ -197,6 +203,7 @@ class DropColumn extends React.Component {
             dropclass = 'pvlDropReady'
         }
         let locationID = this.props.id
+
         return connectDropTarget(
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
                     
@@ -207,7 +214,7 @@ class DropColumn extends React.Component {
                             <LayoutObject 
                                 key={`layout:${lo.fullName}:${index}`} 
                                 removeMe={() => this.removeLayoutObject(lo.fullName)} 
-                                
+                                buildTree={() => this.props.buildTree(lo.fullName,lo)}
                                 mode="layout" 
                                 location={locationID}
                                 id={lo.fullName} 
