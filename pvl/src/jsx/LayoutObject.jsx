@@ -163,7 +163,14 @@ class LayoutObject extends React.Component {
                   }
                   let columnID = `${this.props.obj.fullName}-${column.width}:${this.props.obj.name}:${index}`
                   return (
-                      <DropColumn removeFromTree={this.props.removeFromTree} buildTree={this.props.buildTree} key={columnID} id={columnID} droppable={column.droppable} style={styles}></DropColumn>
+                      <DropColumn 
+                        removeFromTree={this.props.removeFromTree} 
+                        buildTree={this.props.buildTree} 
+                        key={columnID} 
+                        id={columnID} 
+                        droppable={column.droppable} 
+                        style={styles}>
+                        </DropColumn>
                   )
                 })}
                 

@@ -15,7 +15,7 @@ import CodeOutput from './CodeOutput'
 class VisualLayoutContainer extends React.Component {
     constructor(props) {
         super(props);
-        // sets up the first object in our tree
+        // sets up the first child object (root) in our tree
         // tree is fed to the CodeOutput component for creating HTML output
         let rootColumnName = `layout:root:column:0`
         let tree = {}
@@ -49,12 +49,12 @@ class VisualLayoutContainer extends React.Component {
         @childID (string) ID of child key
      */
 
-    removeFromTree = (parentID, childID) => {
+    removeFromTree = async (parentID, childID) => {
         // this ends up being referenced dyanmically in a string which is EVAL'd
         let tree = {...this.state.tree}
-
+        console.log("------- remove from tree ---------");
         // gets each key needed to access the parent (doesnt return parent as a key)
-        let keypath = this.getKeyPath(tree, parentID);
+        const keypath = await this.getKeyPath(tree, parentID);
         // build out the target path for the object
         let objectPathString = 'tree';
         for (const element of keypath) {
@@ -84,7 +84,7 @@ class VisualLayoutContainer extends React.Component {
         note position is handled in the object, and dealt with after by the code output component
 
     */
-    buildTree = (newParentID, oldParent, elObj) => {
+     buildTree = async (newParentID, oldParent, elObj) =>  {
         
         // access tree in a temp derefered object
         let tree = {...this.state.tree}
@@ -94,10 +94,13 @@ class VisualLayoutContainer extends React.Component {
             //search and remove from tree
             // this is handled care of through a call bqk
         }
-        
+        console.log("------- buildTree ---------");
+        console.log("buildTree",newParentID, oldParent)
         // if the keypath greater than 1 we need to the the path to the object's children 
-        let keypath = this.getKeyPath(tree, newParentID);
-        // which we will store in
+        const keypath = await this.getKeyPath(tree, newParentID);
+        
+        console.log('keypath result is built tree',keypath);
+        // which we will store in 
         if(keypath.length > 1){
             // get keypath, an array of keys which chained together accesses
             // the new parent id, note the returned array omits newParentID
@@ -120,6 +123,7 @@ class VisualLayoutContainer extends React.Component {
         this.setState({
             tree: tree
         })
+        
 
     }
 
@@ -135,18 +139,30 @@ class VisualLayoutContainer extends React.Component {
         @return Array 
     
     */
-    getKeyPath(tree, keyToSearch, keyMapArr=[]){
-        if(tree[keyToSearch] != undefined && tree[keyToSearch].children != undefined){
-            //keyMapArr.push(keyToSearch) the last key push isnt needed because deepTreeAddRecursion() already returns it
-            return keyMapArr
-        } else {
-            for (const [key, obj] of Object.entries(tree)) {
-                if(tree[key].children != undefined){
-                    keyMapArr.push(key)
-                    return this.getKeyPath(tree[key].children, keyToSearch, keyMapArr)
-                }
+     getKeyPath = async (childrenTree, keyToSearch) => {
+        var finalArray = []
+        // this checks each child (1 or 100) for a hit
+        async function iter(childrenTree, keyToSearch, keyMapArr=[]){
+            console.log(`getKeyPath`, keyToSearch, keyMapArr, childrenTree)
+            if(childrenTree.hasOwnProperty(keyToSearch) ){ //&& childrenTree[keyToSearch].hasOwnProperty('children')
+                //keyMapArr.push(keyToSearch) the last key push isnt needed because deepTreeAddRecursion() already returns it
+                console.log(`** HIT ** getKeyPath hit ${keyToSearch}`,childrenTree, keyMapArr)
+                finalArray = keyMapArr
+            } 
+            if(Object.keys(childrenTree).length > 0){
+                // if not hit, loop through each child and recurse
+                for (const [key, obj] of Object.entries(childrenTree)) {
+                    console.log('keypathiterating', key, obj)
+                    if(obj.hasOwnProperty('children')){
+                        await iter(obj.children, keyToSearch, [...keyMapArr, key]) // we add the key to the array here instead of pushing on the main one
+                    }
+                } 
             }
         }
+        
+        await iter(childrenTree, keyToSearch, [])
+        return finalArray;
+      
     }
 
     /*
