@@ -12,9 +12,25 @@ class CodeOutput extends React.Component {
         super(props);
         this.textarea = React.createRef()
     } 
+    buildHTMLTree = (tree) => {
+        let html = ''
+        function iter(children){
+            for (const [key, obj] of Object.entries(children)) {
+                console.log(key,obj);
+                if(obj.hasOwnProperty('html')){
+                    html += `\n${obj.html}`
+                }
+                if(obj.hasOwnProperty('children')){
+                    iter(obj.children)
+                }
+            } 
+        }
+        iter(tree)
+        return html
 
+    }
     getCodeOutput(){
-        return 'code'
+        return this.buildHTMLTree(this.props.tree);
     }
 
     render() {

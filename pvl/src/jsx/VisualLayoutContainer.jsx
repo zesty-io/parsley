@@ -112,7 +112,7 @@ class VisualLayoutContainer extends React.Component {
             // remove the ending .children
             objectPathString = objectPathString.slice(0, -9) 
             // setup the new children
-            eval(objectPathString).children = this.deepTreeAddRecursion(tree, newParentID, elObj)
+            // eval(objectPathString).children = this.deepTreeAddRecursion(tree, newParentID, elObj)
 
         // if the keypath is 1, its the root, so no recursion needed
         } else {
@@ -143,16 +143,16 @@ class VisualLayoutContainer extends React.Component {
         var finalArray = []
         // this checks each child (1 or 100) for a hit
         async function iter(childrenTree, keyToSearch, keyMapArr=[]){
-            console.log(`getKeyPath`, keyToSearch, keyMapArr, childrenTree)
+            //console.log(`getKeyPath`, keyToSearch, keyMapArr, childrenTree)
             if(childrenTree.hasOwnProperty(keyToSearch) ){ //&& childrenTree[keyToSearch].hasOwnProperty('children')
                 //keyMapArr.push(keyToSearch) the last key push isnt needed because deepTreeAddRecursion() already returns it
-                console.log(`** HIT ** getKeyPath hit ${keyToSearch}`,childrenTree, keyMapArr)
+                //console.log(`** HIT ** getKeyPath hit ${keyToSearch}`,childrenTree, keyMapArr)
                 finalArray = keyMapArr
             } 
             if(Object.keys(childrenTree).length > 0){
                 // if not hit, loop through each child and recurse
                 for (const [key, obj] of Object.entries(childrenTree)) {
-                    console.log('keypathiterating', key, obj)
+                    //console.log('keypathiterating', key, obj)
                     if(obj.hasOwnProperty('children')){
                         await iter(obj.children, keyToSearch, [...keyMapArr, key]) // we add the key to the array here instead of pushing on the main one
                     }
