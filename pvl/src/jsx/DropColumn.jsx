@@ -114,7 +114,12 @@ class DropColumn extends React.Component {
 
 
     }
+    
+    /**
+    addToLayout is where we add the object to the visual layout. Here we build out the object
+    from the Keyed Object references (ContentTypes and Design Objects)
 
+    */
     addToLayout = (itemString, fromLocation, position=false) => {
         
         // ignore the if location is the same
@@ -124,7 +129,6 @@ class DropColumn extends React.Component {
         
         // split the string up to determine the oject type
         var deciphered = this.decipherItem(itemString)
-        //console.log('adding',deciphered)
         var obj = {}
         let endPosition = this.state.layoutObjects.length // set to add to the end
 
