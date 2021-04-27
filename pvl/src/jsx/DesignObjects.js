@@ -60,19 +60,19 @@ export const DesignObjects = {
         columns: [
           {
             width: '1',
-            html: '<div style="">*</div>',
+            html: '<div style="flex:2" class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           },
           {
             width: '2',
-            html: '<div>*</div>',
+            html: '<div style="flex:2" class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           },
           {
             width: '2',
-            html: '<div>*</div>',
+            html: '<div style="flex:2" class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           }
@@ -102,19 +102,19 @@ export const DesignObjects = {
         name: '2 Columns',
         type: 'columns',
         classes: 'row',
-        html: '<div>*</div>',
+        html: '<div class="pvlRow">*</div>',
         preview: '<div style="display:flex"><div style="flex:4"></div><div style="flex:2"></div></div>',
         droppable: false,
         columns: [
           {
             width: '2',
-            html: '<div>*</div>',
+            html: '<div class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           },
           {
             width: '3', 
-            html: '<div>*</div>',
+            html: '<div class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           },

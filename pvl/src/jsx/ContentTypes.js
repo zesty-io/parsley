@@ -5,6 +5,7 @@ export const ContentTypes = {
     name: 'Image(s)', 
     type: 'content',
     description: 'Reference to image ZUIDs in Zesty.io',
+    html: '<img src="*" alt="*" />',
     draggable: true
   },
   images: {
@@ -12,12 +13,14 @@ export const ContentTypes = {
     name: 'Image(s)', 
     type: 'content',
     description: 'Reference to image ZUIDs in Zesty.io',
+    html: '<img src="*" alt="*" />',
     draggable: true
   },
   textarea: {
     icon : 'align-justify',
     name: 'Text Area',
     type: 'content',
+    html: '<div class="pvlTextarea">*</div>',
     description: 'Mixed Plain and Rich Text',
     draggable: true
   },
@@ -25,6 +28,7 @@ export const ContentTypes = {
     icon : 'text-height',
     name: 'Text',
     type: 'content',
+    html: '<h1 class="pvlHeader">*</h1>',
     description: 'Plain Text',
     draggable: true
   },
@@ -32,6 +36,7 @@ export const ContentTypes = {
     icon: 'outdent',
     name: 'Rich Text',
     type: 'content',
+    html: '<div class="pvlRichtext">*</div>',
     description: 'Text with HTML references.',
     draggable: true
   },
@@ -39,6 +44,7 @@ export const ContentTypes = {
     icon: 'outdent',
     name: 'Rich Text',
     type: 'content',
+    html: '<div class="pvlRichtext">*</div>',
     description: 'Text with HTML references.',
     draggable: true
   },
@@ -46,6 +52,7 @@ export const ContentTypes = {
     icon: 'outdent',
     name: 'Rich Text',
     type: 'content',
+    html: '<div class="pvlRichtext">*</div>',
     description: 'Text with HTML references.',
     draggable: true
   },
@@ -53,6 +60,7 @@ export const ContentTypes = {
     icon: 'outdent',
     name: 'Rich Text',
     type: 'content',
+    html: '<div class="pvlRichtext">*</div>',
     description: 'Text with HTML references.',
     draggable: true
   },
@@ -60,6 +68,7 @@ export const ContentTypes = {
     icon: 'link',
     name: 'URL',
     type: 'content',
+    html: '<a href="*" class="pvlLink">*</a>',
     description: 'URL for Linking',
     draggable: true
   },
@@ -67,6 +76,7 @@ export const ContentTypes = {
     icon: 'calendar-alt',
     name: 'Date',
     type: 'content',
+    html: '<span class="pvlDate">*</span>',
     description: 'Formatted Date',
     draggable: true
   },
