@@ -20,14 +20,15 @@ const layoutObjectSource = {
 
   beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
-    // begin drag
-
+    // this is used to pass information to the DropColumn
     var item = { 
       id: props.id,
       mode: props.mode,
       fromLocation: props.location,
       component: component
     }
+
+    // add the model to it, this will be used more later as we build out the code tree
     if(props.obj.model != undefined){
       item.model = props.obj.model
     }
@@ -51,16 +52,6 @@ const layoutObjectSource = {
     // its drop() method.
     const dropResult = monitor.getDropResult()
 
-    // This is a good place to call some Flux action 
-  
-  //  console.log("end drag objects", item, dropResult)
-  // //  console.log('component',component)
-  //   console.log('drop result', dropResult)
-  //   console.log(component.props.location, dropResult.fromLocation)
-   // look to remove if we are in layout mode and have the removeMe function
-  //  if(typeof(component.props.removeMe) === 'function' && ( dropResult.fromLocation == undefined || dropResult.fromLocation.trim() != item.fromLocation.trim())){
-  //   //component.props.removeMe(props.id)
-  //  }
   }
 }
 

@@ -103,7 +103,7 @@ class VisualLayoutContainer extends React.Component {
         for (const element of keypath) {
             objectPathString += `['${element}'].children`
         }
-        // remove the ending .children because to make eval work, we need to add .children
+        // remove the ending .children because to make eval on the string, we call .children off it (hax)
         objectPathString = objectPathString.slice(0, -9) 
         
         // add the new children
