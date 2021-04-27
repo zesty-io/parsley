@@ -139,9 +139,10 @@ class DropColumn extends React.Component {
             if(obj.type == 'columns'){
                 obj.children = {}
                 obj.columns.map( (column,index) => {
+                    let tempColumn = {...column}
                     let columnID = `${obj.fullName}-${column.width}:${obj.name}:${index}`
-                    column.children = {}
-                    obj.children[columnID] = column
+                    tempColumn.children = {}
+                    obj.children[columnID] = tempColumn
                 })
             }
 

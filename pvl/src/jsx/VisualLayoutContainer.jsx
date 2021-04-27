@@ -106,6 +106,7 @@ class VisualLayoutContainer extends React.Component {
         // remove the ending .children because to make eval on the string, we call .children off it (hax)
         objectPathString = objectPathString.slice(0, -9) 
         
+        console.log('objecting adding ', elObj)
         // add the new children
         if(eval(objectPathString).hasOwnProperty('children')){
             eval(objectPathString).children[elObj.fullName] = elObj
@@ -131,26 +132,26 @@ class VisualLayoutContainer extends React.Component {
         @return Array 
     
     */
-     getKeyPath = async (childrenTree, keyToSearch) => {
+     getKeyPath = async (childTree, keyToSearch) => {
         var finalArray = []
         // this checks each child (1 or 100) for a hit
-        async function iter(childrenTree, keyToSearch, keyMapArr=[]){
-            if(childrenTree.hasOwnProperty(keyToSearch) && childrenTree[keyToSearch].hasOwnProperty('children')){ //
+        function iter(childTree, keyToSearch, keyMapArr=[]){
+            if(childTree.hasOwnProperty(keyToSearch) && childTree[keyToSearch].hasOwnProperty('children')){ //
                  // the last key push isnt needed because deepTreeAddRecursion() already returns it
                 finalArray = [...keyMapArr, keyToSearch]
             } 
-            if(Object.keys(childrenTree).length > 0){
+            if(Object.keys(childTree).length > 0){
                 // if not hit, loop through each child and recurse
-                for (const [key, obj] of Object.entries(childrenTree)) {
+                for (const [key, obj] of Object.entries(childTree)) {
                     //console.log('keypathiterating', key, obj)
                     if(obj.hasOwnProperty('children')){
-                        await iter(obj.children, keyToSearch, [...keyMapArr, key]) // we add the key to the array here instead of pushing on the main one
+                        iter(obj.children, keyToSearch, [...keyMapArr, key]) // we add the key to the array here instead of pushing on the main one
                     }
                 } 
             }
         }
         
-        await iter(childrenTree, keyToSearch, [])
+        iter(childTree, keyToSearch, [])
         return finalArray;
       
     }
