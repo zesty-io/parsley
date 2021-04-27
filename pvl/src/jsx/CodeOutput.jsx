@@ -16,7 +16,7 @@ class CodeOutput extends React.Component {
         let html = ''
         function iter(children){
             for (const [key, obj] of Object.entries(children)) {
-                console.log(key,obj);
+                //console.log(key,obj);
                 if(obj.hasOwnProperty('html')){
                     html += `\n${obj.html}`
                 }

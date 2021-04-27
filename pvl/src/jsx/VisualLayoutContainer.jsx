@@ -52,7 +52,7 @@ class VisualLayoutContainer extends React.Component {
     removeFromTree = async (parentID, childID) => {
         // this ends up being referenced dyanmically in a string which is EVAL'd
         let tree = {...this.state.tree}
-        console.log("------- remove from tree ---------");
+        console.log(`------- remove ${childID} from tree ---------`);
         // gets each key needed to access the parent (doesnt return parent as a key)
         const keypath = await this.getKeyPath(tree, parentID);
         // build out the target path for the object
@@ -62,7 +62,7 @@ class VisualLayoutContainer extends React.Component {
         }
         // different from buildTree, we appened the parent and child to the end
         // becaue we want the absolute path to delete
-        objectPathString += `['${parentID}'].children['${childID}']`
+        objectPathString += `['${childID}']`
         // using EVAL so we can turn out string into an object path
         eval(`delete(${objectPathString})`);
 
@@ -88,42 +88,34 @@ class VisualLayoutContainer extends React.Component {
         
         // access tree in a temp derefered object
         let tree = {...this.state.tree}
-
-        // if its not from the bank, search to remove it form somewhere else
+       
         if(oldParent != 'bank'){ 
-            //search and remove from tree
-            // this is handled care of through a call bqk
+            // handle if is from bank...?
         }
-        console.log("------- buildTree ---------");
-        console.log("buildTree",newParentID, oldParent)
-        // if the keypath greater than 1 we need to the the path to the object's children 
+
+        console.log("--------- buildTree ---------");
+        
+        // get keypath, an array of keys which chained together accesse
         const keypath = await this.getKeyPath(tree, newParentID);
         
-        console.log('keypath result is built tree',keypath);
-        // which we will store in 
-        if(keypath.length > 1){
-            // get keypath, an array of keys which chained together accesses
-            // the new parent id, note the returned array omits newParentID
-            
-            let objectPathString = 'tree';
-            for (const element of keypath) {
-                objectPathString += `['${element}'].children`
-            }
-            // remove the ending .children
-            objectPathString = objectPathString.slice(0, -9) 
-            // setup the new children
-            // eval(objectPathString).children = this.deepTreeAddRecursion(tree, newParentID, elObj)
-
-        // if the keypath is 1, its the root, so no recursion needed
-        } else {
-            // top level, no need to use the eval object path
-            tree = this.deepTreeAddRecursion(tree, newParentID, elObj)
+        // build the string which will be the object key path
+        let objectPathString = 'tree';
+        for (const element of keypath) {
+            objectPathString += `['${element}'].children`
         }
+        // remove the ending .children because to make eval work, we need to add .children
+        objectPathString = objectPathString.slice(0, -9) 
+        
+        // add the new children
+        if(eval(objectPathString).hasOwnProperty('children')){
+            eval(objectPathString).children[elObj.fullName] = elObj
+        }
+       
         // update the state
         this.setState({
             tree: tree
         })
-        
+        console.log('updated tree:',tree)
 
     }
 
@@ -143,11 +135,9 @@ class VisualLayoutContainer extends React.Component {
         var finalArray = []
         // this checks each child (1 or 100) for a hit
         async function iter(childrenTree, keyToSearch, keyMapArr=[]){
-            //console.log(`getKeyPath`, keyToSearch, keyMapArr, childrenTree)
-            if(childrenTree.hasOwnProperty(keyToSearch) ){ //&& childrenTree[keyToSearch].hasOwnProperty('children')
-                //keyMapArr.push(keyToSearch) the last key push isnt needed because deepTreeAddRecursion() already returns it
-                //console.log(`** HIT ** getKeyPath hit ${keyToSearch}`,childrenTree, keyMapArr)
-                finalArray = keyMapArr
+            if(childrenTree.hasOwnProperty(keyToSearch) && childrenTree[keyToSearch].hasOwnProperty('children')){ //
+                 // the last key push isnt needed because deepTreeAddRecursion() already returns it
+                finalArray = [...keyMapArr, keyToSearch]
             } 
             if(Object.keys(childrenTree).length > 0){
                 // if not hit, loop through each child and recurse
@@ -163,26 +153,6 @@ class VisualLayoutContainer extends React.Component {
         await iter(childrenTree, keyToSearch, [])
         return finalArray;
       
-    }
-
-    /*
-    * deepTreeAddRecursion 
-    * digs through the key to where to add the item, returns the children of the key it was added
-    * for anything beyond the root, getKeyPath is needed to dynamically find the child which the returned
-    * tree will be assigned to
-    */
-
-    deepTreeAddRecursion(tree, keyToSearch, objectToAdd){
-        if(tree[keyToSearch] != undefined && tree[keyToSearch].children != undefined){
-            tree[keyToSearch].children[objectToAdd.fullName] = objectToAdd
-            return tree
-        } else {
-            for (const [key, obj] of Object.entries(tree)) {
-                if(tree[key].children != undefined){
-                    return this.deepTreeAddRecursion(tree[key].children, keyToSearch, objectToAdd)
-                }
-            }
-        }
     }
 
     render() {
