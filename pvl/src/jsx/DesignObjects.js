@@ -5,19 +5,19 @@ export const DesignObjects = {
         name: '2 Columns',
         type: 'columns',
         classes: 'row',
-        html: '<div>*</div>',
+        html: '<div style="display:flex" class="pvlRow">*</div>',
         preview: '<div style="display:flex"><div style="flex:1"></div><div style="flex:1"></div></div>',
         droppable: false,
         columns: [
           {
-            width: '2',
-            html: '<div>*</div>',
+            width: '1',
+            html: '<div style="flex:1" class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           },
           {
-            width: '2',
-            html: '<div>*</div>',
+            width: '1',
+            html: '<div style="flex:1" class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           },
@@ -29,19 +29,19 @@ export const DesignObjects = {
         name: '2 Columns',
         type: 'columns',
         classes: 'row',
-        html: '<div>*</div>',
+        html: '<div style="display:flex">*</div>',
         preview: '<div style="display:flex"><div style="flex:2"></div><div style="flex:4"></div></div>',
         droppable: false,
         columns: [
           {
             width: '2',
-            html: '<div>*</div>',
+            html: '<div style="flex:2" class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           },
           {
             width: '4',
-            html: '<div>*</div>',
+            html: '<div style="flex:4" class="pvlColumn">*</div>',
             classes: 'column',
             droppable: true
           },
@@ -54,7 +54,7 @@ export const DesignObjects = {
         name: '3 Columns',
         type: 'columns',
         classes: 'row',
-        html: '<div style="">*</div>',
+        html: '<div style="display:flex" class="pvlRow">*</div>',
         preview: '<div style="display:flex"><div style="flex:1"></div><div style="flex:2"></div><div style="flex:2"></div></div>',
         droppable: false,
         columns: [
@@ -102,7 +102,7 @@ export const DesignObjects = {
         name: '2 Columns',
         type: 'columns',
         classes: 'row',
-        html: '<div class="pvlRow">*</div>',
+        html: '<div style="display:flex" class="pvlRow">*</div>',
         preview: '<div style="display:flex"><div style="flex:4"></div><div style="flex:2"></div></div>',
         droppable: false,
         columns: [

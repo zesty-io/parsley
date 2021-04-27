@@ -26,13 +26,26 @@ class CodeOutput extends React.Component {
         function iter(children, depth){
             for (const [key, obj] of Object.entries(children)) {
                 //console.log(key,obj);
-                if(obj.hasOwnProperty('html')){
+               
+                if(obj.hasOwnProperty('children')){
+                    let htmlSplit = []
+                    let tabs = getTabs(depth)
+                    if(obj.hasOwnProperty('html')){
+                        
+                        htmlSplit = obj.html.split('*')
+                        html += `${tabs}${htmlSplit[0]}\n`
+                    }
+                    iter(obj.children, depth+1)
+                    if(obj.hasOwnProperty('html')){
+                        html += `${tabs}${htmlSplit[1]}\n`
+                    }
+
+                } else if(obj.hasOwnProperty('html')){
                     let tabs = getTabs(depth)
                     html += `${tabs}${obj.html}\n`
                 }
-                if(obj.hasOwnProperty('children')){
-                    iter(obj.children, depth+1)
-                }
+
+
             } 
         }
         iter(tree, 0)
