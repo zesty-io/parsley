@@ -20,11 +20,13 @@ const layoutObjectSource = {
 
   beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
-    // this is used to pass information to the DropColumn
+    // this is used to pass information to the DropColumn\
+    console.log(props)
     var item = { 
       id: props.id,
       mode: props.mode,
       fromLocation: props.location,
+      html: props.obj.html,
       component: component
     }
 

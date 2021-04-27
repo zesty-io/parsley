@@ -567,6 +567,7 @@ select:focus {
   right: 0px;
   bottom: 0px;
   width: 100%;
+  padding: 10px;
   background: #1b202c;
   color: #75bf25;
   font-family: 'Courier New', Courier, monospace;

@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import VisualLayoutContainer from './VisualLayoutContainer'
 import ContentBank from './ContentBank'
 import LayoutBank from './LayoutBank'
-import PVLToolbar from './PVLToolbar'
 import { DesignObjects } from './DesignObjects'
+import { ContentTypes } from './ContentTypes'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
@@ -69,20 +69,24 @@ class ParsleyVisualLayout extends React.Component {
         Object.keys(fields).map(function(key, position) {
              
           let data_type = fields[key]
-          let html = data_type != 'image' ? `{{this.${key}}}` : `{{this.${key}.getImage()}}`
-          
+          let html = data_type != 'images' ? `{{${model.name}.first().${key}}}` : `{{${model.name}.first().${key}.getImage()}}`
+         // this is used to buidl the HTML
+          let typeObj = {...ContentTypes[data_type]}
+          let baseHTML = typeObj.hasOwnProperty('html') ? typeObj.html : '*'
+
           fieldsToReturn.push({ 
               key: `${model.zuid}-${key}`,
               name : key, 
               searchIndex: `${model.name} ${key}`.toLowerCase(),
               type: data_type,
+              obj: typeObj,
               model: {
                   name: model.name,
                   zuid: model.zuid
               },
               sort: sortIndex,
               value: "",
-              html: html
+              html: baseHTML.replace('*',html)
           })
           sortIndex++
         })    

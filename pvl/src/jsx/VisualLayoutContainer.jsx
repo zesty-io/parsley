@@ -21,7 +21,7 @@ class VisualLayoutContainer extends React.Component {
         let tree = {}
         tree[rootColumnName] = {
             name: rootColumnName,
-            html: `<div class="root"></div>`,
+            html: `<div class="pvlRoot">*</div>`,
             children: {}
         }
 

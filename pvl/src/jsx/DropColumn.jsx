@@ -52,7 +52,7 @@ const layoutObjectTarget = {
     // console.log("item detection from drop column on drop", item)
     // console.log("current drop component props", props)
     // console.log("id compared", item.fromLocation, props.id)
-    component.addToLayout(item.id, item.fromLocation);
+    component.addToLayout(item, item.fromLocation);
     
     if(typeof(item.component.props.removeMe) === 'function' && item.fromLocation != props.id){
         item.component.props.removeMe()
@@ -120,7 +120,9 @@ class DropColumn extends React.Component {
     from the Keyed Object references (ContentTypes and Design Objects)
 
     */
-    addToLayout = (itemString, fromLocation, position=false) => {
+    addToLayout = (item, fromLocation, position=false) => {
+        
+        let itemString = item.id
         
         // ignore the if location is the same
         if(this.props.id == fromLocation) {
@@ -154,6 +156,7 @@ class DropColumn extends React.Component {
         } else {
             // content objects have 4 items split from key primarytype:type:model:field_name in the array
             obj = {...ContentTypes[deciphered[1]]};
+            obj.html = item.html // overwrite HTML with one passed in that was made when content bank was build from PVL main component
             obj.model = deciphered[2]; 
             obj.name = deciphered[3];
             obj.position = (position != false) ? position : endPosition;
