@@ -50,6 +50,7 @@ class LayoutBank extends React.Component {
                                 <LayoutObject 
                                     key={lo.uid} 
                                     id={`design:${lo.type}:${key}`} 
+                                    setTab={this.props.setTab}
                                     name={lo.name} 
                                     location="bank"
                                     primarytype="design" 

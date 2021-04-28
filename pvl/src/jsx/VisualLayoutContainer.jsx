@@ -1,8 +1,5 @@
 
 import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
-import { DropTarget } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
 import DeleteArea from './DeleteArea'
 import PVLToolbar from './PVLToolbar'
 import DropColumn from './DropColumn'
@@ -26,19 +23,13 @@ class VisualLayoutContainer extends React.Component {
         }
 
         this.state = {
-            selected: 'visual',
+            selected: this.props.selected,
             rootColumnName:  rootColumnName,
             tree: tree
         }
         
     }
 
-    // state switcher for "selected" which dtermines CSS class output for layering logic
-    changeTab(name){
-        this.setState({
-            selected: name
-        })
-    }
 
     /**
         removeFromTree 
@@ -165,18 +156,26 @@ class VisualLayoutContainer extends React.Component {
                 <PVLToolbar title="Parsley Visual Layout" helpText={helpText}></PVLToolbar>
                 <div className="pvlUtilities">
                     <div className="pvlVisualTabBar">
-                        <button className={this.state.selected == "visual" ? `pvlSelected` : ''} onClick={() => {this.changeTab('visual')} }>
+                        <button className={this.props.selected == "visual" ? `pvlSelected` : ''} onClick={() => {this.props.setTab('visual')} }>
                             <span className="fa fa-pen"></span><span>Visual Layout</span>
                         </button>
-                        <button className={this.state.selected == "code" ? `pvlSelected`: ''}  onClick={() => {this.changeTab('code')} }>
+                        <button className={this.props.selected == "code" ? `pvlSelected`: ''}  onClick={() => {this.props.setTab('code')} }>
                             <span className="fa fa-code"></span><span>Code Output</span>
                         </button>
                     </div> 
                     <DeleteArea></DeleteArea>
                 </div>
                 
-                <DropColumn buildTree={this.buildTree} removeFromTree={this.removeFromTree} key={this.state.rootColumnName} id={this.state.rootColumnName} droppable="true"></DropColumn>
-                <CodeOutput selected={this.state.selected} tree={this.state.tree}></CodeOutput>
+                <DropColumn 
+                    buildTree={this.buildTree} 
+                    removeFromTree={this.removeFromTree} 
+                    key={this.state.rootColumnName} 
+                    id={this.state.rootColumnName} 
+                    droppable="true"></DropColumn>
+                <CodeOutput 
+                    previewURL={this.props.previewURL} 
+                    selected={this.props.selected} 
+                    tree={this.state.tree}></CodeOutput>
             </div>
         );
     }

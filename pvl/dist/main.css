@@ -594,6 +594,9 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlDropColumn.pvlDropReady {
   background: #8fda3d;
 }
+.pvl .pvlVisualLayoutContainer .pvlDropColumn.pvlDropReady:hover {
+  z-index: 3;
+}
 .pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutObject.pvlLayout {
   /* images */
   /* rich text */

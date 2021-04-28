@@ -17,6 +17,7 @@ class ContentBank extends React.Component {
             searchFilter: '',
             collapsed: {}
         };
+        
     }
 
     handleSearchFilterChange(event){
@@ -113,6 +114,7 @@ class ContentBank extends React.Component {
                                             return (<LayoutObject 
                                                         key={field.name} 
                                                         mode="bank"
+                                                        setTab={this.props.setTab}
                                                         id={`content:${field.type}:${model.name}:${field.name}`} 
                                                         name={field.name} 
                                                         location="bank"

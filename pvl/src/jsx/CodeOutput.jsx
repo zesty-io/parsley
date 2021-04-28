@@ -10,10 +10,14 @@ import React, { Component } from 'react'
 class CodeOutput extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            preview: ''
+        }
         this.textarea = React.createRef()
+        console.log(this.props.previewURL)
     } 
     buildHTMLTree = (tree) => {
-        if(this.props.selected != "code") return ''
+        //if(this.props.selected != "code") return ''
         console.log('CODE building tree', tree)
         let html = '' 
         function getTabs(depth){
@@ -41,7 +45,7 @@ class CodeOutput extends React.Component {
                     let tabs = getTabs(depth)
                     html += `${tabs}${obj.html}\n`
                 }
-            } 
+            }  
         }
         iter(tree, 0)
         return html
@@ -50,11 +54,29 @@ class CodeOutput extends React.Component {
     getCodeOutput(){
         return this.buildHTMLTree(this.props.tree);
     }
+    getPreviewOutput() {
+           
+        var formdata = new FormData();
+        formdata.append("parsley", this.getCodeOutput())
+
+      
+        fetch("https://kfg6bckb-dev.preview.zesty.io/ajax/parsley-visual-layout/",{
+            method: 'POST',
+            body: formdata,
+        }).then((response) => response.text())
+        .then(text => {
+            console.log(text)
+        })
+
+        return 'text'
+    }
 
     render() {
+        this.getPreviewOutput()
         return ( 
             <div className={this.props.selected == "code" ? `pvlCode pvlSelected` : 'pvlCode '}>
                 <textarea ref={this.textarea}  id="pvlCode" readOnly value={this.getCodeOutput()}></textarea>
+                <div className="pvlPreview"></div>
             </div>
         );
     }

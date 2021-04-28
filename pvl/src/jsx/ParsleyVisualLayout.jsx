@@ -12,7 +12,11 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 class ParsleyVisualLayout extends React.Component {
   constructor(props) {
     super(props);  
-    this.state = { data: [] };
+    this.state = { 
+      data: [],
+      selected: 'visual' ,
+      models: []
+    };
      
   }
   getContentBankURL() {
@@ -26,10 +30,22 @@ class ParsleyVisualLayout extends React.Component {
 
   }
 
+  getPreviewTestingURL() {
+    let url
+    if(this.props.instanceZUID){
+       url = `https://${this.props.instanceZUID}-dev.preview.zesty.io/ajax/parsley-visual-layout/`
+    } else {
+       url = `https://www.zesty.io/ajax/parsley-visual-layout/`
+    }
+    return url; 
+  } 
+
   async componentDidMount(){
     const response = await fetch(this.getContentBankURL());
-    const json = await response.json();
-    this.setState({ data: json });
+    const json = await response.json(); 
+    this.setState({
+      models: this.getIterableObject(json.models)
+    }) 
   }
 
  // converts given content object (which is Zesty.io /-/gql/ output) to 
@@ -92,9 +108,8 @@ class ParsleyVisualLayout extends React.Component {
         })    
         return fieldsToReturn
     }
-
   getContentBank() {
-    return this.getIterableObject(this.state.data.models)
+    return this.state.models
   }
 
   getCodeReferences() {
@@ -127,8 +142,15 @@ class ParsleyVisualLayout extends React.Component {
     return DesignObjects
   }
 
-  getTree(){
-  
+  setSelectedTab = (tab) => {
+    if(this.state.selected != tab){
+      console.log('setting')
+      this.setState({ selected: tab });
+    }
+
+  }
+  getSelectedTab() {
+    return this.state.selected
   }
 
   render() {
@@ -136,11 +158,21 @@ class ParsleyVisualLayout extends React.Component {
         <div className="pvl">
             <DndProvider backend={HTML5Backend}>
               <div className="shell">
-                  <VisualLayoutContainer></VisualLayoutContainer>
+                  <VisualLayoutContainer
+                    setTab={this.setSelectedTab} 
+                    selected={this.state.selected}
+                    previewURL={this.getPreviewTestingURL()}
+                    ></VisualLayoutContainer>
                   <div className="pvlObjectBanks">
                     
-                    <LayoutBank objects={this.getLayoutObjects()}></LayoutBank>
-                    <ContentBank content={this.getContentBank()}></ContentBank> 
+                    <LayoutBank 
+                      setTab={this.setSelectedTab}
+                      objects={this.getLayoutObjects()}
+                      ></LayoutBank>
+                    <ContentBank 
+                      setTab={this.setSelectedTab} 
+                      content={this.getContentBank()}
+                      ></ContentBank> 
                   </div>
               </div>
             </DndProvider>

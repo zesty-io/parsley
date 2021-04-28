@@ -4,8 +4,6 @@ import { ItemTypes } from './ItemTypes';
 import { ContentTypes } from './ContentTypes';
 import DropColumn from './DropColumn'
 
-var dynamicType = ''
-
 const layoutObjectSource = {
   canDrag(props) {
     // You can disallow drag based on props
@@ -19,9 +17,16 @@ const layoutObjectSource = {
   },
 
   beginDrag(props, monitor, component) {
+
+    // change the tab if applicable, this is used when someone drag while
+    // having code or preview open
+    if(component.props.hasOwnProperty('setTab') && typeof component.props.setTab === 'function'){
+      console.log('setting')
+      component.props.setTab('visual')
+    }
+
     // Return the data describing the dragged item
     // this is used to pass information to the DropColumn\
-    console.log(props)
     var item = { 
       id: props.id,
       mode: props.mode,
