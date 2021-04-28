@@ -483,6 +483,11 @@ select:focus {
   color: #a7afbf;
   font-size: 0.8em;
   padding-left: 10px;
+  display: block;
+  width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .pvl .pvlObject.pvlDesign .pvlDescription {
   font-weight: 500;
@@ -541,6 +546,25 @@ select:focus {
 }
 .pvl .pvlVisualLayoutContainer .pvlToolbar {
   margin-bottom: 0;
+}
+.pvl .pvlVisualLayoutContainer .pvlPreview {
+  position: absolute;
+  z-index: 0;
+  top: 65px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  border: none;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+  background: white;
+}
+.pvl .pvlVisualLayoutContainer .pvlPreview.pvlSelected {
+  z-index: 2;
+}
+.pvl .pvlVisualLayoutContainer .pvlPreview .pvlRenderedOutput {
+  padding: 10px;
 }
 .pvl .pvlVisualLayoutContainer .pvlCode {
   position: absolute;

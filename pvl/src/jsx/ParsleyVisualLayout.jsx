@@ -138,14 +138,18 @@ class ParsleyVisualLayout extends React.Component {
     ]
   } 
 
+
+  
   getLayoutObjects() {
     return DesignObjects
   }
 
   setSelectedTab = (tab) => {
     if(this.state.selected != tab){
-      console.log('setting')
-      this.setState({ selected: tab });
+      this.setState({ 
+          selected: tab,
+          hasRenderedUpdatedHTML: false
+         });
     }
 
   }
@@ -161,6 +165,7 @@ class ParsleyVisualLayout extends React.Component {
                   <VisualLayoutContainer
                     setTab={this.setSelectedTab} 
                     selected={this.state.selected}
+                    hasRenderedUpdatedHTML={this.state.hasRenderedUpdatedHTML}
                     previewURL={this.getPreviewTestingURL()}
                     ></VisualLayoutContainer>
                   <div className="pvlObjectBanks">

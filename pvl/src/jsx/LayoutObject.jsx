@@ -21,7 +21,6 @@ const layoutObjectSource = {
     // change the tab if applicable, this is used when someone drag while
     // having code or preview open
     if(component.props.hasOwnProperty('setTab') && typeof component.props.setTab === 'function'){
-      console.log('setting')
       component.props.setTab('visual')
     }
 

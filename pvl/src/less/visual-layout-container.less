@@ -8,6 +8,26 @@
     .pvlToolbar {
         margin-bottom: 0;
     }
+    .pvlPreview{
+        position: absolute;
+        z-index: 0;
+        top: 65px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        width: 100%;
+        border: none;
+        border-radius: @defaultBorderRadius @defaultBorderRadius 0 0 ;
+        overflow: hidden;
+        background: white;
+        
+        &.pvlSelected {
+            z-index: 2;
+        }
+        .pvlRenderedOutput{
+            padding: @defaultPadding;
+        }
+    }
     .pvlCode{
         position: absolute;
         z-index: 0;

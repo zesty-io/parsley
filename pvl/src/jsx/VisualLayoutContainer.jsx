@@ -4,6 +4,7 @@ import DeleteArea from './DeleteArea'
 import PVLToolbar from './PVLToolbar'
 import DropColumn from './DropColumn'
 import CodeOutput from './CodeOutput'
+import Preview from './Preview'
 
 // VisualLayoutContainer 
 // is the working Component that maintains the primary state of the layout and code objects
@@ -25,11 +26,11 @@ class VisualLayoutContainer extends React.Component {
         this.state = {
             selected: this.props.selected,
             rootColumnName:  rootColumnName,
-            tree: tree
+            tree: tree,
+            codeOutput: ''
         }
         
     }
-
 
     /**
         removeFromTree 
@@ -147,6 +148,42 @@ class VisualLayoutContainer extends React.Component {
       
     }
 
+    
+    buildHTMLTree = (tree) => {
+        //if(this.props.selected != "code") return ''
+       
+        let html = '' 
+        function getTabs(depth){
+            let tabs = ``
+            for(var i = 0; i < depth; i++) { 
+                tabs += `\t` 
+            }
+            return tabs
+        }
+        function iter(children, depth){
+            for (const [key, obj] of Object.entries(children)) {
+                if(obj.hasOwnProperty('children')){
+                    let htmlSplit = []
+                    let tabs = getTabs(depth)
+                    if(obj.hasOwnProperty('html')){
+                        htmlSplit = obj.html.split('*')
+                        html += `${tabs}${htmlSplit[0]}\n`
+                    }
+                    iter(obj.children, depth+1)
+                    if(obj.hasOwnProperty('html')){
+                        html += `${tabs}${htmlSplit[1]}\n`
+                    }
+
+                } else if(obj.hasOwnProperty('html')){
+                    let tabs = getTabs(depth)
+                    html += `${tabs}${obj.html}\n`
+                }
+            }  
+        }
+        iter(tree, 0)
+        return html
+
+    }
     render() {
 
         let helpText = `Drag and Drop elements form the Content Bank and Layout Tools below.`
@@ -162,6 +199,9 @@ class VisualLayoutContainer extends React.Component {
                         <button className={this.props.selected == "code" ? `pvlSelected`: ''}  onClick={() => {this.props.setTab('code')} }>
                             <span className="fa fa-code"></span><span>Code Output</span>
                         </button>
+                        <button className={this.props.selected == "preview" ? `pvlSelected`: ''}  onClick={() => {this.props.setTab('preview')} }>
+                            <span className="fa fa-eye"></span><span>Preview</span>
+                        </button>
                     </div> 
                     <DeleteArea></DeleteArea>
                 </div>
@@ -175,7 +215,15 @@ class VisualLayoutContainer extends React.Component {
                 <CodeOutput 
                     previewURL={this.props.previewURL} 
                     selected={this.props.selected} 
+                    code={this.buildHTMLTree(this.state.tree)}
                     tree={this.state.tree}></CodeOutput>
+                <Preview 
+                    previewURL={this.props.previewURL}
+                    code={this.buildHTMLTree(this.state.tree)}
+                    hasRenderedUpdatedHTML={this.props.hasRenderedUpdatedHTML}
+                    rendered={this.renderedHTML}
+                    selected={this.props.selected} 
+                    tree={this.state.tree}></Preview>    
             </div>
         );
     }
