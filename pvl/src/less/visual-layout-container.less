@@ -1,0 +1,178 @@
+.pvlVisualLayoutContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    
+    
+    .pvlToolbar {
+        margin-bottom: 0;
+    }
+    .pvlPreview{
+        position: absolute; 
+        z-index: 0;
+        top: 65px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        width: 100%;
+        border: none;
+        border-radius: @defaultBorderRadius @defaultBorderRadius 0 0 ;
+        overflow: hidden;
+        background: white;
+        
+        &.pvlSelected {
+            z-index: 2;
+        }
+        .pvlRenderedOutput{
+            padding: @defaultPadding;
+            .pvlRow {
+                margin-bottom: @defaultMargin;
+            }
+            .pvlColumn {
+                margin-right: @defaultMargin;
+            }
+        }
+    }
+    .pvlCode{
+        position: absolute;
+        z-index: 0;
+        top: 65px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        width: 100%;
+        border: none;
+        border-radius: @defaultBorderRadius @defaultBorderRadius 0 0 ;
+        overflow: hidden;
+        background: @zesty-dark-blue;
+        color: @zesty-white;
+        
+        &.pvlSelected {
+            z-index: 2;
+        }
+
+        textarea{
+            position: absolute;
+            z-index: 0;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            width: 100%;
+            padding: @defaultPadding;
+            background: @zesty-dark-blue;
+            color: @zesty-green;
+            font-family: 'Courier New', Courier, monospace;
+            
+        }
+    }
+    .pvlUtilities{
+        flex: 1;
+        min-height: 36px;
+        background-color: transparent;
+        position: relative;
+    }
+    .pvlDropColumn { 
+        opacity: .95;
+        flex: 10;
+        flex-grow: 100;
+        flex-basis: 100%;
+        z-index: 1;
+        background-color: white;
+        position: relative;
+        padding: @defaultPadding;
+        //border-right: 3px solid @zesty-tab-blue;
+        &.pvlTargetHere{
+            background: lighten(@zesty-green,30%);
+        }
+        &.pvlDropReady {
+            background: lighten(@zesty-green,10%);
+            &:hover{
+                z-index: 3;
+            }
+        }
+    }
+
+    /* design for different object types */
+    .pvlObject.pvlLayoutObject.pvlLayout{
+        .pvlObjectHeader{
+            .pvlTypeTag {
+                order: 1;
+                font-size: 18px;
+                border-left: none;
+                border-right: 1px @zesty-light-grey solid;
+                border-radius: 0;
+                min-width: 60px;
+            }
+            .pvlDescription { 
+                order: 2;
+            }
+        }
+        /* images */
+        &.pvlImages{
+            .pvlObjectHeader{
+                display: block;
+            }
+            .pvlTypeTag {
+                display: block;
+                width: 100%;
+                text-align: center;
+                flex:none;
+                max-width: 100%;
+                padding: 50px 0px;
+                span {
+                    font-size: 32px;
+                    position: relative;    
+                }
+            }
+        }
+        /* rich text */
+        &.pvlWysiwyg_advanced, &.pvlWysiwyg_basic, &.pvlArticle_writer, &.pvlRich_text {
+            .pvlTypeTag {
+               
+                order: 1;
+            }
+            .pvlDescription {
+                min-height: 100px;
+            }
+           
+        }  
+
+        /* deisgn object */
+        &.pvlDesignObject{
+            border-color:transparent;
+            &:hover{
+                border: 1px @zesty-light-grey solid;
+            }
+        }
+
+    }
+
+
+    .pvlObject.pvlLayoutRow {
+        display: flex;
+        
+        border: 3px @zesty-light-grey solid;
+
+        .pvlLayoutColumn{
+            background: transparent;
+            min-height: 200px;
+            
+            border-left: 3px @zesty-light-grey solid;
+
+            .defaultBorderRadius();
+            &:nth-child(1){
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                border-left: none;
+            }
+            &:last-child {
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+            }
+        }
+
+    }
+
+}

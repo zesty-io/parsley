@@ -1,0 +1,136 @@
+
+.pvlObject{
+    position: relative;
+    flex-basis: auto; 
+    align-items: stretch;
+    background: white;
+    margin: 0px @defaultMargin @defaultMargin 0px;  
+    border: 1px @zesty-light-grey solid;
+    .defaultBorderRadius();
+    overflow: hidden;
+
+    &:hover{
+        cursor: move;
+        box-shadow: 0px 0px @defaultPadding @zesty-grey;
+    }
+
+    &.pvlDragging{
+        background: @zesty-yellow;
+        box-shadow: 0px 0px @defaultPadding @zesty-dark-blue;
+        opacity: .5;
+       
+    }
+    .pvlObjectHeader {
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+        color: @zesty-grey;
+    }
+    .pvlTypeTag {
+        .typetag();
+
+    }
+    .pvlDescription {
+        flex: 6;
+        display: block;
+        background: @zesty-white;
+        border-radius: @defaultBorderRadius @defaultBorderRadius 0 0 ;
+        span {
+            display: block;
+            padding: 5px @defaultPadding;
+        }
+        
+    }
+    .pvlPreview{
+        display: block;
+        margin-right: @defaultMargin;
+    }
+    &.pvlContent {
+        flex: 1;
+        min-width: 140px;
+        
+        .pvlDescription {
+            padding: 0px;
+            span {
+                font-size: 1.2em;
+                font-weight: 600;
+                padding: 5px @defaultPadding 0px @defaultPadding;
+            }
+            em {
+                color: @zesty-light-grey;
+                font-size: .8em;
+                padding-left: @defaultPadding;
+                display: block;
+                width: 70%;
+                overflow: hidden;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+        }
+    }
+
+    &.pvlDesign {
+        .pvlDescription { 
+           font-weight: 500; 
+           border-bottom: 1px @zesty-light-grey solid;
+        }
+        .pvlTypeTag {
+            //align-self: flex-end;
+            order: 5;
+            border: 1px @zesty-light-grey solid;
+            border-right: 0px;
+            border-top: 0px;
+            min-width: 38px;
+            border-radius: 0px @defaultBorderRadius 0px 0px;
+            span {
+                margin-top: 3px;
+                font-size: 1.3em;
+                padding: 4px;
+            }
+            
+        }
+        
+        
+        .pvlPreview{
+            display: block;
+            padding: @defaultPadding;
+            div {
+                .defaultBorderRadius();
+                border: 4px @zesty-grey solid;
+                height: 20px;
+                width: 100%;
+                div {
+                    border-radius: 0px;
+                    border: none;
+                    border-right: 4px @zesty-grey solid;
+                }
+                div:nth-child(even) {
+                    background-color: @zesty-field-blue;
+                }
+                div:last-child {
+                    border:none;
+                }
+            }
+            hr {
+                border: 2px @zesty-grey solid;
+                .defaultBorderRadius();
+            }
+        }
+    
+    }
+
+    // for row breaks
+
+    &.pvlBreak {
+       
+        flex-basis: 100%;
+        height: 0;
+        width: 100%;
+        display: inline-block
+    
+       
+    }
+
+}

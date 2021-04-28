@@ -1,28 +1,44 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 import { ItemTypes } from './ItemTypes';
-import { LayoutObjectTypes } from './LayoutObjectTypes';
+import { ContentTypes } from './ContentTypes';
+import DropColumn from './DropColumn'
 
 const layoutObjectSource = {
   canDrag(props) {
-    //console.log(props)
     // You can disallow drag based on props
     return props.isReady
   },
 
   isDragging(props, monitor) {
-    // If your component gets unmounted while dragged
-    // (like a card in Kanban board dragged between lists)
     // you can implement something like this to keep its
     // appearance dragged:
     return monitor.getItem().id === props.id
   },
 
   beginDrag(props, monitor, component) {
+
+    // change the tab if applicable, this is used when someone drag while
+    // having code or preview open
+    if(component.props.hasOwnProperty('setTab') && typeof component.props.setTab === 'function'){
+      component.props.setTab('visual')
+    }
+
     // Return the data describing the dragged item
-    console.log(props)
-    const item = { id: props.id }
-    
+    // this is used to pass information to the DropColumn\
+    var item = { 
+      id: props.id,
+      mode: props.mode,
+      fromLocation: props.location,
+      html: props.obj.html,
+      component: component
+    }
+
+    // add the model to it, this will be used more later as we build out the code tree
+    if(props.obj.model != undefined){
+      item.model = props.obj.model
+    }
+
     return item
   },
 
@@ -42,9 +58,6 @@ const layoutObjectSource = {
     // its drop() method.
     const dropResult = monitor.getDropResult()
 
-    // This is a good place to call some Flux action
-    alert('drag ended')
-   console.log(item.id, dropResult)
   }
 }
 
@@ -65,40 +78,112 @@ function collect(connect, monitor) {
 class LayoutObject extends React.Component {
     constructor(props) {
         super(props);
-         
     }
+
     getType() {
-      return LayoutObjectTypes[this.props.type] !== undefined ? LayoutObjectTypes[this.props.type] :  LayoutObjectTypes.unknown;
+      return ContentTypes[this.props.type] !== undefined ? {...ContentTypes[this.props.type]} :  {...ContentTypes.unknown};
+    }
+    getMode() {
+      return this.props.mode != undefined ? this.props.mode : 'bank';
     }
 
+    getPrimaryType() {
+      return this.props.primarytype !== undefined ? this.props.primarytype :  'content';
+    }
 
+    capitalizeFirst(s){
+      if (typeof s !== 'string') return ''
+      return s.charAt(0).toUpperCase() + s.slice(1)
+    }
+
+    // check the passed in object HAS a specific key
+    has(key){
+      return (this.props.obj !== undefined && this.props.obj[key] !== undefined)
+    }
+    
+    // check if the object IS of a primary type
+    is(primaryType){
+      return (this.getPrimaryType() == primaryType)
+    }
 
     render() {
         // Your component receives its own props as usual
         const { id } = this.props
         
-        let type = this.getType()
+        var type = this.getType() 
+        var ptype = this.getPrimaryType()
+        var mode = this.getMode()
         // These props are injected by React DnD,
         // as defined by your `collect` function above:
         const { isDragging, connectDragSource } = this.props
-        console.log('no ty[e', type)
-        return connectDragSource(
-            <div className="pvlObject pvlLayoutObject pvl">
-                <div className="pvlTypeTag" title={type.name}> 
-                  <span className={`fa fa-${type.icon}`}></span>
-                </div>
-                <div className="pvlObjectPreview">
-                  {this.props.obj !== undefined && this.props.obj.preview !== undefined && 
-                    <div className="pvlPreview" dangerouslySetInnerHTML={{
-                      __html: this.props.obj.preview
-                      }}></div>
-                    }
+        var draggingClass = isDragging ? 'pvlDragging' : '';
 
-                  {this.props.type}: {this.props.name} <br />
-                  {isDragging && ' (being dragged )'}
+        // show different outputs based on the mode
+
+        // this is the mode for th left side bank, or for content
+        if (mode == 'bank' || ptype == "content") {
+          return connectDragSource(
+              <div className={`pvlObject pvlLayoutObject pvl${this.capitalizeFirst(mode)} pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(this.props.type)} ${draggingClass}`}>
+                <div className="pvlObjectHeader">  
+                  <div className="pvlTypeTag" title={type.name}> 
+                    <span className={`fa fa-${type.icon}`}></span>
+                  </div>
+                  <div className="pvlDescription">
+                    {this.props.mode == 'layout' && <span>{this.props.obj.model}</span>}
+                    <span>{this.props.name}</span>
+                    {this.has('html') && this.is('content') && <em>{this.props.obj.html}</em>}
+                    
+                  </div>
                 </div>
-            </div>
-        );
+                {this.has('preview') && 
+                  <div className="pvlPreview" dangerouslySetInnerHTML={{
+                    __html: this.props.obj.preview
+                    }}></div> 
+                  }
+                  
+              </div>
+          );
+        
+        // below is for the dropcolumn or layout mode
+        } else {
+
+          // here we are dealing with design objects or columns
+          // for columns we have drop targets
+          if(this.props.obj.type == 'columns'){
+         
+            return connectDragSource(
+              <div className={`pvlObject pvlVisualLayout pvlDropTarget pvlLayoutRow pvl${this.capitalizeFirst(mode)}  pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(this.props.type)} ${draggingClass}`}>
+                {this.props.obj.columns.map( (column,index) => {
+                  
+                  let styles = {
+                    flex: column.width
+                  }
+                  let columnID = `${this.props.obj.fullName}-${column.width}:${this.props.obj.name}:${index}`
+                  return (
+                      <DropColumn 
+                        removeFromTree={this.props.removeFromTree} 
+                        buildTree={this.props.buildTree} 
+                        key={columnID} 
+                        id={columnID} 
+                        droppable={column.droppable} 
+                        style={styles}>
+                        </DropColumn>
+                  )
+                })}
+                
+              </div>
+            )
+          // else we are dealing with a design object
+          } else {
+            return connectDragSource(
+              <div className={`pvlObject pvlVisualLayout pvlLayoutObject pvl${this.capitalizeFirst(mode)}  pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(this.props.type)} pvlDesignObject`}>
+                  <div className="pvlPreview" dangerouslySetInnerHTML={{
+                    __html: this.props.obj.html
+                    }}></div> 
+              </div>
+            )
+          }
+        }
     }
 }
 

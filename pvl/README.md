@@ -1,27 +1,63 @@
 # Development state notes
 
-[X] Setup React Webpack (React 16 to matches manager-ui)
-[X] Install React-DND
-[X] Connect DND to component
-[X] setup DND decorator API https://react-dnd.github.io/react-dnd/docs/api/drop-target
-[X] Test dragging and dropping
-[X] Connect to remote endpoint in zesty, store in top level state
-[X] pass content down to content bank, display layoutobjects (pass in types as props)
-[ ] Setup layout object bank
-[ ] Connect collapse button to CSS functionality and prop passing
-[ ] Setup include code object bank component
-[ ] fetch remote file data for snippets, or fake it for now
-[ ] Work on layout object to adapt to different styles based on its incoming object
-[ ] Expand layoutobject to have different behaviors per type and content
-[ ] Make a layoutobject (columns) droppable once in the canvas (and a new way to delete them)
-[ ] Start Matching design
-[ ] Output Targets (snippet, export html, view file, wysiwyg target)
+- [X] Setup React Webpack (React 16 to matches manager-ui)
+- [X] Install React-DND
+- [X] Connect DND to component
+- [X] setup DND decorator API https://react-dnd.github.io/react-dnd/docs/api/drop-target
+- [X] Test dragging and dropping
+- [X] Connect to remote endpoint in zesty, store in top level state
+- [X] pass content down to content bank, display layoutobjects (pass in types as props)
+- [X] Setup layout object bank
+- [X] Create Layout objects json file
+- [X] Design Layout objects interface
+- [X] Iterate through GQL object for content bank, collapsable content models
+- [X] Design the content model collapsing
+- [X] Move content mutatation into top level PVL before going into content bank
+- [X] Search through content filter, hiding etc
+- [X] Collapse content model button and functionality 
+- [X] clear collapse on search, bring it back
+- [X] CSS design content model area
+- [X] CSS design content model object
+- [X] Clear content filter
+- [X] Start Matching design
+- [ ] Star current Content Model
+- [X] Connect collapse button to CSS functionality and prop passing
+- [X] Test building tree on main component from drag n drop objects
+- [X] Work on layout object to adapt to different styles based on its incoming object
+- [X] Create Column Layout Object that is droppable
+- [X] Make different layout designs for visual layout container
+- [X] Expand layoutobject to have different behaviors per type and content
+- [X] Add content references to the dropped columns
+- [X] Move content objects around
+- [X] Make a layoutobject (columns) droppable once in the canvas
+- [X] A proper way to delete items
+- [X] Fix to error where dropping on itself deletes itself (race condition)
+- [X] Create Code tab, Visual tab bar
+- [X] build tree function which is passed around to build a large tree for code building
+- [X] Clean up presentation
+- [X] Fix tertiary drop error with tree building
+- [ ] Design the drop area
+- [X] Code Output component - Recieves Tree and outputs HTML with parsley
+- [X] Preview Rendering
+- [ ] Output Targets (snippet, export html, view file, wysiwyg target)
 
 ## Considerations
 
 Our Goal... To make Zesty.io like nothing you've ever experienced...
 
-[ ] Allow Parsley in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
+- [ ] Setup include code object bank component
+- [ ] fetch remote file data for snippets, or fake it for now
+- [ ] Allow Parsley in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
+
+# How it works
+
+* **In Schema:** Each content model has a visual layout tab
+ * Output write to a snippet named [MODEL_ZUID]-pvl.parsley
+ * {{this.autolayout()}} will look for that reference
+* **In Content:** Each Content Item will have an PVL (content designer) tab which defaults to the content model design (if it exists)
+  * The output of PVL writes to a new content item field `_pvl`
+  * The items PVL will override the model PVL 
+* In Code: The [MODEL_ZUID]-pvl.parsley files will be accessible to edit
 
 # Parsley Visual Layout Tool
 
@@ -43,6 +79,29 @@ The Zesty.io Instance's `GQL` setting should be set to be on. Start with propert
 ```
 <ParsleyVisualLayout instanceZUID=""></ParsleyVisualLayout>
 ```
+
+## How to Run Locally
+
+Install Global Tools
+```
+npm install -g react
+npm install -g webpack-cli
+npm install -g less
+npm install -g less-watch-compiler
+```
+
+From base `pvl` directory, run two terminals
+
+Terminal 1
+```
+webpack
+```
+Terminal 2
+```
+npm run watch-less
+```
+
+Install VS Code live server, open `example.html` with live server extension
 
 # Documenting of the Layout App
 
@@ -85,6 +144,16 @@ A layout object is a top level class that holds information to
 * Access its children on the tree
 * Reference Content
 * Optional Behavior
+
+## LayoutObject Dragging
+
+[An ID is needed for React DND](https://react-dnd.github.io/react-dnd/docs/overview), and that is all that you are working with. Since we do not use REDUX or FLUX for this component, we need to know as much from the ID as possible. Since Layout Object are not related to their actual layout we will be creating a new layout object upon drop. To do this we will need a key that tells us what to do.
+
+Design Format ID: `[primarytype]:[type]` e.g. `design:2columns`
+Content Format ID: `[primarytype]:[type]:[model]:[field_name]` e.g. `content:text:about:title`
+
+The key is split by `:` dilimiter and used to create a new layout object in the VisualLayout component
+
 
 **Types of Layout Objects and specific behaviors**
 

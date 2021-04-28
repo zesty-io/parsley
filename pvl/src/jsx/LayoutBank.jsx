@@ -12,31 +12,57 @@ import PVLToolbar from './PVLToolbar'
 class LayoutBank extends React.Component {
     constructor(props) {
         super(props);
-    }
+        this.state = {
+            collapsed: false
+        }
+    } 
 
     getLayoutObjects() {
         return this.props.objects;
     }
 
     getTotalLO(){
-        return this.getLayoutObjects() !== undefined ? this.getLayoutObjects().length : 0;
+        var size = 0, key;
+        for (key in this.getLayoutObjects()) {
+            if (this.getLayoutObjects().hasOwnProperty(key)) size++;
+        }
+
+        return size;
     }
-    collapse() {
-        alert('collapse')
+    collapse() { 
+        let toggle = this.state.collapsed == false ? true : false; 
+        this.setState({
+            collapsed: toggle
+        });
+        
     }
 
     render() {
         let helpText = `Column, hairlines and other things to build a page`
         return this.getTotalLO() > 0 ? (
-            <div className="pvlLayoutBank">
-                <PVLToolbar title="Layout Tools" helpText={helpText} collapse={this.collapse}></PVLToolbar>
-                <div className="modelText">
-                    {this.getLayoutObjects().map((lo) => {
-                        return (
-                            <LayoutObject key={lo.uid} id={lo.uid} name={lo.name} type={lo.type} obj={lo} isReady="true" />
-                        ) 
-                    })} 
-                </div>
+            <div className="pvlBank pvlLayoutBank">
+                <PVLToolbar title="Layout Design Tools" helpText={helpText} collapse={() => {this.collapse()} } collapsed={this.state.collapsed}></PVLToolbar>
+                {!this.state.collapsed && 
+                    <div className="pvlObjectBank">
+                        {Object.keys(this.getLayoutObjects()).map((key,index) => {
+                            let lo = this.getLayoutObjects()[key]
+                            return (
+                                <LayoutObject 
+                                    key={lo.uid} 
+                                    id={`design:${lo.type}:${key}`} 
+                                    setTab={this.props.setTab}
+                                    name={lo.name} 
+                                    location="bank"
+                                    primarytype="design" 
+                                    type={lo.type} 
+                                    obj={lo} 
+                                    mode="bank"
+                                    isReady="true" 
+                                    />
+                            ) 
+                        })} 
+                    </div>
+                }
 
             </div> 
         ) : (<div></div>);

@@ -7,35 +7,41 @@
 
     h1, h2, h3, h4, h5, h6, label {
         font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
     }
 
     .pvlVisualLayoutContainer {
-        flex: 4;
+        flex: 4; 
         min-width: 100px;
-        background: white;
+        background: transparent;
         .defaultBorderRadius();
+        overflow: hidden;
+        
     }
+
     .pvlObjectBanks{
         flex: 2;
-        min-width: 100px;
-        background: @zesty-field-blue;
+        min-width: 380px;
+        max-width: 460px;
         .defaultBorderRadius();
         margin-left: @defaultMargin;
     }
-    .pvlContentBank{
-        
-        
-    }
-   
+
     .pvlToolbar {
         background: @zesty-light-grey;
         border-bottom: 1px @zesty-light-grey solid;
         display: flex;
+        margin-bottom: @defaultMargin;
+        position: relative;
+        z-index: 1;
         h1 {
             .zerod();
             font-size: 16px;
-            padding: 5px;
+            padding: 5px 0;
             flex: 3;
+            strong {
+                margin-right: @defaultMargin;
+            }
             
         }
         > div {
@@ -49,10 +55,16 @@
            }
         }
     }
+    
+    .pvlBank {
+        margin-bottom: @defaultMargin;
+    }
     .pvlHelp {
         color: @zesty-white;
         position: relative;
         margin-right: @defaultMargin;
+        cursor: help;
+        
         .pvlHelpText{
             display: none;
             position: absolute;
@@ -67,6 +79,7 @@
             border: @zesty-grey 1px solid;
             .defaultBorderRadius();
             z-index: 2;
+            .defaultBoxShadow();
         }
         &:hover{
             color: @zesty-grey;

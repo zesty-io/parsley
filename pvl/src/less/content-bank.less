@@ -1,0 +1,152 @@
+
+.pvlContentBankHeader{
+    display: flex;
+    .pvlContentBankToolbar {
+        flex: 1;
+    }
+    .pvlInputWrapper{
+        flex: 1;
+        position: relative;
+        span {
+            z-index: 1;
+            top: 8px;
+            left: 8px;
+            position: absolute;
+            transform: scaleX(-1);
+            color: @zesty-light-grey;
+            font-size: 1.3em;
+
+        }
+        button { 
+            background-color: transparent;
+            border:none;
+            color: @zesty-orange;
+            z-index: 1;
+            top: 8px;
+            right: 6px;
+            position: absolute;
+            cursor: pointer;
+        }
+        input {
+            width: 100%;
+            .defaultBorderRadius();
+            padding: 8px 10px 8px 25px;
+            margin-bottom: @defaultMargin;
+            border-radius: @defaultMargin;
+            border: 1px @zesty-light-grey solid;
+            background: @zesty-white;
+            font-size: 1em;
+            
+            &:hover, &:active {
+                background: white;
+                border: 1px @zesty-grey solid;
+            }
+           
+            
+        }
+    }
+}
+
+.pvlEmptySearch{
+    .defaultBorderRadius();
+    border: 1px solid @zesty-light-grey;
+    text-align: center;
+    background: @zesty-gray;
+    padding: @defaultPadding;
+    color: @zesty-white;
+    p {
+        font-size: 1.4em;
+    }
+    button {
+        border: 1px solid @zesty-light-gray;
+        padding: @defaultPadding;
+        .defaultBorderRadius();
+        color: @zesty-gray;
+        &:hover{
+            cursor: pointer;
+            background: @zesty-white;
+        }
+    }
+}
+
+.pvlContentModel {
+    //padding: @defaultPadding;
+    margin-bottom: @defaultMargin;
+    .defaultBorderRadius();
+    overflow: hidden;
+
+
+    .pvlModelHeader {
+        display: flex;
+        background: @zesty-white; 
+        border-bottom: 1px solid @zesty-light-grey;
+        button {
+            bordeR: none;
+            background-color: transparent;
+            padding: 0 0 0 @defaultPadding;
+        }
+        h3 { 
+            flex-grow: 5;
+            display: flex;
+            flex-shrink: 2;
+            overflow: hidden;
+            align-items: center;
+            strong {
+                font-weight: 600;
+                font-size: 1.3em;
+                flex-shrink: 1;
+                margin: 0 @defaultMargin;
+            }
+            span {
+                flex: 1;
+                color: @zesty-light-grey;
+                font-size: .9em;
+                flex-grow: 4;
+                flex-shrink: 1;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                
+            }
+            a {
+                font-size: 1em;
+                flex: 2;
+                text-align: right;
+                margin-right: @defaultMargin;
+                text-decoration: none;
+                color: @zesty-blue;
+                overflow: hidden;
+                white-space: nowrap;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+        .pvlModeltag {
+            .typetag();
+            border: none;
+            border-left: 1px solid @zesty-light-grey;
+            flex: 1;
+            max-width: 40px;
+            flex-basis: 100%;
+            span {
+                color: @zesty-gray;
+                margin-top: 4px;
+            }
+        }
+    } 
+
+    .pvlModelFields {
+        background: white;
+        padding: @defaultPadding;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: auto;
+        &.pvlCollapsed{
+            display: none; 
+        }
+    }
+   
+}
+
+

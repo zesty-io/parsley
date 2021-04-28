@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import VisualLayoutContainer from './VisualLayoutContainer'
 import ContentBank from './ContentBank'
 import LayoutBank from './LayoutBank'
-import PVLToolbar from './PVLToolbar'
-
+import { DesignObjects } from './DesignObjects'
+import { ContentTypes } from './ContentTypes'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
@@ -12,7 +12,11 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 class ParsleyVisualLayout extends React.Component {
   constructor(props) {
     super(props);  
-    this.state = { data: [] };
+    this.state = { 
+      data: [],
+      selected: 'visual' ,
+      models: []
+    };
      
   }
   getContentBankURL() {
@@ -26,14 +30,86 @@ class ParsleyVisualLayout extends React.Component {
 
   }
 
+  getPreviewTestingURL() {
+    let url
+    if(this.props.instanceZUID){
+       url = `https://${this.props.instanceZUID}-dev.preview.zesty.io/ajax/parsley-visual-layout/`
+    } else {
+       url = `https://www.zesty.io/ajax/parsley-visual-layout/`
+    }
+    return url; 
+  } 
+
   async componentDidMount(){
     const response = await fetch(this.getContentBankURL());
-    const json = await response.json();
-    this.setState({ data: json });
+    const json = await response.json(); 
+    this.setState({
+      models: this.getIterableObject(json.models)
+    }) 
   }
 
+ // converts given content object (which is Zesty.io /-/gql/ output) to 
+    // a react iterable array/object build, also modifies data to work 
+    // with the layout tool
+    getIterableObject(models) {
+        // bail if we dont have the array yet
+        if(models == undefined) return []
+        // restructure the data
+        let structuredDataArray = []
+        models.map( (model,index) => {
+            
+            model.key =model.zuid
+            model.dataRef =model.gqlUrl
+            // remove GQL references not used
+            delete(model.gqlUrl)
+            delete(model.gqlGetAllMethodName)
+            delete(model.gqlGetMethodName)
+            delete(model.gqlModelName)
+            // setup fields for reading
+            let fields = this.mutateFieldsForPVL(model)
+            delete(model.fields)
+            model.fields = fields
+          
+            structuredDataArray.push(model)
+        })
+
+        return structuredDataArray
+    }
+
+    mutateFieldsForPVL(model) {
+        
+        const fields = model.fields != undefined ? model.fields : {loading: "Empty Fields"}
+        let fieldsToReturn = []
+        let sortIndex = 1 ;
+
+        Object.keys(fields).map(function(key, position) {
+             
+          let data_type = fields[key]
+          let html = data_type != 'images' ? `{{${model.name}.first().${key}}}` : `{{${model.name}.first().${key}.getImage()}}`
+         // this is used to buidl the HTML
+          let typeObj = {...ContentTypes[data_type]}
+          let baseHTML = typeObj.hasOwnProperty('html') ? typeObj.html : '*'
+
+          fieldsToReturn.push({ 
+              key: `${model.zuid}-${key}`,
+              name : key, 
+              searchIndex: `${model.name} ${key}`.toLowerCase(),
+              type: data_type,
+              obj: typeObj,
+              model: {
+                  name: model.name,
+                  zuid: model.zuid
+              },
+              sort: sortIndex,
+              value: "",
+              html: baseHTML.replace('*',html)
+          })
+          sortIndex++
+        })    
+        return fieldsToReturn
+    }
   getContentBank() {
-    return this.state.data.models
+    return this.state.models
   }
 
   getCodeReferences() {
@@ -62,86 +138,46 @@ class ParsleyVisualLayout extends React.Component {
     ]
   } 
 
+
+  
   getLayoutObjects() {
-    return [
-      {
-        uid: '1',
-        name: '2 Columns',
-        type: 'columns',
-        classes: 'row',
-        html: '<div>*</div>',
-        droppable: false,
-        columns: [
-          {
-            width: '2',
-            html: '<div>*</div>',
-            classes: 'column',
-            droppable: true
-          },
-          {
-            width: '2',
-            html: '<div>*</div>',
-            classes: 'column',
-            droppable: true
-          },
-        ]
-
-      },
-      {
-        uid: '1',
-        name: '3 Columns',
-        type: 'columns',
-        classes: 'row',
-        html: '<div style="">*</div>',
-        preview: '<div style="display:flex"><div style="flex:1"><div style="flex:2"><div style="flex:2"><div><div><div></div>',
-        droppable: false,
-        children: [
-          {
-            width: '1',
-            html: '<div style="">*</div>',
-            classes: 'column',
-            droppable: true
-          },
-          {
-            width: '2',
-            html: '<div>*</div>',
-            classes: 'column',
-            droppable: true
-          },
-          {
-            width: '2',
-            html: '<div>*</div>',
-            classes: 'column',
-            droppable: true
-          }
-        ]
-
-      },
-       {
-        uid: '1',
-        name: 'Horizontal Rule',
-        type: 'design',
-        html: '<hr>',
-        preview: '<hr>',
-        classes: '',
-        droppable: false
-      }
-    ]
+    return DesignObjects
   }
 
-  getTree(){
-  
+  setSelectedTab = (tab) => {
+    if(this.state.selected != tab){
+      this.setState({ 
+          selected: tab,
+          hasRenderedUpdatedHTML: false
+         });
+    }
+
+  }
+  getSelectedTab() {
+    return this.state.selected
   }
 
   render() {
-      return (
+      return ( 
         <div className="pvl">
             <DndProvider backend={HTML5Backend}>
               <div className="shell">
-                  <VisualLayoutContainer></VisualLayoutContainer>
-                  <div class="pvlObjectBanks">
-                    <LayoutBank objects={this.getLayoutObjects()}></LayoutBank>
-                    <ContentBank content={this.getContentBank()}></ContentBank> 
+                  <VisualLayoutContainer
+                    setTab={this.setSelectedTab} 
+                    selected={this.state.selected}
+                    hasRenderedUpdatedHTML={this.state.hasRenderedUpdatedHTML}
+                    previewURL={this.getPreviewTestingURL()}
+                    ></VisualLayoutContainer>
+                  <div className="pvlObjectBanks">
+                    
+                    <LayoutBank 
+                      setTab={this.setSelectedTab}
+                      objects={this.getLayoutObjects()}
+                      ></LayoutBank>
+                    <ContentBank 
+                      setTab={this.setSelectedTab} 
+                      content={this.getContentBank()}
+                      ></ContentBank> 
                   </div>
               </div>
             </DndProvider>

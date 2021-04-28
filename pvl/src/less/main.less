@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto:wght@400&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Roboto:wght@400&display=swap';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
 @import 'https://raw.githubusercontent.com/zesty-io/design-system/master/core/src/colors.less';
 @import 'https://raw.githubusercontent.com/zesty-io/design-system/master/core/src/typography.less';
@@ -6,23 +6,72 @@
 // variables and mixins
 @width: 100%;
 @defaultPadding: 10px;
-@defaultBorderRadius: 5px;
+@defaultBorderRadius: 3px;
 @defaultMargin: @defaultPadding;
 .defaultBorderRadius() {
-    border-radius: 3px;
+    border-radius: @defaultBorderRadius;
+}
+.defaultBoxShadow() {
+    box-shadow: 0px 0px @defaultPadding @zesty-grey;
 }
 .zerod() {
     margin: 0;
     padding: 0;
 }
+
+// resused 
+.typetag() {
+    flex: 1;
+    display: block;
+    max-width: 60px;
+    text-align: center;
+    background-color: @zesty-field-blue;
+    border-right: 1px @zesty-light-grey solid;
+    span {
+        font-size: 1.5em;
+        padding: @defaultPadding;
+    }
+}
+
 // For the demo 
 body,html {
-    background-color: #000;
+    background-color: @zesty-dark-blue;
     font-family: 'Roboto', sans-serif;
     font-size: .8em;
     .zerod();
+    color: @zesty-dark-blue;
+    padding: 0 20px @defaultPadding 20px; 
+}
+.header{
+    display: flex;
+    width: 100%; 
+    padding: 10px 0px;
+}
+.header div {
+    flex: 1;
+    text-align: right;
+}
+.header div img {
+    max-width: 160px;
+    padding: 10px 0px;
+}
+.header h1 {
+    flex: 3;
+    color: white;  letter-spacing: 1;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+
+}
+// remove outline in chrome
+input:focus, button:focus, textarea:focus, select:focus{
+    outline: none;
 }
 .pvl {
-    @import 'visual-shell.less';
-    @import 'drag-objects.less';
+    @import 'pvl-shell.less';
+    @import 'visual-utlities.less';
+    @import 'layout-bank.less';
+    @import 'content-bank.less';
+    @import 'layout-objects.less';
+    @import 'visual-layout-container.less';
 }
