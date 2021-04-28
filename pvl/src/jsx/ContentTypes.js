@@ -5,7 +5,7 @@ export const ContentTypes = {
     name: 'Image(s)', 
     type: 'content',
     description: 'Reference to image ZUIDs in Zesty.io',
-    html: '<img src="*" alt="*" />',
+    html: '<img src="*" alt="@" width="100%" />',
     draggable: true
   },
   images: {
@@ -13,7 +13,7 @@ export const ContentTypes = {
     name: 'Image(s)', 
     type: 'content',
     description: 'Reference to image ZUIDs in Zesty.io',
-    html: '<img src="*" alt="*" />',
+    html: '<img src="*" alt="@" width="100%" />',
     draggable: true
   },
   textarea: {

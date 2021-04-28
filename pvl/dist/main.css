@@ -566,6 +566,12 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlPreview .pvlRenderedOutput {
   padding: 10px;
 }
+.pvl .pvlVisualLayoutContainer .pvlPreview .pvlRenderedOutput .pvlRow {
+  margin-bottom: 10px;
+}
+.pvl .pvlVisualLayoutContainer .pvlPreview .pvlRenderedOutput .pvlColumn {
+  margin-right: 10px;
+}
 .pvl .pvlVisualLayoutContainer .pvlCode {
   position: absolute;
   z-index: 0;
