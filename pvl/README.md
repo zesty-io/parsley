@@ -102,9 +102,10 @@ When provided an instance but not a model zuid, the app asks them to select a mo
 With demo passed as a prop, the tool runs in demo mode using freeform  on the zesty.io website instance.
 
 
-
-When with property `instanceZUID`, if it is blank it will default to zesty.io/-/gql/, if you pass an instanceZUID it attempts to connect to the preview URL for that ZUID. Not preview lock will block this requrest, so the user should have an active session to access their {instanceZUID}-dev.zesty.io/-/gql/. 
-
+```
+<ParsleyVisualLayout instanceZUID="[INSTANCE_ZUID]" modelZUID="[MODEL_ZUID]" itemZUID="[ITEM_ZUID]"></ParsleyVisualLayout>
+```
+When provided the instance, model, and item zuid as props, it automatically starts with the model selected but will attempt to write an pvl/content designer item field, it it doesn exist, it will create it, and then write to it. If the item doesnt exist it will fail to load. When i item exists, it will preload item data to populate in the design experience. 
 
 
 ## How to Run Locally
