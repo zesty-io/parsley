@@ -47,17 +47,7 @@ Our Goal... To make Zesty.io like nothing you've ever experienced...
 
 - [ ] Setup include code object bank component
 - [ ] fetch remote file data for snippets, or fake it for now
-- [ ] Allow Parsley in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
-
-# How it works
-
-* **In Schema:** Each content model has a visual layout tab
- * Output write to a snippet named [MODEL_ZUID]-pvl.parsley
- * {{this.autolayout()}} will look for that reference
-* **In Content:** Each Content Item will have an PVL (content designer) tab which defaults to the content model design (if it exists)
-  * The output of PVL writes to a new content item field `_pvl`
-  * The items PVL will override the model PVL 
-* In Code: The [MODEL_ZUID]-pvl.parsley files will be accessible to edit
+- [ ] Allow Parsley Rendering in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
 
 # Parsley Visual Layout Tool
 
@@ -72,13 +62,50 @@ A NO CODE tool for authoring HTML layouts that outputs HTML and CSS with Zesty.i
 * Will use a lightweight CSS framework: [Reflex](https://github.com/leejordan/reflex)
 * Elements in output all have a `pvl-*` class on them
 
+## How it works in Zesty.io
+
+* **In App:** A Visual Layout Tab - it is provided an instanceZUID prop, user selects a model to edit
+* **In Schema:** Each content model has a visual layout tab
+ * Output writes to a snippet named [MODEL_ZUID]-pvl.parsley, save and publish available in tool
+ * {{this.autolayout()}} will look for that reference
+* **In Content:** Each Content Item will have an PVL (content designer) tab which defaults to the content model design (if it exists)
+  * The output of PVL writes to a new content item field `_pvl`
+  * The items PVL will override the model PVL sotred in [MODEL_ZUID]-pvl.parsley
+* In Code: The [MODEL_ZUID]-pvl.parsley files will be accessible to edit
+* **Free Form mode** No saving, just makes code for copying
+
+
 ## How to Use
 
-The Zesty.io Instance's `GQL` setting should be set to be on. Start with property `instanceZUID`, if it is blank it will default to zesty.io/-/gql/, if you pass an instanceZUID it attempts to connect to the preview URL for that ZUID. Not preview lock will block this requrest, so the user should have an active session to access their {instanceZUID}-dev.zesty.io/-/gql/. 
+It must be used in a react app. Import the ParsleyVisualLayout component, and enter it into your JSX.T he Zesty.io Instance's `GQL` setting must be set to [true] in order to run, else it fails.  
+
+Instantiation examples:
 
 ```
-<ParsleyVisualLayout instanceZUID=""></ParsleyVisualLayout>
+<ParsleyVisualLayout></ParsleyVisualLayout>
 ```
+Runs and looks for a Zesty.io user auth token, then prompts the user to select an Instance from their access list, then asks them to select a model or include, or use freeform mode.
+
+```
+<ParsleyVisualLayout instanceZUID="[INSTANCE_ZUID]" modelZUID="[MODEL_ZUID]"></ParsleyVisualLayout>
+```
+When provided both the instance and model zuid as props, it automatically starts with the model selected. If the model is not included in the instance ZUID, it will fail to load.
+
+```
+<ParsleyVisualLayout instanceZUID="[INSTANCE_ZUID]"></ParsleyVisualLayout>
+```
+When provided an instance but not a model zuid, the app asks them to select a model or include, or use freeform mode.
+
+```
+<ParsleyVisualLayout demo=true></ParsleyVisualLayout>
+```
+With demo passed as a prop, the tool runs in demo mode using freeform  on the zesty.io website instance.
+
+
+
+When with property `instanceZUID`, if it is blank it will default to zesty.io/-/gql/, if you pass an instanceZUID it attempts to connect to the preview URL for that ZUID. Not preview lock will block this requrest, so the user should have an active session to access their {instanceZUID}-dev.zesty.io/-/gql/. 
+
+
 
 ## How to Run Locally
 
@@ -149,7 +176,7 @@ A layout object is a top level class that holds information to
 
 [An ID is needed for React DND](https://react-dnd.github.io/react-dnd/docs/overview), and that is all that you are working with. Since we do not use REDUX or FLUX for this component, we need to know as much from the ID as possible. Since Layout Object are not related to their actual layout we will be creating a new layout object upon drop. To do this we will need a key that tells us what to do.
 
-Design Format ID: `[primarytype]:[type]` e.g. `design:2columns`
+Design Format ID: `[primarytype]:[type]:[name]` e.g. `design:columns:2columns`
 Content Format ID: `[primarytype]:[type]:[model]:[field_name]` e.g. `content:text:about:title`
 
 The key is split by `:` dilimiter and used to create a new layout object in the VisualLayout component
