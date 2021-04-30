@@ -20,7 +20,7 @@
 - [X] CSS design content model object
 - [X] Clear content filter
 - [X] Start Matching design
-- [ ] Star current Content Model
+- [ ] Star/Select current Content Model
 - [X] Connect collapse button to CSS functionality and prop passing
 - [X] Test building tree on main component from drag n drop objects
 - [X] Work on layout object to adapt to different styles based on its incoming object
@@ -40,12 +40,16 @@
 - [X] Code Output component - Recieves Tree and outputs HTML with parsley
 - [X] Preview Rendering
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
-
+- [ ] Setup "demo" mode which always runs the zesty.io marketing website
+- [ ] Setup instanceZUId prop, if not available, creates a prompt to select an instance (requires auth)
+- [ ] If modelZuid not passed, setup a prompt to select model zuid to work with (or free form)
+- [ ] Save and publish button for snippets
+- [ ] 
 ## Considerations
 
 Our Goal... To make Zesty.io like nothing you've ever experienced...
 
-- [ ] Setup include code object bank component
+- [ ] Setup {{include}} code object bank component - loads snippets
 - [ ] fetch remote file data for snippets, or fake it for now
 - [ ] Allow Parsley in Rich Fields (enables content designer and forms to be include like {{include forms2}} )
 
