@@ -5476,7 +5476,7 @@ eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/i
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! babel-polyfill */\"./node_modules/babel-polyfill/lib/index.js\");\nmodule.exports = __webpack_require__(/*! /home/kilroy/code/zesty-io/parsley/pvl/src/jsx/index.js */\"./src/jsx/index.js\");\n\n\n//# sourceURL=webpack:///multi_babel-polyfill_./src/jsx/index.js?");
+eval("__webpack_require__(/*! babel-polyfill */\"./node_modules/babel-polyfill/lib/index.js\");\nmodule.exports = __webpack_require__(/*! /Users/kilroy/code/zesty-io/parsley/pvl/src/jsx/index.js */\"./src/jsx/index.js\");\n\n\n//# sourceURL=webpack:///multi_babel-polyfill_./src/jsx/index.js?");
 
 /***/ })
 

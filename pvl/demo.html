@@ -14,6 +14,29 @@
         </div>
         
         <div id="app"></div>
+        
+        <script src="https://zesty-io.github.io/websites/fetch-api-wrapper/zestyio-rest-fetch-wrapper.js"></script>
+        <script>
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            if(getCookie('APP_SID') != ''){
+                console.log('API Instantiated')
+                ZestyAPI = new ZestyioRestFetchWrapper('8-82f8f3fff6-4zq0d0',getCookie('APP_SID'))
+                console.log(ZestyAPI)
+            }
+        </script>
         <script src="dist/bundle.js"></script>
     </body>
 </html> 
