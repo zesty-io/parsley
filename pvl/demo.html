@@ -32,9 +32,7 @@
                 return "";
             }
             if(getCookie('APP_SID') != ''){
-                console.log('API Instantiated')
-                ZestyAPI = new ZestyioRestFetchWrapper('8-82f8f3fff6-4zq0d0',getCookie('APP_SID'))
-                console.log(ZestyAPI)
+                ZestyAPI = new ZestyioRestFetchWrapper('',getCookie('APP_SID'))
             }
         </script>
         <script src="dist/bundle.js"></script>

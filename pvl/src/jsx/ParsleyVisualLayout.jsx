@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import VisualLayoutContainer from './VisualLayoutContainer'
 import ContentBank from './ContentBank'
 import LayoutBank from './LayoutBank'
+import InstanceSelector from './InstanceSelector'
 import { DesignObjects } from './DesignObjects'
 import { ContentTypes } from './ContentTypes'
 import { DndProvider } from 'react-dnd'
@@ -12,19 +13,25 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 class ParsleyVisualLayout extends React.Component {
   constructor(props) {
     super(props);  
+    let instanceZUID = (this.props.instanceZUID != undefined) ? this.props.instanceZUID : '';
     this.state = { 
       data: [],
       selected: 'visual' ,
-      models: []
+      models: [],
+      instanceZUID: instanceZUID,
+      demo: {
+        'contentBankURL' : `https://www.zesty.io/-/gql/`,
+        'previewURL': `https://www.zesty.io/ajax/parsley-visual-layout/`
+      } 
     };
      
   }
   getContentBankURL() {
     let url
-    if(this.props.instanceZUID){
-       url = `https://${this.props.instanceZUID}-dev.preview.zesty.io/-/gql/`
+    if(this.state.instanceZUID && this.props.demo != "true"){
+       url = `https://${this.props.instanceZUID}-dev.webengine.zesty.io/-/gql/`
     } else {
-       url = `https://www.zesty.io/-/gql/`
+       url = this.state.demo.contentBankURL
     }
     return url; 
 
@@ -32,15 +39,18 @@ class ParsleyVisualLayout extends React.Component {
 
   getPreviewTestingURL() {
     let url
-    if(this.props.instanceZUID){
-       url = `https://${this.props.instanceZUID}-dev.preview.zesty.io/ajax/parsley-visual-layout/`
+    if(this.state.instanceZUID && this.props.demo != "true"){
+       url = `https://${this.props.instanceZUID}-dev.webengine.zesty.io/ajax/parsley-visual-layout/`
     } else {
-       url = `https://www.zesty.io/ajax/parsley-visual-layout/`
+       url = this.state.demo.contentBankURL
     }
     return url; 
   } 
 
   async componentDidMount(){
+    if(this.state.instanceZUID == ''){
+      console.log(ZestyAPI)
+    }
     const response = await fetch(this.getContentBankURL());
     const json = await response.json(); 
     this.setState({
@@ -144,6 +154,11 @@ class ParsleyVisualLayout extends React.Component {
     return DesignObjects
   }
 
+  setInstanceZUID = (zuid) => {
+    this.setState({instanceZUID: zuid})
+    alert(zuid)
+  }
+
   setSelectedTab = (tab) => {
     if(this.state.selected != tab){
       this.setState({ 
@@ -160,6 +175,9 @@ class ParsleyVisualLayout extends React.Component {
   render() {
       return ( 
         <div className="pvl">
+            {this.state.instanceZUID == '' && <InstanceSelector
+              setInstanceZUID={this.setInstanceZUID}
+            ></InstanceSelector>}
             <DndProvider backend={HTML5Backend}>
               <div className="shell">
                   <VisualLayoutContainer
