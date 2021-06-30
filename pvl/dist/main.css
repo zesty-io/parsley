@@ -699,7 +699,7 @@ select:focus {
   border-bottom-left-radius: 0px;
 }
 .pvl .pvlInstanceSelector {
-  position: fixed;
+  position: absolute;
   top: 20%;
   left: 50%;
   margin-left: -150;
@@ -708,11 +708,45 @@ select:focus {
   background: #ccc;
   z-index: 1000;
 }
+.pvl .pvlInstanceSelector:before {
+  content: '';
+  position: fixed;
+  z-index: 0;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -50%;
+  background: rgba(0, 0, 0, 0.5);
+}
 .pvl .pvlInstanceSelector > div {
-  position: absolute;
-  top: 40px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  background: #FFF;
+  position: relative;
+  z-index: 1000;
+}
+.pvl .pvlInstanceSelector > div > div {
+  height: 80%;
+  width: 100%;
   overflow-y: scroll;
+}
+.pvl .pvlInstanceSelector > div > div ul {
+  margin: 0px;
+  padding: 0px;
+}
+.pvl .pvlInstanceSelector > div > div ul li {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  border-bottom: 1px #a7afbf;
+}
+.pvl .pvlInstanceSelector > div > div ul li a {
+  padding: 5px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  color: #5b667d;
+  font-weight: 400;
+  font-size: 14px;
+}
+.pvl .pvlInstanceSelector > div > div ul li a:hover {
+  background: #c7d4ea;
 }

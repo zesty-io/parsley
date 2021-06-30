@@ -31,6 +31,7 @@ class VisualLayoutContainer extends React.Component {
             codeOutput: ''
         }
         
+        
     }
 
     /**

@@ -20,6 +20,7 @@ class ParsleyVisualLayout extends React.Component {
       selected: 'visual' ,
       models: [],
       instanceZUID: instanceZUID,
+      instance : {},
       demo: demo,
       demoLinks: {
         'contentBankURL' : `https://www.zesty.io/-/gql/`,
@@ -30,8 +31,8 @@ class ParsleyVisualLayout extends React.Component {
   }
   getContentBankURL() {
     let url
-    if(this.state.instanceZUID && this.state.demo != true){
-       url = `https://${this.props.instanceZUID}-dev.webengine.zesty.io/-/gql/`
+    if(this.state.instanceZUID != '' && this.state.demo == false){
+       url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/-/gql/`
     } else {
        url = this.state.demoLinks.contentBankURL
     }
@@ -41,14 +42,15 @@ class ParsleyVisualLayout extends React.Component {
 
   getPreviewTestingURL() {
     let url
-    if(this.state.instanceZUID && this.state.demo != true){
-       url = `https://${this.props.instanceZUID}-dev.webengine.zesty.io/ajax/parsley-visual-layout/`
+    if(this.state.instanceZUID != '' && this.state.demo == false){
+       url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/ajax/parsley-visual-layout/`
     } else {
        url = this.state.demoLinks.contentBankURL
     }
     return url; 
   } 
   async loadData(){
+    console.log(this.getContentBankURL())
     const response = await fetch(this.getContentBankURL());
     const json = await response.json(); 
     this.setState({
@@ -160,15 +162,22 @@ class ParsleyVisualLayout extends React.Component {
     return DesignObjects
   }
 
-  setInstanceZUID = (zuid) => {
-    this.setState({instanceZUID: zuid})
-    alert(zuid)
+  setInstance = async (object) => {
+    console.log(object)
+     this.setState({
+        instanceZUID: object.ZUID,
+        instance: object
+      },async () => {
+      await this.loadData()
+    })
   }
 
   toggleDemo = async () => {
     let toggle = this.state.demo ? false : true;
-    this.setState({demo: toggle})
-    await this.loadData()
+    this.setState({demo: toggle}, async () => {
+      await this.loadData()
+    })
+    
   }
 
   setSelectedTab = (tab) => {
@@ -188,7 +197,7 @@ class ParsleyVisualLayout extends React.Component {
       return ( 
         <div className="pvl">
             {this.state.instanceZUID == '' && this.state.demo == false && <InstanceSelector
-              setInstanceZUID={this.setInstanceZUID}
+              setInstance={this.setInstance}
               toggleDemoMode={this.toggleDemo}
             ></InstanceSelector>}
             <DndProvider backend={HTML5Backend}>
