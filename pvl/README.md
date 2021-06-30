@@ -40,11 +40,14 @@
 - [X] Code Output component - Recieves Tree and outputs HTML with parsley
 - [X] Preview Rendering
 - [ ] Output Targets (snippet, export html, view file, wysiwyg target)
-- [ ] Setup "demo" mode which always runs the zesty.io marketing website
-- [ ] Setup instanceZUId prop, if not available, creates a prompt to select an instance (requires auth)
+- [X] Setup "demo" mode which always runs the zesty.io marketing website
+- [X] Setup instanceZUId prop, if not available, creates a prompt to select an instance (requires auth)
+- [X] Setup JSON view
+- [ ] Update webengine to accept a remote parse from a zesty `/-/parsley-visual-layout/` (requires authentication)
+- [ ] Render JSON output that could be read by NextJS to make rows/columns 
 - [ ] If modelZuid not passed, setup a prompt to select model zuid to work with (or free form)
 - [ ] Save and publish button for snippets
-- [ ] 
+
 ## Considerations
 
 Our Goal... To make Zesty.io like nothing you've ever experienced...
@@ -133,7 +136,7 @@ Terminal 2
 npm run watch-less
 ```
 
-Install VS Code live server, open `example.html` with live server extension
+Install VS Code live server, open `demo.html` with live server extension
 
 # Documenting of the Layout App
 
