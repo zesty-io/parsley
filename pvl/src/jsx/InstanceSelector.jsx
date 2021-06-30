@@ -9,7 +9,8 @@ class InstanceSelector extends React.Component {
     constructor(props) {
         super(props);
          this.state = { 
-            availableInstances: [],
+            search: '',
+            availableInstances: []
          }
     }
     async componentDidMount() {
@@ -20,15 +21,34 @@ class InstanceSelector extends React.Component {
         })
         
     }
+    handleChange = (e) => {
+        this.setState({ search: e.target.value });
+    }
+
+    getInstances() {
+        return this.state.availableInstances.filter(instance => {
+            if(this.state.search == '') return true;
+            return instance.name.toLowerCase().includes(this.state.search.toLowerCase())
+        })
+    }
    
     render() {
-        let instances = this.state.availableInstances
+        let instances = this.getInstances()
         return (
             <div className="pvlInstanceSelector">
                 Select an Instance
-                <input type="text" placeholder="search" />
+                <input 
+                    type="text" 
+                    placeholder="search" 
+                    value={this.state.search}
+                    onChange={this.handleChange}
+                    />
                 <div>
-                    
+                    {instances.length == 0 && <p>No Instances found. You may need to login to  
+                        <a target="_blank" href="https://accounts.zesty.io"> https://accounts.zesty.io</a>
+                        <br /><br />
+                        If you do not have an account, you may <a onClick={ () => this.props.toggleDemoMode() } href="#"> start demo mode</a>.
+                        </p>}
                     {instances.length != 0 && instances.sort(function(a, b){
                             if(a.name == null) a.name = ''
                             if(b.name == null) b.name = ''
@@ -47,10 +67,10 @@ class InstanceSelector extends React.Component {
                         }).map((instance) => {
                             console.log(instance)
                             return (
-                            <div key={instance.ZUID}>
-                                <h1>{instance.name}</h1>
-                                <a onClick={ () => this.props.setInstanceZUID(instance.ZUID) } href="#"> set zuid </a>
-                            </div>
+                                <div key={instance.ZUID}>
+                                    <h1>{instance.name}</h1>
+                                    <a onClick={ () => this.props.setInstanceZUID(instance.ZUID) } href="#"> set zuid </a>
+                                </div>
                             )
                         })
                         

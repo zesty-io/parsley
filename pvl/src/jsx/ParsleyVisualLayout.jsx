@@ -14,12 +14,14 @@ class ParsleyVisualLayout extends React.Component {
   constructor(props) {
     super(props);  
     let instanceZUID = (this.props.instanceZUID != undefined) ? this.props.instanceZUID : '';
+    let demo = (this.props.demo != undefined && this.props.demo == "true") ? true : false;
     this.state = { 
       data: [],
       selected: 'visual' ,
       models: [],
       instanceZUID: instanceZUID,
-      demo: {
+      demo: demo,
+      demoLinks: {
         'contentBankURL' : `https://www.zesty.io/-/gql/`,
         'previewURL': `https://www.zesty.io/ajax/parsley-visual-layout/`
       } 
@@ -28,10 +30,10 @@ class ParsleyVisualLayout extends React.Component {
   }
   getContentBankURL() {
     let url
-    if(this.state.instanceZUID && this.props.demo != "true"){
+    if(this.state.instanceZUID && this.state.demo != true){
        url = `https://${this.props.instanceZUID}-dev.webengine.zesty.io/-/gql/`
     } else {
-       url = this.state.demo.contentBankURL
+       url = this.state.demoLinks.contentBankURL
     }
     return url; 
 
@@ -39,23 +41,27 @@ class ParsleyVisualLayout extends React.Component {
 
   getPreviewTestingURL() {
     let url
-    if(this.state.instanceZUID && this.props.demo != "true"){
+    if(this.state.instanceZUID && this.state.demo != true){
        url = `https://${this.props.instanceZUID}-dev.webengine.zesty.io/ajax/parsley-visual-layout/`
     } else {
-       url = this.state.demo.contentBankURL
+       url = this.state.demoLinks.contentBankURL
     }
     return url; 
   } 
-
-  async componentDidMount(){
-    if(this.state.instanceZUID == ''){
-      console.log(ZestyAPI)
-    }
+  async loadData(){
     const response = await fetch(this.getContentBankURL());
     const json = await response.json(); 
     this.setState({
       models: this.getIterableObject(json.models)
     }) 
+  }
+
+  async componentDidMount(){
+    if(this.state.instanceZUID == '' && this.state.demo == false){
+      console.log(ZestyAPI)
+    }
+    await this.loadData()
+   
   }
 
  // converts given content object (which is Zesty.io /-/gql/ output) to 
@@ -159,12 +165,18 @@ class ParsleyVisualLayout extends React.Component {
     alert(zuid)
   }
 
+  toggleDemo = async () => {
+    let toggle = this.state.demo ? false : true;
+    this.setState({demo: toggle})
+    await this.loadData()
+  }
+
   setSelectedTab = (tab) => {
     if(this.state.selected != tab){
       this.setState({ 
-          selected: tab,
-          hasRenderedUpdatedHTML: false
-         });
+        selected: tab,
+        hasRenderedUpdatedHTML: false
+      });
     }
 
   }
@@ -175,8 +187,9 @@ class ParsleyVisualLayout extends React.Component {
   render() {
       return ( 
         <div className="pvl">
-            {this.state.instanceZUID == '' && <InstanceSelector
+            {this.state.instanceZUID == '' && this.state.demo == false && <InstanceSelector
               setInstanceZUID={this.setInstanceZUID}
+              toggleDemoMode={this.toggleDemo}
             ></InstanceSelector>}
             <DndProvider backend={HTML5Backend}>
               <div className="shell">

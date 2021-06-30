@@ -572,7 +572,8 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlPreview .pvlRenderedOutput .pvlColumn {
   margin-right: 10px;
 }
-.pvl .pvlVisualLayoutContainer .pvlCode {
+.pvl .pvlVisualLayoutContainer .pvlCode,
+.pvl .pvlVisualLayoutContainer .pvlJSON {
   position: absolute;
   z-index: 0;
   top: 65px;
@@ -586,10 +587,12 @@ select:focus {
   background: #1b202c;
   color: #eff5ff;
 }
-.pvl .pvlVisualLayoutContainer .pvlCode.pvlSelected {
+.pvl .pvlVisualLayoutContainer .pvlCode.pvlSelected,
+.pvl .pvlVisualLayoutContainer .pvlJSON.pvlSelected {
   z-index: 2;
 }
-.pvl .pvlVisualLayoutContainer .pvlCode textarea {
+.pvl .pvlVisualLayoutContainer .pvlCode textarea,
+.pvl .pvlVisualLayoutContainer .pvlJSON textarea {
   position: absolute;
   z-index: 0;
   top: 0px;
@@ -704,4 +707,12 @@ select:focus {
   height: 200px;
   background: #ccc;
   z-index: 1000;
+}
+.pvl .pvlInstanceSelector > div {
+  position: absolute;
+  top: 40px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-y: scroll;
 }

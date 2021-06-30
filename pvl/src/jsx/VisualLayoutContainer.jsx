@@ -4,6 +4,7 @@ import DeleteArea from './DeleteArea'
 import PVLToolbar from './PVLToolbar'
 import DropColumn from './DropColumn'
 import CodeOutput from './CodeOutput'
+import JSONOutput from './JSONOutput'
 import Preview from './Preview'
 
 // VisualLayoutContainer 
@@ -147,7 +148,9 @@ class VisualLayoutContainer extends React.Component {
         return finalArray;
       
     }
-
+    buildJSON = (tree) => {
+        return JSON.stringify(tree);
+    }
     
     buildHTMLTree = (tree) => {
         //if(this.props.selected != "code") return ''
@@ -197,7 +200,10 @@ class VisualLayoutContainer extends React.Component {
                             <span className="fa fa-pen"></span><span>Visual Layout</span>
                         </button>
                         <button className={this.props.selected == "code" ? `pvlSelected`: ''}  onClick={() => {this.props.setTab('code')} }>
-                            <span className="fa fa-code"></span><span>Code Output</span>
+                            <span className="fa fa-code"></span><span>ZHTML Output</span>
+                        </button>
+                        <button className={this.props.selected == "json" ? `pvlSelected`: ''}  onClick={() => {this.props.setTab('json')} }>
+                            <span className="fa fa-project-diagram"></span><span>JSON Output</span>
                         </button>
                         <button className={this.props.selected == "preview" ? `pvlSelected`: ''}  onClick={() => {this.props.setTab('preview')} }>
                             <span className="fa fa-eye"></span><span>Preview</span>
@@ -213,10 +219,13 @@ class VisualLayoutContainer extends React.Component {
                     id={this.state.rootColumnName} 
                     droppable="true"></DropColumn>
                 <CodeOutput 
-                    previewURL={this.props.previewURL} 
                     selected={this.props.selected} 
                     code={this.buildHTMLTree(this.state.tree)}
                     tree={this.state.tree}></CodeOutput>
+                <JSONOutput 
+                    selected={this.props.selected} 
+                    json={this.buildJSON(this.state.tree)}
+                    tree={this.state.tree}></JSONOutput>
                 <Preview 
                     previewURL={this.props.previewURL}
                     code={this.buildHTMLTree(this.state.tree)}
