@@ -14,10 +14,12 @@ class InstanceSelector extends React.Component {
          }
     }
     async componentDidMount() {
-        let instances = await ZestyAPI.getInstances();
-        this.setState({
-            'availableInstances' : instances.data
-        })
+        if(typeof ZestyAPI !== 'undefined' ){
+            let instances = await ZestyAPI.getInstances();
+            this.setState({
+                'availableInstances' : instances.data
+            })
+        }
         
     }
     handleChange = (e) => {

@@ -20,9 +20,12 @@ class ParsleyVisualLayout extends React.Component {
       selected: 'visual' ,
       models: [],
       instanceZUID: instanceZUID,
-      instance : {},
+      instance : {
+        name: 'Select'
+      },
       demo: demo,
-      demoLinks: {
+      demoData: {
+        'name': 'Demo Mode',
         'contentBankURL' : `https://www.zesty.io/-/gql/`,
         'previewURL': `https://www.zesty.io/ajax/parsley-visual-layout/`
       } 
@@ -34,7 +37,7 @@ class ParsleyVisualLayout extends React.Component {
     if(this.state.instanceZUID != '' && this.state.demo == false){
        url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/-/gql/`
     } else {
-       url = this.state.demoLinks.contentBankURL
+       url = this.state.demoData.contentBankURL
     }
     return url; 
 
@@ -45,7 +48,7 @@ class ParsleyVisualLayout extends React.Component {
     if(this.state.instanceZUID != '' && this.state.demo == false){
        url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/ajax/parsley-visual-layout/`
     } else {
-       url = this.state.demoLinks.contentBankURL
+       url = this.state.demoData.contentBankURL
     }
     return url; 
   } 
@@ -59,8 +62,11 @@ class ParsleyVisualLayout extends React.Component {
   }
 
   async componentDidMount(){
-    if(this.state.instanceZUID == '' && this.state.demo == false){
-      console.log(ZestyAPI)
+    if(this.state.instanceZUID == '' && this.state.demo == false && typeof ZestyAPI !== 'undefined'){
+        let authed = await ZestyAPI.verify()
+        console.log(authed)
+    } else {
+      this.toggleDemo()
     }
     await this.loadData()
    
@@ -180,6 +186,10 @@ class ParsleyVisualLayout extends React.Component {
     
   }
 
+  getInstanceData() {
+    return this.demo ? this.state.demoData : this.state.instance
+  }
+
   setSelectedTab = (tab) => {
     if(this.state.selected != tab){
       this.setState({ 
@@ -207,6 +217,7 @@ class ParsleyVisualLayout extends React.Component {
                     selected={this.state.selected}
                     hasRenderedUpdatedHTML={this.state.hasRenderedUpdatedHTML}
                     previewURL={this.getPreviewTestingURL()}
+                    instance={this.getInstanceData()}
                     ></VisualLayoutContainer>
                   <div className="pvlObjectBanks">
                     

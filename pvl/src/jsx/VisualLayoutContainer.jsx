@@ -194,7 +194,7 @@ class VisualLayoutContainer extends React.Component {
         
         return (
             <div className="pvlVisualLayoutContainer">
-                <PVLToolbar title="Parsley Visual Layout" helpText={helpText}></PVLToolbar>
+                <PVLToolbar title={`${this.props.instance.name} - Visual Layout`} helpText={helpText}></PVLToolbar>
                 <div className="pvlUtilities">
                     <div className="pvlVisualTabBar">
                         <button className={this.props.selected == "visual" ? `pvlSelected` : ''} onClick={() => {this.props.setTab('visual')} }>
