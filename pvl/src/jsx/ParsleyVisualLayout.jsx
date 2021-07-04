@@ -30,7 +30,7 @@ class ParsleyVisualLayout extends React.Component {
       demoData: {
         'name': 'Demo Mode',
         'contentBankURL' : `https://www.zesty.io/-/gql/`,
-        'previewURL': `https://www.zesty.io/ajax/parsley-visual-layout/`
+        'previewURL': `https://www.zesty.io/-/pvl/`
       } 
     };
      
@@ -44,12 +44,12 @@ class ParsleyVisualLayout extends React.Component {
     }
     return url; 
 
-  }
+  } 
 
   getPreviewTestingURL() {
     let url
     if(this.state.instanceZUID != '' && this.state.demo == false){
-       url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/ajax/parsley-visual-layout/`
+       url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/-/pvl/`
     } else {
        url = this.state.demoData.contentBankURL
     }
