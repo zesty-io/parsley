@@ -14,11 +14,14 @@ class ParsleyVisualLayout extends React.Component {
   constructor(props) {
     super(props);  
     let instanceZUID = (this.props.instanceZUID != undefined) ? this.props.instanceZUID : '';
+    let modelZUID = (this.props.modelZUID != undefined) ? this.props.modelZUID : '';
     let demo = (this.props.demo != undefined && this.props.demo == "true") ? true : false;
     this.state = { 
       data: [],
       selected: 'visual' ,
       models: [],
+      modelZUID: modelZUID,
+      model: {},
       instanceZUID: instanceZUID,
       instance : {
         name: 'Select'
@@ -178,6 +181,16 @@ class ParsleyVisualLayout extends React.Component {
     })
   }
 
+  setModel = async (object) => {
+    console.log(object)
+    this.setState({
+      model: object,
+      modelZUID: object.zuid
+    }, async () => {
+      alert('set')
+    })
+  }
+
   toggleDemo = async () => {
     let toggle = this.state.demo ? false : true;
     this.setState({demo: toggle}, async () => {
@@ -228,6 +241,7 @@ class ParsleyVisualLayout extends React.Component {
                     <ContentBank 
                       setTab={this.setSelectedTab} 
                       content={this.getContentBank()}
+                      setModel={this.setModel}
                       ></ContentBank> 
                   </div>
               </div>
