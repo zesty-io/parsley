@@ -20,6 +20,7 @@ class ParsleyVisualLayout extends React.Component {
       data: [],
       selected: 'visual' ,
       models: [],
+      views: [],
       modelZUID: modelZUID,
       model: {},
       instanceZUID: instanceZUID,
@@ -56,11 +57,22 @@ class ParsleyVisualLayout extends React.Component {
     return url; 
   } 
   async loadData(){
-    console.log(this.getContentBankURL())
+    // get models
     const response = await fetch(this.getContentBankURL());
     const json = await response.json(); 
+    
+    let cleanedViewsObject = {} 
+    if(ZestyAPI.instanceZUID){
+      // get views
+      const views = await ZestyAPI.getViews();
+      views.data.forEach(view => {
+        cleanedViewsObject[view.fileName] = view.ZUID
+      }) 
+    }
+    console.log(cleanedViewsObject)
     this.setState({
-      models: this.getIterableObject(json.models)
+      models: this.getIterableObject(json.models),
+      views: cleanedViewsObject
     }) 
   }
 
@@ -68,6 +80,10 @@ class ParsleyVisualLayout extends React.Component {
     if(this.state.instanceZUID == '' && this.state.demo == false && typeof ZestyAPI !== 'undefined'){
         let authed = await ZestyAPI.verify()
         console.log(authed)
+        if(authed.status != "OK"){
+          console.log("authed")
+        }
+        
     } else {
       this.toggleDemo()
     }
@@ -204,9 +220,13 @@ class ParsleyVisualLayout extends React.Component {
   }
 
   save = (code) =>{
-    let fileName = this.state.model.fileHTML
-    console.log('CODE',code)
-    ZestyAPI.createView(fileName,code)
+    const fileName = this.state.model.fileHTML
+    
+    if(this.state.views.hasOwnProperty(fileName)){
+      ZestyAPI.updateView(this.state.views[fileName], code)
+    } else {
+      ZestyAPI.createView(fileName,code)
+    }
     
   }
   publish = () => {
