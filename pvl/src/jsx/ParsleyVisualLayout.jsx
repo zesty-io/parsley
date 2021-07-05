@@ -51,7 +51,7 @@ class ParsleyVisualLayout extends React.Component {
     if(this.state.instanceZUID != '' && this.state.demo == false){
        url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/-/pvl/`
     } else {
-       url = this.state.demoData.contentBankURL
+       url = this.state.demoData.previewURL
     }
     return url; 
   } 

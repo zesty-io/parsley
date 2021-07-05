@@ -16,10 +16,13 @@ class InstanceSelector extends React.Component {
     async componentDidMount() {
         if(typeof ZestyAPI !== 'undefined' ){
             let instances = await ZestyAPI.getInstances();
-            this.setState({
-                'availableInstances' : instances.data
-            })
-        }
+            console.log(instances)
+            if(!instances.hasOwnProperty('error')){
+                this.setState({
+                    'availableInstances' : instances.data
+                })
+            }
+        } 
         
     }
     handleChange = (e) => {
@@ -47,8 +50,8 @@ class InstanceSelector extends React.Component {
                     onChange={this.handleChange}
                     />
                     <div>
-                    {instances.length == 0 && <p>No Instances found. You may need to login to  
-                        <a target="_blank" href="https://accounts.zesty.io"> https://accounts.zesty.io</a>
+                    {instances.length == 0 && <p>No Instances found. To access and instance you will need to login to  
+                        <a target="_blank" href="https://accounts.zesty.io"> https://accounts.zesty.io</a>, create an instance or be invited to an instance.
                         <br /><br />
                         If you do not have an account, you may <a onClick={ () => this.props.toggleDemoMode() } href="#"> start demo mode</a>.
                         </p>}
