@@ -219,13 +219,21 @@ class ParsleyVisualLayout extends React.Component {
     
   }
 
-  save = (code) =>{
-    const fileName = this.state.model.fileHTML
+  save = (code,json) => {
     
+    // zhtml
+    const fileName = this.state.model.fileHTML
     if(this.state.views.hasOwnProperty(fileName)){
       ZestyAPI.updateView(this.state.views[fileName], code)
     } else {
       ZestyAPI.createView(fileName,code)
+    }
+    // json
+    const fileNameJSON = this.state.model.fileJSON
+    if(this.state.views.hasOwnProperty(fileNameJSON)){
+      ZestyAPI.updateView(this.state.views[fileNameJSON], json)
+    } else {
+      ZestyAPI.createView(fileNameJSON,json)
     }
     
   }

@@ -200,7 +200,7 @@ class VisualLayoutContainer extends React.Component {
                     Editing Content Layout for <strong>{this.props.model.label}</strong> ({this.props.model.zuid}) 
                     </div> 
                     <div>  
-                        <button onClick={() => {this.props.save(this.buildHTMLTree(this.state.tree))} }>Save</button>
+                        <button onClick={() => {this.props.save(this.buildHTMLTree(this.state.tree),this.buildJSON(this.state.tree))} }>Save</button>
                         <button onClick={() => {this.props.publish()} }>Publish</button>
                     </div>
   
