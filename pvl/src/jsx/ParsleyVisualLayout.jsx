@@ -25,7 +25,7 @@ class ParsleyVisualLayout extends React.Component {
       instanceZUID: instanceZUID,
       instance : {
         name: 'Select'
-      },
+      }, 
       demo: demo,
       demoData: {
         'name': 'Demo Mode',
@@ -177,18 +177,22 @@ class ParsleyVisualLayout extends React.Component {
         instanceZUID: object.ZUID,
         instance: object
       },async () => {
+        ZestyAPI.setInstanceZUID(object.ZUID)
       await this.loadData()
     })
   }
 
-  setModel = async (object) => {
-    console.log(object)
+  setModel = async (modelObject) => {
+    
+    modelObject.fileJSON = `/z/pvl/${modelObject.zuid}.json`
+    modelObject.fileHTML = `/z/pvl/${modelObject.zuid}.zhtml`
+    console.log(modelObject) 
     this.setState({
-      model: object,
-      modelZUID: object.zuid
+      model: modelObject,
+      modelZUID: modelObject.zuid
     }, async () => {
-      alert('set')
-    })
+      alert(`Model '${modelObject.label}' Selected`)
+    }) 
   }
 
   toggleDemo = async () => {
@@ -199,10 +203,29 @@ class ParsleyVisualLayout extends React.Component {
     
   }
 
-  getInstanceData() {
-    return this.demo ? this.state.demoData : this.state.instance
+  save = (code) =>{
+    let fileName = this.state.model.fileHTML
+    console.log('CODE',code)
+    ZestyAPI.createView(fileName,code)
+    
+  }
+  publish = () => {
+    alert('pub')
   }
 
+  getInstanceData() {
+    return this.state.demo ? this.state.demoData : this.state.instance
+  }
+
+  getModelData() {
+    return this.state.model
+  }
+  resetModelData() {
+    this.setState({
+      model : {},
+      modelZUID : ''
+    })
+  }
   setSelectedTab = (tab) => {
     if(this.state.selected != tab){
       this.setState({ 
@@ -231,6 +254,9 @@ class ParsleyVisualLayout extends React.Component {
                     hasRenderedUpdatedHTML={this.state.hasRenderedUpdatedHTML}
                     previewURL={this.getPreviewTestingURL()}
                     instance={this.getInstanceData()}
+                    model={this.getModelData()}
+                    save={this.save}
+                    publish={this.publish}
                     ></VisualLayoutContainer>
                   <div className="pvlObjectBanks">
                     

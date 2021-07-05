@@ -195,6 +195,17 @@ class VisualLayoutContainer extends React.Component {
         return (
             <div className="pvlVisualLayoutContainer">
                 <PVLToolbar title={`${this.props.instance.name} - Visual Layout`} helpText={helpText}></PVLToolbar>
+                {this.props.model.hasOwnProperty('label') && <div>
+                    <div>
+                    Editing Content Layout for <strong>{this.props.model.label}</strong> ({this.props.model.zuid}) 
+                    </div> 
+                    <div>  
+                        <button onClick={() => {this.props.save(this.buildHTMLTree(this.state.tree))} }>Save</button>
+                        <button onClick={() => {this.props.publish()} }>Publish</button>
+                    </div>
+  
+
+                </div>}
                 <div className="pvlUtilities">
                     <div className="pvlVisualTabBar">
                         <button className={this.props.selected == "visual" ? `pvlSelected` : ''} onClick={() => {this.props.setTab('visual')} }>

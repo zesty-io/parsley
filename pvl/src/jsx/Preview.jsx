@@ -25,8 +25,8 @@ class Preview extends React.Component {
             formdata.append("parsley", this.props.code)
 
             fetch(this.props.previewURL,{
-                method: 'POST',
-                body: formdata,
+                method: 'POST', 
+                body: formdata  
             }).then(response => response.text())
             .then(text => {
                 this.setState({
