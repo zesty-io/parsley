@@ -1,52 +1,7 @@
-# Development state notes
 
-- [X] Setup React Webpack (React 16 to matches manager-ui)
-- [X] Install React-DND
-- [X] Connect DND to component
-- [X] setup DND decorator API https://react-dnd.github.io/react-dnd/docs/api/drop-target
-- [X] Test dragging and dropping
-- [X] Connect to remote endpoint in zesty, store in top level state
-- [X] pass content down to content bank, display layoutobjects (pass in types as props)
-- [X] Setup layout object bank
-- [X] Create Layout objects json file
-- [X] Design Layout objects interface
-- [X] Iterate through GQL object for content bank, collapsable content models
-- [X] Design the content model collapsing
-- [X] Move content mutatation into top level PVL before going into content bank
-- [X] Search through content filter, hiding etc
-- [X] Collapse content model button and functionality 
-- [X] clear collapse on search, bring it back
-- [X] CSS design content model area
-- [X] CSS design content model object
-- [X] Clear content filter
-- [X] Start Matching design
-- [ ] Star/Select current Content Model
-- [X] Connect collapse button to CSS functionality and prop passing
-- [X] Test building tree on main component from drag n drop objects
-- [X] Work on layout object to adapt to different styles based on its incoming object
-- [X] Create Column Layout Object that is droppable
-- [X] Make different layout designs for visual layout container
-- [X] Expand layoutobject to have different behaviors per type and content
-- [X] Add content references to the dropped columns
-- [X] Move content objects around
-- [X] Make a layoutobject (columns) droppable once in the canvas
-- [X] A proper way to delete items
-- [X] Fix to error where dropping on itself deletes itself (race condition)
-- [X] Create Code tab, Visual tab bar
-- [X] build tree function which is passed around to build a large tree for code building
-- [X] Clean up presentation
-- [X] Fix tertiary drop error with tree building
-- [ ] Design the drop area
-- [X] Code Output component - Recieves Tree and outputs HTML with parsley
-- [X] Preview Rendering
-- [ ] Output Targets (snippet, export html, view file, wysiwyg target)
-- [X] Setup "demo" mode which always runs the zesty.io marketing website
-- [X] Setup instanceZUId prop, if not available, creates a prompt to select an instance (requires auth)
-- [X] Setup JSON view
-- [ ] Update webengine to accept a remote parse from a zesty `/-/parsley-visual-layout/` (requires authentication)
-- [ ] Render JSON output that could be read by NextJS to make rows/columns 
+git - [ ] Render JSON output that could be read by NextJS to make rows/columns 
 - [ ] If modelZuid not passed, setup a prompt to select model zuid to work with (or free form)
-- [ ] Save and publish button for snippets
+
 
 ## Considerations
 

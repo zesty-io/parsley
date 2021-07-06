@@ -124,11 +124,19 @@ class ParsleyVisualLayout extends React.Component {
         const fields = model.fields != undefined ? model.fields : {loading: "Empty Fields"}
         let fieldsToReturn = []
         let sortIndex = 1 ;
+        console.log(model.zuid+':'+this.state.model.zuid)
 
-        Object.keys(fields).map(function(key, position) {
+        Object.keys(fields).map((key, position) => {
              
           let data_type = fields[key]
-          let html = data_type != 'images' ? `{{${model.name}.first().${key}}}` : `{{${model.name}.first().${key}.getImage()}}`
+          let html = ''
+          
+          // use the first reference if its not the model you are working on 
+          if(model.zuid == this.state.modelZUID){
+            html = data_type != 'images' ? `{{this.${key}}}` : `{{this.${key}.getImage()}}` 
+          } else {
+            html = data_type != 'images' ? `{{${model.name}.first().${key}}}` : `{{${model.name}.first().${key}.getImage()}}` 
+          }
          // this is used to buidl the HTML
           let typeObj = {...ContentTypes[data_type]}
           let baseHTML = typeObj.hasOwnProperty('html') ? typeObj.html : '*'
@@ -196,7 +204,7 @@ class ParsleyVisualLayout extends React.Component {
         ZestyAPI.setInstanceZUID(object.ZUID)
       await this.loadData()
     })
-  }
+  } 
 
   setModel = async (modelObject) => {
     
@@ -208,6 +216,7 @@ class ParsleyVisualLayout extends React.Component {
       modelZUID: modelObject.zuid
     }, async () => {
       alert(`Model '${modelObject.label}' Selected`)
+      await this.loadData()
     }) 
   }
 
@@ -296,6 +305,7 @@ class ParsleyVisualLayout extends React.Component {
                       setTab={this.setSelectedTab} 
                       content={this.getContentBank()}
                       setModel={this.setModel}
+                      model={this.getModelData()}
                       ></ContentBank> 
                   </div>
               </div>
