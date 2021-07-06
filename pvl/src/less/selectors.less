@@ -1,0 +1,57 @@
+@selectorWidth: 300;
+
+.pvlInstanceSelector{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-left: ((@selectorWidth / 2) * -1);
+    width: @selectorWidth;
+    height: 200px;
+    background: #ccc;
+    z-index: 1000;
+    &:before{
+        content: '';
+        position: fixed;
+        z-index:0;
+        width: 200%;
+        
+        height: 200%;
+        left: -50%;
+        top: -50%;
+        background: rgba(0,0,0,.5);
+    }
+
+    > div {
+        background: #FFF;
+        position: relative;
+        z-index: 1000;
+        > div {
+            height: 80%;
+            width: 100%;
+            
+            overflow-y: scroll;
+            ul {
+                margin: 0px;
+                padding: 0px;
+                li {
+                    margin: 0px;
+                    padding: 0px;
+                    list-style: none;
+                    border-bottom: 1px @zesty-light-grey;
+                    a {
+                        padding: 5px;
+                        text-decoration: none;
+                        display: block;
+                        width: 100%;
+                        color: @zesty-grey;
+                        font-weight: 400;
+                        font-size: 14px;
+                        &:hover{
+                            background: @zesty-field-blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

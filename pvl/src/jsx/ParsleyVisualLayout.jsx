@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import VisualLayoutContainer from './VisualLayoutContainer'
 import ContentBank from './ContentBank'
 import LayoutBank from './LayoutBank'
+import InstanceSelector from './InstanceSelector'
 import { DesignObjects } from './DesignObjects'
 import { ContentTypes } from './ContentTypes'
 import { DndProvider } from 'react-dnd'
@@ -12,40 +13,82 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 class ParsleyVisualLayout extends React.Component {
   constructor(props) {
     super(props);  
+    let instanceZUID = (this.props.instanceZUID != undefined) ? this.props.instanceZUID : '';
+    let modelZUID = (this.props.modelZUID != undefined) ? this.props.modelZUID : '';
+    let demo = (this.props.demo != undefined && this.props.demo == "true") ? true : false;
     this.state = { 
       data: [],
       selected: 'visual' ,
-      models: []
+      models: [],
+      views: [],
+      modelZUID: modelZUID,
+      model: {},
+      instanceZUID: instanceZUID,
+      instance : {
+        name: 'Select'
+      }, 
+      demo: demo,
+      demoData: {
+        'name': 'Demo Mode',
+        'contentBankURL' : `https://www.zesty.io/-/gql/`,
+        'previewURL': `https://www.zesty.io/-/pvl/`
+      } 
     };
      
   }
   getContentBankURL() {
     let url
-    if(this.props.instanceZUID){
-       url = `https://${this.props.instanceZUID}-dev.preview.zesty.io/-/gql/`
+    if(this.state.instanceZUID != '' && this.state.demo == false){
+       url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/-/gql/`
     } else {
-       url = `https://www.zesty.io/-/gql/`
+       url = this.state.demoData.contentBankURL
     }
     return url; 
 
-  }
+  } 
 
   getPreviewTestingURL() {
     let url
-    if(this.props.instanceZUID){
-       url = `https://${this.props.instanceZUID}-dev.preview.zesty.io/ajax/parsley-visual-layout/`
+    if(this.state.instanceZUID != '' && this.state.demo == false){
+       url = `https://${this.state.instance.randomHashID}-dev.webengine.zesty.io/-/pvl/`
     } else {
-       url = `https://www.zesty.io/ajax/parsley-visual-layout/`
+       url = this.state.demoData.previewURL
     }
     return url; 
   } 
-
-  async componentDidMount(){
+  async loadData(){
+    // get models
     const response = await fetch(this.getContentBankURL());
     const json = await response.json(); 
+    
+    let cleanedViewsObject = {} 
+    if(ZestyAPI.instanceZUID){
+      // get views
+      const views = await ZestyAPI.getViews();
+      views.data.forEach(view => {
+        cleanedViewsObject[view.fileName] = view.ZUID
+      }) 
+    }
+    console.log(cleanedViewsObject)
     this.setState({
-      models: this.getIterableObject(json.models)
+      models: this.getIterableObject(json.models),
+      views: cleanedViewsObject
     }) 
+  }
+
+  async componentDidMount(){
+    if(this.state.instanceZUID == '' && this.state.demo == false && typeof ZestyAPI !== 'undefined'){
+        let authed = await ZestyAPI.verify()
+        console.log(authed)
+        if(authed.status != "OK"){
+          console.log("authed")
+        }
+        
+    } else {
+      this.toggleDemo()
+    }
+    await this.loadData()
+   
   }
 
  // converts given content object (which is Zesty.io /-/gql/ output) to 
@@ -144,12 +187,79 @@ class ParsleyVisualLayout extends React.Component {
     return DesignObjects
   }
 
+  setInstance = async (object) => {
+    console.log(object)
+     this.setState({
+        instanceZUID: object.ZUID,
+        instance: object
+      },async () => {
+        ZestyAPI.setInstanceZUID(object.ZUID)
+      await this.loadData()
+    })
+  }
+
+  setModel = async (modelObject) => {
+    
+    modelObject.fileJSON = `/z/pvl/${modelObject.zuid}.json`
+    modelObject.fileHTML = `/z/pvl/${modelObject.zuid}.zhtml`
+    console.log(modelObject) 
+    this.setState({
+      model: modelObject,
+      modelZUID: modelObject.zuid
+    }, async () => {
+      alert(`Model '${modelObject.label}' Selected`)
+    }) 
+  }
+
+  toggleDemo = async () => {
+    let toggle = this.state.demo ? false : true;
+    this.setState({demo: toggle}, async () => {
+      await this.loadData()
+    })
+    
+  }
+
+  save = (code,json) => {
+    
+    // zhtml
+    const fileName = this.state.model.fileHTML
+    if(this.state.views.hasOwnProperty(fileName)){
+      ZestyAPI.updateView(this.state.views[fileName], code)
+    } else {
+      ZestyAPI.createView(fileName,code)
+    }
+    // json
+    const fileNameJSON = this.state.model.fileJSON
+    if(this.state.views.hasOwnProperty(fileNameJSON)){
+      ZestyAPI.updateView(this.state.views[fileNameJSON], json)
+    } else {
+      ZestyAPI.createView(fileNameJSON,json)
+    }
+    
+  }
+  publish = () => {
+    alert('pub')
+  }
+
+  getInstanceData() {
+    return this.state.demo ? this.state.demoData : this.state.instance
+  }
+
+  getModelData() {
+    return this.state.model
+  }
+  resetModelData() {
+    this.setState({
+      model : {},
+      modelZUID : ''
+    })
+  }
   setSelectedTab = (tab) => {
     if(this.state.selected != tab){
       this.setState({ 
-          selected: tab,
-          hasRenderedUpdatedHTML: false
-         });
+        selected: tab,
+        hasRenderedUpdatedHTML: false
+      });
     }
 
   }
@@ -160,6 +270,10 @@ class ParsleyVisualLayout extends React.Component {
   render() {
       return ( 
         <div className="pvl">
+            {this.state.instanceZUID == '' && this.state.demo == false && <InstanceSelector
+              setInstance={this.setInstance}
+              toggleDemoMode={this.toggleDemo}
+            ></InstanceSelector>}
             <DndProvider backend={HTML5Backend}>
               <div className="shell">
                   <VisualLayoutContainer
@@ -167,6 +281,10 @@ class ParsleyVisualLayout extends React.Component {
                     selected={this.state.selected}
                     hasRenderedUpdatedHTML={this.state.hasRenderedUpdatedHTML}
                     previewURL={this.getPreviewTestingURL()}
+                    instance={this.getInstanceData()}
+                    model={this.getModelData()}
+                    save={this.save}
+                    publish={this.publish}
                     ></VisualLayoutContainer>
                   <div className="pvlObjectBanks">
                     
@@ -177,6 +295,7 @@ class ParsleyVisualLayout extends React.Component {
                     <ContentBank 
                       setTab={this.setSelectedTab} 
                       content={this.getContentBank()}
+                      setModel={this.setModel}
                       ></ContentBank> 
                   </div>
               </div>

@@ -572,10 +572,11 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlPreview .pvlRenderedOutput .pvlColumn {
   margin-right: 10px;
 }
-.pvl .pvlVisualLayoutContainer .pvlCode {
+.pvl .pvlVisualLayoutContainer .pvlCode,
+.pvl .pvlVisualLayoutContainer .pvlJSON {
   position: absolute;
   z-index: 0;
-  top: 65px;
+  top: 80px;
   left: 0px;
   right: 0px;
   bottom: 0px;
@@ -586,10 +587,12 @@ select:focus {
   background: #1b202c;
   color: #eff5ff;
 }
-.pvl .pvlVisualLayoutContainer .pvlCode.pvlSelected {
+.pvl .pvlVisualLayoutContainer .pvlCode.pvlSelected,
+.pvl .pvlVisualLayoutContainer .pvlJSON.pvlSelected {
   z-index: 2;
 }
-.pvl .pvlVisualLayoutContainer .pvlCode textarea {
+.pvl .pvlVisualLayoutContainer .pvlCode textarea,
+.pvl .pvlVisualLayoutContainer .pvlJSON textarea {
   position: absolute;
   z-index: 0;
   top: 0px;
@@ -694,4 +697,56 @@ select:focus {
 .pvl .pvlVisualLayoutContainer .pvlObject.pvlLayoutRow .pvlLayoutColumn:last-child {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+}
+.pvl .pvlInstanceSelector {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-left: -150;
+  width: 300;
+  height: 200px;
+  background: #ccc;
+  z-index: 1000;
+}
+.pvl .pvlInstanceSelector:before {
+  content: '';
+  position: fixed;
+  z-index: 0;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -50%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.pvl .pvlInstanceSelector > div {
+  background: #FFF;
+  position: relative;
+  z-index: 1000;
+}
+.pvl .pvlInstanceSelector > div > div {
+  height: 80%;
+  width: 100%;
+  overflow-y: scroll;
+}
+.pvl .pvlInstanceSelector > div > div ul {
+  margin: 0px;
+  padding: 0px;
+}
+.pvl .pvlInstanceSelector > div > div ul li {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  border-bottom: 1px #a7afbf;
+}
+.pvl .pvlInstanceSelector > div > div ul li a {
+  padding: 5px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  color: #5b667d;
+  font-weight: 400;
+  font-size: 14px;
+}
+.pvl .pvlInstanceSelector > div > div ul li a:hover {
+  background: #c7d4ea;
 }

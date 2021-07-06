@@ -21,12 +21,12 @@ class Preview extends React.Component {
     componentDidUpdate() {
         if(this.props.selected == "preview" && this.props.hasRenderedUpdatedHTML == false){
             
-            var formdata = new FormData(); 
+            var formdata = new FormData();  
             formdata.append("parsley", this.props.code)
 
-            fetch("https://kfg6bckb-dev.preview.zesty.io/ajax/parsley-visual-layout/",{
-                method: 'POST',
-                body: formdata,
+            fetch(this.props.previewURL,{
+                method: 'POST', 
+                body: formdata  
             }).then(response => response.text())
             .then(text => {
                 this.setState({

@@ -102,6 +102,9 @@ class ContentBank extends React.Component {
                                             <a href={`/schema/${model.zuid}`}>
                                                 <em className="fa fa-pen"></em> {model.name}
                                             </a>
+                                            <a onClick={() => this.props.setModel(model)}>
+                                                <em className="fa fa-star"></em>
+                                            </a>
                                         </h3>
                                         {/* collapse is off during search, this render output if not on */}
                                         <div className="pvlModelTag"><span className="fa fa-list"></span></div>
