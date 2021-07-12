@@ -211,6 +211,8 @@ class ParsleyVisualLayout extends React.Component {
     modelObject.fileJSON = `/z/pvl/${modelObject.zuid}.json`
     modelObject.fileHTML = `/z/pvl/${modelObject.zuid}.zhtml`
     console.log(modelObject) 
+
+    // get the respective json, load the json into the state
     this.setState({
       model: modelObject,
       modelZUID: modelObject.zuid
