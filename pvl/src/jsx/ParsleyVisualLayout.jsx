@@ -249,7 +249,17 @@ class ParsleyVisualLayout extends React.Component {
     
   }
   publish = () => {
-    alert('pub')
+    // zhtml
+    const fileName = this.state.model.fileHTML
+    const fileNameJSON = this.state.model.fileJSON // json
+    if(!this.state.views.hasOwnProperty(fileName)){
+      alert ('you must save the file before publishing');
+      return false;
+    }
+    
+    ZestyAPI.publishView(this.state.views[fileName], code)
+    ZestyAPI.pubishView(this.state.views[fileNameJSON], json)
+   
   }
 
   getInstanceData() {
