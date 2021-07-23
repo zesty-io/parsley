@@ -70,7 +70,6 @@ class ParsleyVisualLayout extends React.Component {
         cleanedViewsObject[view.fileName] = view.ZUID
       }) 
     }
-    console.log(cleanedViewsObject)
     this.setState({
       models: this.getIterableObject(json.models),
       views: cleanedViewsObject
@@ -80,7 +79,7 @@ class ParsleyVisualLayout extends React.Component {
   async componentDidMount(){
     if(this.state.instanceZUID == '' && this.state.demo == false && typeof ZestyAPI !== 'undefined'){
         let authed = await ZestyAPI.verify()
-        console.log(authed)
+        
         if(authed.status != "OK"){
           console.log("authed")
         }
@@ -125,8 +124,7 @@ class ParsleyVisualLayout extends React.Component {
         const fields = model.fields != undefined ? model.fields : {loading: "Empty Fields"}
         let fieldsToReturn = []
         let sortIndex = 1 ;
-        console.log(model.zuid+':'+this.state.model.zuid)
-
+        
         Object.keys(fields).map((key, position) => {
              
           let data_type = fields[key]
