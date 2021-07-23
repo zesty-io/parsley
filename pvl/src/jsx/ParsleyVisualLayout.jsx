@@ -212,8 +212,15 @@ class ParsleyVisualLayout extends React.Component {
     modelObject.fileJSON = `/z/pvl/${modelObject.zuid}.json`
     modelObject.fileHTML = `/z/pvl/${modelObject.zuid}.zhtml`
     console.log(modelObject) 
-    // add it to the this.state.views
-    let tree = false
+    // setup the default tree
+    let tree = {}
+    let rootColumnName = `layout:root:column:0`
+    tree[rootColumnName] = {
+        name: rootColumnName,
+        html: `<div class="pvlRoot">*</div>`,
+        children: {} 
+    }
+    // get the saved state tree if it exists
     if(this.state.views.hasOwnProperty(modelObject.fileJSON)){
        let file = await ZestyAPI.getView(this.state.views[modelObject.fileJSON])
        tree = JSON.parse(file.data.code)
@@ -271,6 +278,15 @@ class ParsleyVisualLayout extends React.Component {
     ZestyAPI.pubishView(this.state.views[fileNameJSON], json)
    
   }
+  getNewTree = () => {
+    if(this.state.tree == false) return false;
+    let tree = {...this.state.tree}
+    console.log(tree)
+    this.setState({
+      'tree' : false
+    })
+    return tree;
+  }
 
   getInstanceData() {
     return this.state.demo ? this.state.demoData : this.state.instance
@@ -315,7 +331,7 @@ class ParsleyVisualLayout extends React.Component {
                     instance={this.getInstanceData()}
                     model={this.getModelData()}
                     save={this.save}
-                    tree={this.state.tree}
+                    getNewTree={this.getNewTree}
                     publish={this.publish}
                     ></VisualLayoutContainer>
                   <div className="pvlObjectBanks">

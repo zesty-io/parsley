@@ -33,19 +33,16 @@ class VisualLayoutContainer extends React.Component {
         
         
     }
-    componentWillReceiveProps(nextProps) {
-        let tree = {}
-        let rootColumnName = `layout:root:column:0`
-        tree[rootColumnName] = {
-            name: rootColumnName,
-            html: `<div class="pvlRoot">*</div>`,
-            children: {}
+    componentDidUpdate(nextProps, nextState) {
+       
+        let tempTree = nextProps.getNewTree()
+        
+        if(tempTree != false){ 
+             this.setState({ tree: tempTree })
+            
         }
-        console.log(nextProps.tree)
-        if(nextProps.tree !== false){
-            tree = nextProps.tree 
-            this.setState({ tree: tree })
-        }
+        
+        
     }
     /**
         removeFromTree 
