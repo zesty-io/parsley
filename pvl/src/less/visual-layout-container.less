@@ -182,3 +182,40 @@
     }
 
 }
+
+.pvlUtilityBar{
+    display: flex;
+    align-content: space-around;
+    margin-bottom: 8px;
+    div {
+        margin: auto;
+    }
+    .pvlUtilityButtons {
+        flex: 2;
+        button {
+            align-items: center;
+            background-color: @zesty-gray;
+            border: 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 2px 0 rgb(0 0 0 / 24%), 0 0 2px 0 rgb(26 32 44 / 12%);
+            color: #fff;
+            cursor: pointer; 
+            
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 24px;
+            letter-spacing: 0.1px;
+            padding: 4px 12px 4px 12px;
+            flex-direction: row;
+            justify-content: flex-start;
+            text-transform: uppercase;
+            text-align: left;
+
+            &.saveButton {
+                background-color: @zesty-green;
+                margin: 0px 10px;
+            }
+        }
+    }
+}
