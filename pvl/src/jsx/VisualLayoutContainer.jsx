@@ -163,7 +163,7 @@ class VisualLayoutContainer extends React.Component {
         return finalArray;
       
     }
-    
+
     buildJSON = (tree) => {
         return JSON.stringify(tree);
     }

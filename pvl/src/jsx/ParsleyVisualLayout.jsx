@@ -225,7 +225,6 @@ class ParsleyVisualLayout extends React.Component {
     this.setState({
       model: modelObject,
       modelZUID: modelObject.zuid,
-      loadingMode: true,
       tree: tree
     }, async () => {
       alert(`Model '${modelObject.label}' Selected`)
@@ -280,8 +279,7 @@ class ParsleyVisualLayout extends React.Component {
     if(this.state.tree == false) return false;
     let tree = {...this.state.tree}
     this.setState({
-      tree : false,
-      loadingMode: false
+      tree : false
     })
     return tree;
   }
@@ -330,7 +328,6 @@ class ParsleyVisualLayout extends React.Component {
                     model={this.getModelData()}
                     save={this.save}
                     getNewTree={this.getNewTree}
-                    loadingMode={this.state.loadingMode}
                     publish={this.publish}
                     ></VisualLayoutContainer>
                   <div className="pvlObjectBanks">
