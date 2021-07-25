@@ -125,7 +125,6 @@ class VisualLayoutContainer extends React.Component {
         this.setState({
             tree: tree
         })
-        console.log('updated tree:',tree)
 
     }
 
@@ -164,6 +163,7 @@ class VisualLayoutContainer extends React.Component {
         return finalArray;
       
     }
+    
     buildJSON = (tree) => {
         return JSON.stringify(tree);
     }
