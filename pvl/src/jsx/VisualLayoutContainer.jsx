@@ -28,20 +28,28 @@ class VisualLayoutContainer extends React.Component {
             selected: this.props.selected,
             rootColumnName:  rootColumnName,
             tree: tree,
-            codeOutput: ''
+            codeOutput: '',
+            loadingState: false
         }
         
         
+        
     }
-    buildState() {
-        alert('building state')
+    loadingComplete = () => {
+        console.log('state built')
+        this.setState({ 
+            loadingState: false
+        })
     }
-    componentDidUpdate(nextProps, nextState) {
+    componentDidUpdate(nextProps) {
        
         let tempTree = nextProps.getNewTree()
         
         if(tempTree != false){ 
-             this.setState({ tree: tempTree },this.buildState())
+            this.setState({ 
+                tree: tempTree,
+                loadingState: true
+            })
             
         }
         
@@ -100,7 +108,7 @@ class VisualLayoutContainer extends React.Component {
             // handle if is from bank...?
         }
 
-        console.log("--------- buildTree ---------");
+        // console.log("--------- buildTree ---------");
         
         // get keypath, an array of keys which chained together accesse
         const keypath = await this.getKeyPath(tree, newParentID);
@@ -113,7 +121,7 @@ class VisualLayoutContainer extends React.Component {
         // remove the ending .children because to make eval on the string, we call .children off it (hax)
         objectPathString = objectPathString.slice(0, -9) 
         
-        console.log('objecting adding ', elObj)
+        // console.log('objecting adding ', elObj)
         // add the new children
         if(eval(objectPathString).hasOwnProperty('children')){
             eval(objectPathString).children[elObj.fullName] = elObj
@@ -241,12 +249,17 @@ class VisualLayoutContainer extends React.Component {
                     <DeleteArea></DeleteArea>
                 </div>
                 
-                <DropColumn 
+                <DropColumn  
                     buildTree={this.buildTree} 
                     removeFromTree={this.removeFromTree} 
                     key={this.state.rootColumnName} 
                     id={this.state.rootColumnName} 
-                    droppable="true"></DropColumn>
+                    startTree={this.state.tree}
+                    layoutObjects={this.state.tree[this.state.rootColumnName].children ? Object.values(this.state.tree[this.state.rootColumnName].children) : []}
+                    loadingState={this.state.loadingState}
+                    loadingComplete={this.loadingComplete}
+                    droppable="true">
+                    </DropColumn>
                 <CodeOutput 
                     selected={this.props.selected} 
                     code={this.buildHTMLTree(this.state.tree)}

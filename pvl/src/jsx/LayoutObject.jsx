@@ -150,22 +150,24 @@ class LayoutObject extends React.Component {
           // here we are dealing with design objects or columns
           // for columns we have drop targets
           if(this.props.obj.type == 'columns'){
-         
+            let children =  Object.values(this.props.obj.children)
+            let columns = this.props.obj.columns
             return connectDragSource(
               <div className={`pvlObject pvlVisualLayout pvlDropTarget pvlLayoutRow pvl${this.capitalizeFirst(mode)}  pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(this.props.type)} ${draggingClass}`}>
                 {this.props.obj.columns.map( (column,index) => {
                   
                   let styles = {
-                    flex: column.width
+                    flex: columns[index].width
                   }
-                  let columnID = `${this.props.obj.fullName}-${column.width}:${this.props.obj.name}:${index}`
+                  let columnID = `${this.props.obj.fullName}-${columns[index].width}:${this.props.obj.name}:${index}`
                   return (
                       <DropColumn 
                         removeFromTree={this.props.removeFromTree} 
-                        buildTree={this.props.buildTree} 
+                        buildTree={this.props.buildTree}
+                        layoutObjects={children[index].children ? Object.values(children[index].children) : []}
                         key={columnID} 
                         id={columnID} 
-                        droppable={column.droppable} 
+                        droppable={columns[index].droppable} 
                         style={styles}>
                         </DropColumn>
                   )

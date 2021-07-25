@@ -49,7 +49,7 @@ const layoutObjectTarget = {
     // Obtain the dragged item
     const item = monitor.getItem()
 
-    // console.log("item detection from drop column on drop", item)
+     console.log("item detection from drop column on drop", item)
     // console.log("current drop component props", props)
     // console.log("id compared", item.fromLocation, props.id)
     component.addToLayout(item, item.fromLocation);
@@ -90,14 +90,43 @@ function collect(connect, monitor) {
 class DropColumn extends React.Component {
     constructor(props) {
         super(props);
+        console.log("drop column props", props)
+       
         this.state = {
-            layoutObjects: []
+            layoutObjects: props.layoutObjects ? props.layoutObjects : []
         };
+
+      
 
     }
     
     componentDidUpdate(prevProps) { 
-       
+        // console.log('props',prevProps)
+        // if(prevProps.startTree && prevProps.loadingState == true){
+        //     console.log('attempting to load the saved state from DropColumn:', prevProps.startTree)
+        //     // iterate through tree and run addtolayout all the way through
+        //     let children = prevProps.startTree['layout:root:column:0'].children
+        //     console.log(children)
+        //     let item = {}
+        //     Object.values(children).forEach(async (val) =>  {
+               
+        //         console.log(`${val.fullName}:`, val);
+        //         item = {
+        //             id: val.fullName 
+        //         }
+        //         console.log('loading into drop column',item)
+        //         await this.addToLayout(item, "saveState",false, true)
+        //     });
+
+        //     this.props.loadingComplete()
+        //     //this.addToLayout(...)
+        // }
+        if(prevProps.loadingState == true){
+            this.setState({
+                layoutObjects: prevProps.layoutObjects ? prevProps.layoutObjects : []
+            },this.props.loadingComplete())
+        }
+
         if (!prevProps.isOver && this.props.isOver) {
         // You can use this as enter handler
             //alert('entered')
@@ -120,7 +149,7 @@ class DropColumn extends React.Component {
     from the Keyed Object references (ContentTypes and Design Objects)
 
     */
-    addToLayout = (item, fromLocation, position=false) => {
+    addToLayout = async (item, fromLocation, position=false, loadingMode=false) => {
         
         let itemString = item.id
         
@@ -165,9 +194,10 @@ class DropColumn extends React.Component {
         }
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
-        
-        
-        this.props.buildTree(this.props.id, fromLocation, obj)
+        console.log("addToLayout: adding this object",obj)
+        if(!loadingMode){
+            this.props.buildTree(this.props.id, fromLocation, obj)
+        }
         this.addLayoutObject(obj,position);
     }
 
@@ -235,7 +265,7 @@ class DropColumn extends React.Component {
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
                     
                     {this.state.layoutObjects.map((lo,index) => {
-                        
+                        console.log("looped layout object", lo)
                         return (
                             // index in the ID and KEY is used as position, but all for uniqueness
                             <LayoutObject 
@@ -243,6 +273,7 @@ class DropColumn extends React.Component {
                                 removeMe={() => this.removeLayoutObject(lo.fullName)} 
                                 buildTree={this.props.buildTree}
                                 removeFromTree={this.props.removeFromTree}
+                                layoutObjects={lo.hasOwnProperty('children') ? Object.values(lo.children) : []}
                                 mode="layout" 
                                 location={locationID}
                                 id={lo.fullName} 
@@ -253,6 +284,7 @@ class DropColumn extends React.Component {
                                 isReady="true" />
                         )
                     })}
+                    {this.props.children}
             </div>
         );
     }
