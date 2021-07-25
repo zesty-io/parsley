@@ -253,8 +253,7 @@ class VisualLayoutContainer extends React.Component {
                     buildTree={this.buildTree} 
                     removeFromTree={this.removeFromTree} 
                     key={this.state.rootColumnName} 
-                    id={this.state.rootColumnName} 
-                    startTree={this.state.tree}
+                    id={this.state.rootColumnName}
                     layoutObjects={this.state.tree[this.state.rootColumnName].children ? Object.values(this.state.tree[this.state.rootColumnName].children) : []}
                     loadingState={this.state.loadingState}
                     loadingComplete={this.loadingComplete}

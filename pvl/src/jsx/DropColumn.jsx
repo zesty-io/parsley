@@ -101,26 +101,7 @@ class DropColumn extends React.Component {
     }
     
     componentDidUpdate(prevProps) { 
-        // console.log('props',prevProps)
-        // if(prevProps.startTree && prevProps.loadingState == true){
-        //     console.log('attempting to load the saved state from DropColumn:', prevProps.startTree)
-        //     // iterate through tree and run addtolayout all the way through
-        //     let children = prevProps.startTree['layout:root:column:0'].children
-        //     console.log(children)
-        //     let item = {}
-        //     Object.values(children).forEach(async (val) =>  {
-               
-        //         console.log(`${val.fullName}:`, val);
-        //         item = {
-        //             id: val.fullName 
-        //         }
-        //         console.log('loading into drop column',item)
-        //         await this.addToLayout(item, "saveState",false, true)
-        //     });
-
-        //     this.props.loadingComplete()
-        //     //this.addToLayout(...)
-        // }
+        // check if in loading state
         if(prevProps.loadingState == true){
             this.setState({
                 layoutObjects: prevProps.layoutObjects ? prevProps.layoutObjects : []
@@ -149,7 +130,7 @@ class DropColumn extends React.Component {
     from the Keyed Object references (ContentTypes and Design Objects)
 
     */
-    addToLayout = async (item, fromLocation, position=false, loadingMode=false) => {
+    addToLayout = async (item, fromLocation, position=false) => {
         
         let itemString = item.id
         
@@ -195,9 +176,9 @@ class DropColumn extends React.Component {
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
         console.log("addToLayout: adding this object",obj)
-        if(!loadingMode){
-            this.props.buildTree(this.props.id, fromLocation, obj)
-        }
+        
+        this.props.buildTree(this.props.id, fromLocation, obj)
+        
         this.addLayoutObject(obj,position);
     }
 
