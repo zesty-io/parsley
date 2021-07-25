@@ -37,10 +37,7 @@ const layoutObjectTarget = {
  
   drop(props, monitor, component) {
     //   console.log('drop function in layoutObjecttarget')
-
     //   console.log('component',component)
-      
-     
     if (monitor.didDrop()) {
       // this handles multi level nesting, stops from adding on below layers
       return
@@ -90,14 +87,22 @@ function collect(connect, monitor) {
 class DropColumn extends React.Component {
     constructor(props) {
         super(props);
+       
+        // the terinary is for loading state (switching to a new models PVL saved code)
         this.state = {
-            layoutObjects: []
+            layoutObjects: props.layoutObjects ? props.layoutObjects : []
         };
 
     }
     
     componentDidUpdate(prevProps) { 
-       
+        // check if in loading state to load existing data
+        if(prevProps.loadingState == true){
+            this.setState({
+                layoutObjects: prevProps.layoutObjects ? prevProps.layoutObjects : []
+            },this.props.loadingComplete())
+        }
+
         if (!prevProps.isOver && this.props.isOver) {
         // You can use this as enter handler
             //alert('entered')
@@ -111,7 +116,6 @@ class DropColumn extends React.Component {
         // You can be more specific and track enter/leave
         // shallowly, not including nested targets
         }
-
 
     }
     
@@ -151,8 +155,7 @@ class DropColumn extends React.Component {
                     obj.children[columnID] = tempColumn
                 })
             }
-
-            
+    
         } else {
             // content objects have 4 items split from key primarytype:type:model:field_name in the array
             obj = {...ContentTypes[deciphered[1]]};
@@ -166,13 +169,12 @@ class DropColumn extends React.Component {
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
         
-        
         this.props.buildTree(this.props.id, fromLocation, obj)
+        
         this.addLayoutObject(obj,position);
     }
 
 
-    // where we control order
     addLayoutObject(obj, pos=false){
 
         // add to master tree, if columns, need to split each here
@@ -209,12 +211,12 @@ class DropColumn extends React.Component {
             layoutObjects: newObjArr
         })
     }
+
     isBaseDropColumn(){
         return this.props.id == 'layout:root:column:0'
     }
 
-    decipherItem(itemString){
-        
+    decipherItem(itemString){ 
         return itemString.split(':')
     }
 
@@ -234,25 +236,25 @@ class DropColumn extends React.Component {
         return connectDropTarget(
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
                     
-                    {this.state.layoutObjects.map((lo,index) => {
-                        
-                        return (
-                            // index in the ID and KEY is used as position, but all for uniqueness
-                            <LayoutObject 
-                                key={`layout:${lo.fullName}:${index}`} 
-                                removeMe={() => this.removeLayoutObject(lo.fullName)} 
-                                buildTree={this.props.buildTree}
-                                removeFromTree={this.props.removeFromTree}
-                                mode="layout" 
-                                location={locationID}
-                                id={lo.fullName} 
-                                name={lo.name} 
-                                primarytype={lo.primarytype} 
-                                type={lo.type} 
-                                obj={lo} 
-                                isReady="true" />
-                        )
-                    })}
+                {this.state.layoutObjects.map((lo,index) => {
+                    return (
+                        // index in the ID and KEY is used as position, but all for uniqueness
+                        <LayoutObject 
+                            key={`layout:${lo.fullName}:${index}`} 
+                            removeMe={() => this.removeLayoutObject(lo.fullName)} 
+                            buildTree={this.props.buildTree}
+                            removeFromTree={this.props.removeFromTree}
+                            layoutObjects={lo.hasOwnProperty('children') ? Object.values(lo.children) : []} // terinary is for saved state loading
+                            mode="layout" 
+                            location={locationID}
+                            id={lo.fullName} 
+                            name={lo.name} 
+                            primarytype={lo.primarytype} 
+                            type={lo.type} 
+                            obj={lo} 
+                            isReady="true" />
+                    )
+                })}
             </div>
         );
     }

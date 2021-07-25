@@ -28,24 +28,27 @@ class VisualLayoutContainer extends React.Component {
             selected: this.props.selected,
             rootColumnName:  rootColumnName,
             tree: tree,
-            codeOutput: ''
+            codeOutput: '',
+            loadingState: false
         }
         
-        
     }
-    buildState() {
-        alert('building state')
+    // callback function to change the loading state from JSON file as complete (false)
+    loadingComplete = () => {
+        this.setState({ 
+            loadingState: false
+        })
     }
-    componentDidUpdate(nextProps, nextState) {
-       
+
+    componentDidUpdate(nextProps) {
+        // for loading from the saved JSON file
         let tempTree = nextProps.getNewTree()
-        
         if(tempTree != false){ 
-             this.setState({ tree: tempTree },this.buildState())
-            
-        }
-        
-        
+            this.setState({ 
+                tree: tempTree,
+                loadingState: true // put the initial drop column in loading state to load objects from memory
+            })   
+        }        
     }
     /**
         removeFromTree 
@@ -100,7 +103,7 @@ class VisualLayoutContainer extends React.Component {
             // handle if is from bank...?
         }
 
-        console.log("--------- buildTree ---------");
+        // console.log("--------- buildTree ---------");
         
         // get keypath, an array of keys which chained together accesse
         const keypath = await this.getKeyPath(tree, newParentID);
@@ -113,7 +116,7 @@ class VisualLayoutContainer extends React.Component {
         // remove the ending .children because to make eval on the string, we call .children off it (hax)
         objectPathString = objectPathString.slice(0, -9) 
         
-        console.log('objecting adding ', elObj)
+        // console.log('objecting adding ', elObj)
         // add the new children
         if(eval(objectPathString).hasOwnProperty('children')){
             eval(objectPathString).children[elObj.fullName] = elObj
@@ -123,7 +126,6 @@ class VisualLayoutContainer extends React.Component {
         this.setState({
             tree: tree
         })
-        console.log('updated tree:',tree)
 
     }
 
@@ -162,6 +164,7 @@ class VisualLayoutContainer extends React.Component {
         return finalArray;
       
     }
+
     buildJSON = (tree) => {
         return JSON.stringify(tree);
     }
@@ -208,6 +211,7 @@ class VisualLayoutContainer extends React.Component {
         return (
             <div className="pvlVisualLayoutContainer">
                 <PVLToolbar title={`${this.props.instance.name} - Visual Layout`} helpText={helpText}></PVLToolbar>
+                
                 {this.props.model.hasOwnProperty('label') && <div className="pvlUtilityBar">
                     <div>
                     Editing Content Layout for <strong>{this.props.model.label}</strong> ({this.props.model.zuid}) 
@@ -216,9 +220,12 @@ class VisualLayoutContainer extends React.Component {
                         <button className="saveButton" onClick={() => {this.props.save(this.buildHTMLTree(this.state.tree),this.buildJSON(this.state.tree))} }>Save</button>
                         <button className="publishButton" onClick={() => {this.props.publish()} }>Publish</button>
                     </div>
-  
-
                 </div>}
+                {!this.props.model.hasOwnProperty('label') && <div className="pvlUtilityBar">
+                    <p>Select a Model to save to by clicking the <i className="fa fa-star"></i> icon by the model name in the the content bank.</p>
+                </div>}
+
+
                 <div className="pvlUtilities">
                     <div className="pvlVisualTabBar">
                         <button className={this.props.selected == "visual" ? `tab pvlSelected` : 'tab'} onClick={() => {this.props.setTab('visual')} }>
@@ -236,13 +243,17 @@ class VisualLayoutContainer extends React.Component {
                     </div> 
                     <DeleteArea></DeleteArea>
                 </div>
-                
-                <DropColumn 
+
+                <DropColumn  
                     buildTree={this.buildTree} 
                     removeFromTree={this.removeFromTree} 
                     key={this.state.rootColumnName} 
-                    id={this.state.rootColumnName} 
-                    droppable="true"></DropColumn>
+                    id={this.state.rootColumnName}
+                    layoutObjects={this.state.tree[this.state.rootColumnName].children ? Object.values(this.state.tree[this.state.rootColumnName].children) : []}
+                    loadingState={this.state.loadingState}
+                    loadingComplete={this.loadingComplete}
+                    droppable="true">
+                    </DropColumn>
                 <CodeOutput 
                     selected={this.props.selected} 
                     code={this.buildHTMLTree(this.state.tree)}

@@ -16,7 +16,7 @@ class InstanceSelector extends React.Component {
     async componentDidMount() {
         if(typeof ZestyAPI !== 'undefined' ){
             let instances = await ZestyAPI.getInstances();
-            console.log(instances)
+            
             if(!instances.hasOwnProperty('error')){
                 this.setState({
                     'availableInstances' : instances.data

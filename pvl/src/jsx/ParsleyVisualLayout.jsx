@@ -70,7 +70,6 @@ class ParsleyVisualLayout extends React.Component {
         cleanedViewsObject[view.fileName] = view.ZUID
       }) 
     }
-    console.log(cleanedViewsObject)
     this.setState({
       models: this.getIterableObject(json.models),
       views: cleanedViewsObject
@@ -80,7 +79,7 @@ class ParsleyVisualLayout extends React.Component {
   async componentDidMount(){
     if(this.state.instanceZUID == '' && this.state.demo == false && typeof ZestyAPI !== 'undefined'){
         let authed = await ZestyAPI.verify()
-        console.log(authed)
+        
         if(authed.status != "OK"){
           console.log("authed")
         }
@@ -125,8 +124,7 @@ class ParsleyVisualLayout extends React.Component {
         const fields = model.fields != undefined ? model.fields : {loading: "Empty Fields"}
         let fieldsToReturn = []
         let sortIndex = 1 ;
-        console.log(model.zuid+':'+this.state.model.zuid)
-
+        
         Object.keys(fields).map((key, position) => {
              
           let data_type = fields[key]
@@ -189,15 +187,12 @@ class ParsleyVisualLayout extends React.Component {
       }
     ]
   } 
-
-
   
   getLayoutObjects() {
     return DesignObjects
   }
 
   setInstance = async (object) => {
-    console.log(object)
      this.setState({
         instanceZUID: object.ZUID,
         instance: object
@@ -211,7 +206,7 @@ class ParsleyVisualLayout extends React.Component {
     
     modelObject.fileJSON = `/z/pvl/${modelObject.zuid}.json`
     modelObject.fileHTML = `/z/pvl/${modelObject.zuid}.zhtml`
-    console.log(modelObject) 
+   
     // setup the default tree
     let tree = {}
     let rootColumnName = `layout:root:column:0`
@@ -278,12 +273,12 @@ class ParsleyVisualLayout extends React.Component {
     ZestyAPI.pubishView(this.state.views[fileNameJSON], json)
    
   }
+  // for loading an existing tree from saved JSON file
   getNewTree = () => {
     if(this.state.tree == false) return false;
     let tree = {...this.state.tree}
-    console.log(tree)
     this.setState({
-      'tree' : false
+      tree : false
     })
     return tree;
   }

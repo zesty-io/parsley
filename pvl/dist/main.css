@@ -703,8 +703,13 @@ select:focus {
   display: flex;
   align-content: space-around;
   margin-bottom: 8px;
+  min-height: 24px;
 }
 .pvl .pvlUtilityBar div {
+  margin: auto;
+}
+.pvl .pvlUtilityBar div p {
+  align-items: center;
   margin: auto;
 }
 .pvl .pvlUtilityBar .pvlUtilityButtons {
