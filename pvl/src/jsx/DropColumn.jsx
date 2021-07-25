@@ -90,8 +90,8 @@ function collect(connect, monitor) {
 class DropColumn extends React.Component {
     constructor(props) {
         super(props);
-        console.log("drop column props", props)
        
+        // the terinary is for loading state (switching to a new models PVL saved code)
         this.state = {
             layoutObjects: props.layoutObjects ? props.layoutObjects : []
         };
@@ -101,7 +101,7 @@ class DropColumn extends React.Component {
     }
     
     componentDidUpdate(prevProps) { 
-        // check if in loading state
+        // check if in loading state to load existing data
         if(prevProps.loadingState == true){
             this.setState({
                 layoutObjects: prevProps.layoutObjects ? prevProps.layoutObjects : []
@@ -130,7 +130,7 @@ class DropColumn extends React.Component {
     from the Keyed Object references (ContentTypes and Design Objects)
 
     */
-    addToLayout = async (item, fromLocation, position=false) => {
+    addToLayout = (item, fromLocation, position=false) => {
         
         let itemString = item.id
         
@@ -175,7 +175,6 @@ class DropColumn extends React.Component {
         }
         obj.type = deciphered[1];
         obj.primarytype = deciphered[0];
-        console.log("addToLayout: adding this object",obj)
         
         this.props.buildTree(this.props.id, fromLocation, obj)
         
@@ -246,7 +245,6 @@ class DropColumn extends React.Component {
             <div className={`pvlDropColumn pvlLayoutColumn ${dropclass}`} style={this.props.style}>
                     
                     {this.state.layoutObjects.map((lo,index) => {
-                        console.log("looped layout object", lo)
                         return (
                             // index in the ID and KEY is used as position, but all for uniqueness
                             <LayoutObject 
@@ -254,7 +252,7 @@ class DropColumn extends React.Component {
                                 removeMe={() => this.removeLayoutObject(lo.fullName)} 
                                 buildTree={this.props.buildTree}
                                 removeFromTree={this.props.removeFromTree}
-                                layoutObjects={lo.hasOwnProperty('children') ? Object.values(lo.children) : []}
+                                layoutObjects={lo.hasOwnProperty('children') ? Object.values(lo.children) : []} // terinary is for saved state loading
                                 mode="layout" 
                                 location={locationID}
                                 id={lo.fullName} 
@@ -265,7 +263,6 @@ class DropColumn extends React.Component {
                                 isReady="true" />
                         )
                     })}
-                    {this.props.children}
             </div>
         );
     }

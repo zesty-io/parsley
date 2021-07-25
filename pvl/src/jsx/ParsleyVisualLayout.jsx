@@ -275,10 +275,10 @@ class ParsleyVisualLayout extends React.Component {
     ZestyAPI.pubishView(this.state.views[fileNameJSON], json)
    
   }
+  // for loading an existing tree from saved JSON file
   getNewTree = () => {
     if(this.state.tree == false) return false;
     let tree = {...this.state.tree}
-    console.log("get new tree:",tree)
     this.setState({
       tree : false,
       loadingMode: false

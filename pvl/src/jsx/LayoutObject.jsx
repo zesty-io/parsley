@@ -150,24 +150,23 @@ class LayoutObject extends React.Component {
           // here we are dealing with design objects or columns
           // for columns we have drop targets
           if(this.props.obj.type == 'columns'){
-            let children =  Object.values(this.props.obj.children)
-            let columns = this.props.obj.columns
+            let children =  Object.values(this.props.obj.children) // making children array to be referenced as a pair with column array iteration
             return connectDragSource(
               <div className={`pvlObject pvlVisualLayout pvlDropTarget pvlLayoutRow pvl${this.capitalizeFirst(mode)}  pvl${this.capitalizeFirst(ptype)} pvl${this.capitalizeFirst(this.props.type)} ${draggingClass}`}>
                 {this.props.obj.columns.map( (column,index) => {
                   
                   let styles = {
-                    flex: columns[index].width
+                    flex: column.width
                   }
-                  let columnID = `${this.props.obj.fullName}-${columns[index].width}:${this.props.obj.name}:${index}`
+                  let columnID = `${this.props.obj.fullName}-${column.width}:${this.props.obj.name}:${index}`
                   return (
                       <DropColumn 
                         removeFromTree={this.props.removeFromTree} 
                         buildTree={this.props.buildTree}
-                        layoutObjects={children[index].children ? Object.values(children[index].children) : []}
+                        layoutObjects={children[index].children ? Object.values(children[index].children) : []} // terinary is for saved state loading
                         key={columnID} 
                         id={columnID} 
-                        droppable={columns[index].droppable} 
+                        droppable={column.droppable} 
                         style={styles}>
                         </DropColumn>
                   )

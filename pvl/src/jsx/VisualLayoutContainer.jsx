@@ -32,8 +32,6 @@ class VisualLayoutContainer extends React.Component {
             loadingState: false
         }
         
-        
-        
     }
     loadingComplete = () => {
         console.log('state built')
@@ -42,18 +40,14 @@ class VisualLayoutContainer extends React.Component {
         })
     }
     componentDidUpdate(nextProps) {
-       
+        // for loading from the saved JSON file
         let tempTree = nextProps.getNewTree()
-        
         if(tempTree != false){ 
             this.setState({ 
                 tree: tempTree,
-                loadingState: true
-            })
-            
-        }
-        
-        
+                loadingState: true // put the initial drop column in loading state to load objects from memory
+            })   
+        }        
     }
     /**
         removeFromTree 
