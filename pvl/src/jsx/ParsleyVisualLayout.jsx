@@ -193,7 +193,6 @@ class ParsleyVisualLayout extends React.Component {
   }
 
   setInstance = async (object) => {
-    console.log(object)
      this.setState({
         instanceZUID: object.ZUID,
         instance: object
@@ -207,7 +206,7 @@ class ParsleyVisualLayout extends React.Component {
     
     modelObject.fileJSON = `/z/pvl/${modelObject.zuid}.json`
     modelObject.fileHTML = `/z/pvl/${modelObject.zuid}.zhtml`
-    console.log(modelObject) 
+   
     // setup the default tree
     let tree = {}
     let rootColumnName = `layout:root:column:0`

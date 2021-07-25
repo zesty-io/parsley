@@ -70,7 +70,7 @@ class ContentBank extends React.Component {
                     <div className="pvlInputWrapper">
                         <span className="fa fa-search"></span>
                         <input placeholder="Search Model or Field Name" value={this.state.searchFilter} onChange={this.handleSearchFilterChange.bind(this)} />
-                        {searchOn && <button onClick={() => {this.clearSearch()} } class="fa fa-times"></button>}
+                        {searchOn && <button onClick={() => {this.clearSearch()} } className="fa fa-times"></button>}
                     </div>
                 </div>
                 <div className="pvlContentModels">

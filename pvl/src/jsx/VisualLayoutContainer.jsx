@@ -33,12 +33,13 @@ class VisualLayoutContainer extends React.Component {
         }
         
     }
+    // callback function to change the loading state from JSON file as complete (false)
     loadingComplete = () => {
-        console.log('state built')
         this.setState({ 
             loadingState: false
         })
     }
+
     componentDidUpdate(nextProps) {
         // for loading from the saved JSON file
         let tempTree = nextProps.getNewTree()
@@ -242,7 +243,7 @@ class VisualLayoutContainer extends React.Component {
                     </div> 
                     <DeleteArea></DeleteArea>
                 </div>
-                
+
                 <DropColumn  
                     buildTree={this.buildTree} 
                     removeFromTree={this.removeFromTree} 
