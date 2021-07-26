@@ -49,7 +49,7 @@ const layoutObjectTarget = {
     // console.log("item detection from drop column on drop", item)
     // console.log("current drop component props", props)
     // console.log("id compared", item.fromLocation, props.id)
-    component.addToLayout(item, item.fromLocation);
+    component.addToLayout(item, item.fromLocation, {...props.getTree()});
     
     if(typeof(item.component.props.removeMe) === 'function' && item.fromLocation != props.id){
         item.component.props.removeMe()
@@ -124,7 +124,7 @@ class DropColumn extends React.Component {
     from the Keyed Object references (ContentTypes and Design Objects)
 
     */
-    addToLayout = (item, fromLocation, position=false) => {
+    addToLayout = async (item, fromLocation, tree, position=false) => {
         
         let itemString = item.id
         
@@ -136,7 +136,7 @@ class DropColumn extends React.Component {
         // split the string up to determine the oject type
         var deciphered = this.decipherItem(itemString)
         var obj = {}
-        let endPosition = this.state.layoutObjects.length // set to add to the end
+        let endPosition = this.state.layoutObjects.length // set to add to the end    
 
         // design objects have 3 items split from key primarytype:type:name in the array
         if(deciphered[0] == 'design'){
@@ -145,8 +145,15 @@ class DropColumn extends React.Component {
             obj.position = (position != false) ? position : endPosition;
             // check if it already has a number
             obj.fullName = itemString.match(/\d+$/) ? itemString :  `${itemString}:${obj.position}`;
+            
             // setup the children if type of obj is columns
             if(obj.type == 'columns'){
+                //if(fromLocation != 'bank'){
+                    let pathToItem = await this.props.getObjectFromKeyPath(itemString, tree)
+                    console.log("path to item from columns addToLayout",itemString, pathToItem)
+                //}
+                // get the original object, to access the children, pass the children to the obj
+                // use the getKeyPath (needs to be passes as a prop) to get access to the 
                 obj.children = {}
                 obj.columns.map( (column,index) => {
                     let tempColumn = {...column}
@@ -243,6 +250,8 @@ class DropColumn extends React.Component {
                             key={`layout:${lo.fullName}:${index}`} 
                             removeMe={() => this.removeLayoutObject(lo.fullName)} 
                             buildTree={this.props.buildTree}
+                            getTree={this.props.getTree}
+                            getObjectFromKeyPath={this.props.getObjectFromKeyPath}
                             removeFromTree={this.props.removeFromTree}
                             layoutObjects={lo.hasOwnProperty('children') ? Object.values(lo.children) : []} // terinary is for saved state loading
                             mode="layout" 

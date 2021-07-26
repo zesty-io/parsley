@@ -163,6 +163,8 @@ class LayoutObject extends React.Component {
                       <DropColumn 
                         removeFromTree={this.props.removeFromTree} 
                         buildTree={this.props.buildTree}
+                        getTree={this.props.getTree}
+                        getObjectFromKeyPath={this.props.getObjectFromKeyPath}
                         layoutObjects={children[index].children ? Object.values(children[index].children) : []} // terinary is for saved state loading
                         key={columnID} 
                         id={columnID} 
