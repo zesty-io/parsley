@@ -103,18 +103,7 @@ class VisualLayoutContainer extends React.Component {
             // handle if is from bank...?
         }
 
-        // console.log("--------- buildTree ---------");
-        
-        // get keypath, an array of keys which chained together accesse
-        const keypath = await this.getKeyPath(tree, newParentID);
-        
-        // build the string which will be the object key path
-        let objectPathString = 'tree';
-        for (const element of keypath) {
-            objectPathString += `['${element}'].children`
-        }
-        // remove the ending .children because to make eval on the string, we call .children off it (hax)
-        objectPathString = objectPathString.slice(0, -9) 
+        let objectPathString = await this.getTreeObjectPathFromKeyName(newParentID, tree)
         
         // console.log('objecting adding ', elObj)
         // add the new children
@@ -127,6 +116,37 @@ class VisualLayoutContainer extends React.Component {
             tree: tree
         })
 
+    }
+
+    getObjectFromKeyPath = async (keyPath, tree) => {
+
+        let objectPathString = await this.getTreeObjectPathFromKeyName(keyPath, tree)
+        console.log("objectPathString",keyPath, objectPathString, eval(objectPathString), tree)
+        if(eval(objectPathString).hasOwnProperty('name')){
+            return eval(objectPathString)
+        }
+        return false
+       
+    }
+
+    getTree = async () => {
+        return this.state.tree
+    }
+
+    getTreeObjectPathFromKeyName = async (keyName, tree) => {
+        
+        // get keypath, an array of keys which chained together accesse
+        const keypath = await this.getKeyPath(tree, keyName);
+            
+        // build the string which will be the object key path
+        let objectPathString = 'tree';
+        for (const element of keypath) {
+            objectPathString += `['${element}'].children`
+        }
+        // remove the ending .children because to make eval on the string, we call .children off it (hax)
+        objectPathString = objectPathString.slice(0, -9) 
+        
+        return objectPathString
     }
 
     /** 
@@ -142,6 +162,7 @@ class VisualLayoutContainer extends React.Component {
     
     */
      getKeyPath = async (childTree, keyToSearch) => {
+
         var finalArray = []
         // this checks each child (1 or 100) for a hit
         function iter(childTree, keyToSearch, keyMapArr=[]){
@@ -245,7 +266,9 @@ class VisualLayoutContainer extends React.Component {
                 </div>
 
                 <DropColumn  
-                    buildTree={this.buildTree} 
+                    buildTree={this.buildTree}
+                    getTree={this.getTree}
+                    getObjectFromKeyPath={this.getObjectFromKeyPath}
                     removeFromTree={this.removeFromTree} 
                     key={this.state.rootColumnName} 
                     id={this.state.rootColumnName}
