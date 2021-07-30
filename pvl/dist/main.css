@@ -715,7 +715,7 @@ select:focus {
 .pvl .pvlUtilityBar .pvlUtilityButtons {
   flex: 2;
 }
-.pvl .pvlUtilityBar .pvlUtilityButtons button {
+.pvl .pvlUtilityBar button {
   align-items: center;
   background-color: #5b667d;
   border: 0;
@@ -734,21 +734,28 @@ select:focus {
   text-transform: uppercase;
   text-align: left;
 }
-.pvl .pvlUtilityBar .pvlUtilityButtons button.saveButton {
+.pvl .pvlUtilityBar button.saveButton {
   background-color: #75bf25;
   margin: 0px 10px;
 }
-.pvl .pvlInstanceSelector {
+.pvl .pvlUtilityBar button.changeButton {
+  background-color: #5b667d;
+  margin-right: 10px;
+}
+.pvl .pvlSelector {
   position: absolute;
   top: 20%;
   left: 50%;
   margin-left: -150;
   width: 300;
-  height: 200px;
-  background: #ccc;
+  height: 300px;
+  background: #5b667d;
   z-index: 1000;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px #5b667d solid;
 }
-.pvl .pvlInstanceSelector:before {
+.pvl .pvlSelector:before {
   content: '';
   position: fixed;
   z-index: 0;
@@ -758,35 +765,50 @@ select:focus {
   top: -50%;
   background: rgba(0, 0, 0, 0.5);
 }
-.pvl .pvlInstanceSelector > div {
+.pvl .pvlSelector > div {
   background: #FFF;
   position: relative;
   z-index: 1000;
+  background: #c7d4ea;
 }
-.pvl .pvlInstanceSelector > div > div {
+.pvl .pvlSelector > div h1 {
+  font-size: 16px;
+  padding: 10px 10px 0px 14px;
+  margin: 0px;
+}
+.pvl .pvlSelector > div input {
+  border-radius: 10px;
+  padding: 6px 10px;
+  border: 1px #a7afbf solid;
+  display: block;
+  margin: 10px;
+  width: 80%;
+}
+.pvl .pvlSelector > div > div {
   height: 80%;
   width: 100%;
+  background: white;
   overflow-y: scroll;
 }
-.pvl .pvlInstanceSelector > div > div ul {
+.pvl .pvlSelector > div > div ul {
   margin: 0px;
   padding: 0px;
 }
-.pvl .pvlInstanceSelector > div > div ul li {
+.pvl .pvlSelector > div > div ul li {
   margin: 0px;
   padding: 0px;
   list-style: none;
-  border-bottom: 1px #a7afbf;
 }
-.pvl .pvlInstanceSelector > div > div ul li a {
-  padding: 5px;
+.pvl .pvlSelector > div > div ul li a {
+  padding: 10px;
   text-decoration: none;
   display: block;
   width: 100%;
   color: #5b667d;
   font-weight: 400;
   font-size: 14px;
+  border-bottom: 1px #e2e5ea solid;
 }
-.pvl .pvlInstanceSelector > div > div ul li a:hover {
-  background: #c7d4ea;
+.pvl .pvlSelector > div > div ul li a:hover {
+  background: #e2e5ea;
 }
