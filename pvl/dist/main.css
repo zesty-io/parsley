@@ -715,7 +715,7 @@ select:focus {
 .pvl .pvlUtilityBar .pvlUtilityButtons {
   flex: 2;
 }
-.pvl .pvlUtilityBar .pvlUtilityButtons button {
+.pvl .pvlUtilityBar button {
   align-items: center;
   background-color: #5b667d;
   border: 0;
@@ -734,9 +734,13 @@ select:focus {
   text-transform: uppercase;
   text-align: left;
 }
-.pvl .pvlUtilityBar .pvlUtilityButtons button.saveButton {
+.pvl .pvlUtilityBar button.saveButton {
   background-color: #75bf25;
   margin: 0px 10px;
+}
+.pvl .pvlUtilityBar button.changeButton {
+  background-color: #5b667d;
+  margin-right: 10px;
 }
 .pvl .pvlSelector {
   position: absolute;
@@ -768,8 +772,8 @@ select:focus {
   background: #c7d4ea;
 }
 .pvl .pvlSelector > div h1 {
-  font-size: 14px;
-  padding: 4px 10px 0px 10px;
+  font-size: 16px;
+  padding: 10px 10px 0px 14px;
   margin: 0px;
 }
 .pvl .pvlSelector > div input {

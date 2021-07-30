@@ -4,6 +4,7 @@ import VisualLayoutContainer from './VisualLayoutContainer'
 import ContentBank from './ContentBank'
 import LayoutBank from './LayoutBank'
 import InstanceSelector from './InstanceSelector'
+import ModelSelector from './ModelSelector'
 import { DesignObjects } from './DesignObjects'
 import { ContentTypes } from './ContentTypes'
 import { DndProvider } from 'react-dnd'
@@ -202,6 +203,13 @@ class ParsleyVisualLayout extends React.Component {
     })
   } 
 
+  clearModel = () => {
+    this.setState({
+      modelZUID: '',
+      model: {}
+    })
+  }
+
   setModel = async (modelObject) => {
     
     modelObject.fileJSON = `/z/pvl/${modelObject.zuid}.json`
@@ -226,7 +234,6 @@ class ParsleyVisualLayout extends React.Component {
       modelZUID: modelObject.zuid,
       tree: tree
     }, async () => {
-      alert(`Model '${modelObject.label}' Selected`)
       await this.loadData()
     }) 
   }
@@ -316,10 +323,16 @@ class ParsleyVisualLayout extends React.Component {
               setInstance={this.setInstance}
               toggleDemoMode={this.toggleDemo}
             ></InstanceSelector>}
+
+            {this.state.instanceZUID != '' && this.state.modelZUID == '' && this.state.models.length > 0 && this.state.demo == false && <ModelSelector
+              setModel={this.setModel}
+              models={this.state.models}
+            ></ModelSelector>}
             <DndProvider backend={HTML5Backend}>
               <div className="shell">
                   <VisualLayoutContainer
                     setTab={this.setSelectedTab} 
+                    clearModel={this.clearModel} 
                     selected={this.state.selected}
                     hasRenderedUpdatedHTML={this.state.hasRenderedUpdatedHTML}
                     previewURL={this.getPreviewTestingURL()}
