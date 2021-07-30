@@ -261,9 +261,11 @@ class ParsleyVisualLayout extends React.Component {
     const fileNameJSON = this.state.model.fileJSON
     if(this.state.views.hasOwnProperty(fileNameJSON)){
       ZestyAPI.updateView(this.state.views[fileNameJSON], json)
+      alert('File Created and Saved')
     } else {
       ZestyAPI.createView(fileNameJSON,json)
       // add it to the this.state.views
+      alert('File Saved')
     }
     
   }
@@ -274,11 +276,12 @@ class ParsleyVisualLayout extends React.Component {
     if(!this.state.views.hasOwnProperty(fileName)){
       alert ('you must save the file before publishing');
       return false;
-    }
+    } else {
     
-    ZestyAPI.publishView(this.state.views[fileName], code)
-    ZestyAPI.pubishView(this.state.views[fileNameJSON], json)
-   
+      ZestyAPI.publishView(this.state.views[fileName], code)
+      ZestyAPI.publishView(this.state.views[fileNameJSON], json)
+      alert('File Saved and Published')
+    }
   }
   // for loading an existing tree from saved JSON file
   getNewTree = () => {
