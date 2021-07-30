@@ -222,7 +222,7 @@ class VisualLayoutContainer extends React.Component {
                     
                     <div className="pvlUtilityButtons">  
                         <button className="saveButton" onClick={() => {this.props.save(this.buildHTMLTree(this.state.tree),this.buildJSON(this.state.tree))} }>Save</button>
-                        <button className="publishButton" onClick={() => {this.props.publish()} }>Publish</button>
+                        <button className="publishButton" onClick={() => {this.props.publish(this.buildHTMLTree(this.state.tree),this.buildJSON(this.state.tree))} }>Publish</button>
                     </div>
                 </div>}
                 {!this.props.model.hasOwnProperty('label') && <div className="pvlUtilityBar">

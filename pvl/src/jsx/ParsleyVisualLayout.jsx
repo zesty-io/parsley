@@ -269,7 +269,7 @@ class ParsleyVisualLayout extends React.Component {
     }
     
   }
-  publish = () => {
+  publish = (code,json) => {
     // zhtml
     const fileName = this.state.model.fileHTML
     const fileNameJSON = this.state.model.fileJSON // json
