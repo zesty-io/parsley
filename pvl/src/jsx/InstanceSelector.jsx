@@ -39,16 +39,16 @@ class InstanceSelector extends React.Component {
     render() {
         let instances = this.getInstances()
         return (
-            <div className="pvlInstanceSelector">
+            <div className="pvlSelector">
                 
                 <div>
-                    Select an Instance
-                <input 
-                    type="text" 
-                    placeholder="search" 
-                    value={this.state.search}
-                    onChange={this.handleChange}
-                    />
+                    <h1>Select an Instance</h1>
+                    <input 
+                        type="text" 
+                        placeholder="Search Your Instance" 
+                        value={this.state.search}
+                        onChange={this.handleChange}
+                        />
                     <div>
                     {instances.length == 0 && <p>No Instances found. To access and instance you will need to login to  
                         <a target="_blank" href="https://accounts.zesty.io"> https://accounts.zesty.io</a>, create an instance or be invited to an instance.
@@ -71,7 +71,7 @@ class InstanceSelector extends React.Component {
 
                             // names must be equal
                             return 0;
-                        }).map((instance) => {
+                        }).filter(instance => instance.name != '').map((instance) => {
                             return (
                                 <li key={instance.ZUID}>
                                     <a onClick={ () => this.props.setInstance(instance) } href="#"> 
