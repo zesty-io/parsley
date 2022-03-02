@@ -46,7 +46,7 @@
     "dependencies": {
         "fs": "0.0.1-security",
         "path": "^0.12.7",
-        "plist": "^3.0.2"
+        "plist": "^3.0.4"
     },
     "devDependencies": {
         "js-yaml": "^3.14.1"
